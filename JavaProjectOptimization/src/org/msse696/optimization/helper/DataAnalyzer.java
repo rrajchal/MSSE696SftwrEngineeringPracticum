@@ -9,6 +9,11 @@ import java.util.List;
 
 public class DataAnalyzer {
 
+    private static final double DEFAULT_SIGNIFICANCE_LEVEL = 0.01; // Constant for default significance level
+    private static final double CRITICAL_VALUE_95 = 1.96;          // Critical value for 95% confidence
+    private static final double CRITICAL_VALUE_99 = 2.576;         // Critical value for 99% confidence
+
+    // Reads data from the specified file
     public List<Double> readDataFromFile(String filePath) {
         List<Double> data = new ArrayList<>();
         File file = new File(filePath);
@@ -34,7 +39,7 @@ public class DataAnalyzer {
         return data;
     }
 
-    // Method to calculate the average of a dataset
+    // Calculates the average of a dataset
     public double calculateAverage(List<Double> data) {
         if (data.isEmpty()) return 0;
         double sum = 0;
@@ -44,7 +49,7 @@ public class DataAnalyzer {
         return sum / data.size();
     }
 
-    // Method to calculate the standard deviation of a dataset
+    // Calculates the standard deviation of a dataset
     public double calculateStandardDeviation(List<Double> data) {
         if (data.isEmpty()) return 0;
         double mean = calculateAverage(data);
@@ -55,30 +60,68 @@ public class DataAnalyzer {
         return Math.sqrt(sumOfSquares / data.size());
     }
 
-    // Method to perform a t-test to determine if two datasets are significantly different
-    public boolean isSignificantlyDifferent(List<Double> data1, List<Double> data2, double significanceLevel) {
-        if (data1.isEmpty() || data2.isEmpty()) {
-            System.err.println("One or both datasets are empty");
+    // Determines if two datasets are significantly different
+    public boolean isSignificantlyDifferent(List<Double> efficientData, List<Double> inefficientData, double significanceLevel) {
+        if (efficientData.isEmpty() || inefficientData.isEmpty()) {
+            System.err.println("Error: One or both datasets are empty.");
             return false;
         }
 
-        double mean1 = calculateAverage(data1);
-        double mean2 = calculateAverage(data2);
-        double stdDev1 = calculateStandardDeviation(data1);
-        double stdDev2 = calculateStandardDeviation(data2);
+        if (efficientData.size() <= 1 || inefficientData.size() <= 1) {
+            System.err.println("Error: One or both datasets have insufficient data points for statistical analysis.");
+            return false;
+        }
 
-        // Calculate pooled standard deviation
-        int n1 = data1.size();
-        int n2 = data2.size();
+        double mean1 = calculateAverage(efficientData);
+        double mean2 = calculateAverage(inefficientData);
+        double stdDev1 = calculateStandardDeviation(efficientData);
+        double stdDev2 = calculateStandardDeviation(inefficientData);
+
+        if (stdDev1 == 0 || stdDev2 == 0) {
+            System.err.println("Error: One or both datasets have zero variance. Statistical comparison is invalid.");
+            return false;
+        }
+
+        int n1 = efficientData.size();
+        int n2 = inefficientData.size();
         double pooledStdDev = Math.sqrt(((n1 - 1) * Math.pow(stdDev1, 2) + (n2 - 1) * Math.pow(stdDev2, 2)) / (n1 + n2 - 2));
-
-        // Calculate t-statistic
         double tStatistic = (mean1 - mean2) / (pooledStdDev * Math.sqrt((1.0 / n1) + (1.0 / n2)));
 
-        // For simplicity, we'll approximate the critical t-value for a two-tailed test with large degrees of freedom
-        double criticalValue = 1.96; // Corresponds to ~95% confidence level for two-tailed test
-        if (significanceLevel == 0.01) criticalValue = 2.576; // ~99% confidence level
+        double criticalValue = significanceLevel == DEFAULT_SIGNIFICANCE_LEVEL ? CRITICAL_VALUE_99 : CRITICAL_VALUE_95;
 
         return Math.abs(tStatistic) > criticalValue;
+    }
+
+    public boolean isSignificantlyDifferent(List<Double> efficientData, List<Double> inefficientData) {
+        return isSignificantlyDifferent(efficientData, inefficientData, DEFAULT_SIGNIFICANCE_LEVEL);
+    }
+
+    public void displayStatisticalAnalysis(List<Double> efficientData, List<Double> inefficientData, double efficientPeakMem, double inefficientPeakMem) {
+        System.out.println("Statistical Analysis:");
+        System.out.println("----------------------------------------------------------------");
+        System.out.printf("| %-29s | %-11s | %-14s |\n", "Metric", "Dataset 1", "Dataset 2");
+        System.out.printf("| %-29s | %-11s | %-14s |\n", "", "(Efficient)", "(Inefficient)");
+        System.out.println("----------------------------------------------------------------");
+        System.out.printf("| Number of Data Points         | %-11d | %-14d |\n", efficientData.size(), inefficientData.size());
+        printRow("Average", calculateAverage(efficientData), calculateAverage(inefficientData));
+        printRow("Standard Deviation", calculateStandardDeviation(efficientData), calculateStandardDeviation(inefficientData));
+        printRow("Peak Memory (MB)", efficientPeakMem, inefficientPeakMem);
+
+        System.out.println("----------------------------------------------------------------");
+
+        if (isSignificantlyDifferent(efficientData, inefficientData)) {
+            System.out.println("The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.");
+        } else {
+            System.out.println("The difference between Dataset 1 and Dataset 2 is statistically **insignificant** at the 1.0% level.");
+        }
+    }
+
+    public void displayStatisticalAnalysis(List<Double> efficientData, List<Double> inefficientData) {
+        displayStatisticalAnalysis(efficientData, inefficientData, 0.0, 0.0);
+    }
+
+    // Prints a formatted row in the statistical analysis table
+    private void printRow(String metric, double efficientValue, double inefficientValue) {
+        System.out.printf("| %-29s | %-11.3f | %-14.3f |\n", metric, efficientValue, inefficientValue);
     }
 }

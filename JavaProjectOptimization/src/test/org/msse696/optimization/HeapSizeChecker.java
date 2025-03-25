@@ -1,4 +1,4 @@
-package org.msse696.optimization.helper;
+package test.org.msse696.optimization;
 
 public class HeapSizeChecker {
     public static void main(String[] args) {

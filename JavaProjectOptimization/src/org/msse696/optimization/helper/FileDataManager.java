@@ -12,31 +12,18 @@ import java.util.List;
 public class FileDataManager {
 
     private final String filePath;
-    private final String efficientFilePath = "efficient_data.txt";
-    private final String inefficientFilePath = "inefficient_data.txt";
 
-    public FileDataManager() {
-        this.filePath = null;
-    }
-
-    // Constructor with default file path based on efficiency
-    public FileDataManager(boolean isEfficient) {
-        this.filePath = isEfficient ? efficientFilePath : inefficientFilePath;
-    }
-
-    // Constructor with a specified custom file path
-    public FileDataManager(String filePath, boolean isEfficient) {
-        if (filePath != null && !filePath.isEmpty()) {
-            this.filePath = filePath;
-        } else {
-            this.filePath = isEfficient ? efficientFilePath : inefficientFilePath;
+    // Constructor requiring a file path
+    public FileDataManager(String filePath) {
+        if (filePath == null || filePath.isEmpty()) {
+            throw new IllegalArgumentException("File path must not be null or empty.");
         }
+        this.filePath = filePath;
     }
 
     // Method to append a string to the file
     public void appendLine(String line) {
         try {
-            // Ensure file exists, create if not
             File file = new File(filePath);
             if (!file.exists()) {
                 boolean isFileCreated = file.createNewFile();
@@ -45,7 +32,6 @@ public class FileDataManager {
                 }
             }
 
-            // Write the line to the file
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
                 writer.write(line);
                 writer.newLine();
@@ -62,6 +48,11 @@ public class FileDataManager {
 
     // Overloaded method to append a long to the file
     public void appendLine(long line) {
+        appendLine(String.valueOf(line));
+    }
+
+    // Overloaded method to append a double to the file
+    public void appendLine(double line) {
         appendLine(String.valueOf(line));
     }
 
@@ -94,7 +85,6 @@ public class FileDataManager {
     // Method to clear all data in the file
     public void clearData() {
         try {
-            // Overwrite the file with an empty content
             File file = new File(filePath);
             if (!file.exists()) {
                 boolean isFileCreated = file.createNewFile();
@@ -105,33 +95,9 @@ public class FileDataManager {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
                 writer.write(""); // Clears the content of the file
             }
-            System.out.println("File cleared: " + filePath);
+            //System.out.println("File cleared: " + filePath);
         } catch (IOException e) {
             System.err.println("Error clearing file: " + e.getMessage());
         }
-    }
-
-    public void clearData(String singleFilePath) {
-        try {
-            // Overwrite the file with an empty content
-            File file = new File(singleFilePath);
-            if (!file.exists()) {
-                boolean isFileCreated = file.createNewFile();
-                if (isFileCreated) {
-                    System.out.println("File created: " + singleFilePath);
-                }
-            }
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
-                writer.write(""); // Clears the content of the file
-            }
-            System.out.println("File cleared: " + singleFilePath);
-        } catch (IOException e) {
-            System.err.println("Error clearing file: " + e.getMessage());
-        }
-    }
-
-    public void clearBothData() {
-        clearData(efficientFilePath);
-        clearData(inefficientFilePath);
     }
 }
