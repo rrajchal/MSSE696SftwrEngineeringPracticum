@@ -26,8 +26,8 @@ public class ComparePadding {
             }
             long end = System.nanoTime();
             double executionTime = (end - start);
-            fileDataManager.appendLine(executionTime); // Save execution time
-        }, numberOfTimes); // Use the dynamically passed value
+            fileDataManager.appendLine(executionTime);
+        }, numberOfTimes);
     }
 
     public void compareEfficientPadding() {
