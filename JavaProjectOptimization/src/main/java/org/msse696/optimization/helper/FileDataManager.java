@@ -19,6 +19,16 @@ public class FileDataManager {
             throw new IllegalArgumentException("File path must not be null or empty.");
         }
         this.filePath = filePath;
+
+        // Ensure the directory exists
+        File file = new File(filePath);
+        File parentDir = file.getParentFile(); // Get the parent directory
+        if (parentDir != null && !parentDir.exists()) {
+            boolean isDirCreated = parentDir.mkdirs();
+            if (isDirCreated) {
+                System.out.println("Directory created: " + parentDir.getAbsolutePath());
+            }
+        }
     }
 
     // Method to append a string to the file

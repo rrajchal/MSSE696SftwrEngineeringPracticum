@@ -17,8 +17,12 @@ public class ComparePaddingMain {
     public static void main(String[] args) {
         System.out.println("Analyzing time taken to run...");
 
-        prepareEnvironmentForDataCreation(true, EFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
+        //runEfficientFirstThenInefficient();
+        runInefficientFirstThenEfficient();
 
+    }
+    private static void runEfficientFirstThenInefficient() {
+        prepareEnvironmentForDataCreation(true, EFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
         // Memory usage for efficient dataset
         HeapMonitor.resetPeakHeapUsage();
         HeapMonitor.startMonitoring();
@@ -29,8 +33,7 @@ public class ComparePaddingMain {
 
         // Memory usage for inefficient dataset
         HeapMonitor.resetPeakHeapUsage();
-
-        prepareEnvironmentForDataCreation(true, EFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
+        prepareEnvironmentForDataCreation(false, EFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
 
         HeapMonitor.startMonitoring();
         createData(false, INEFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
@@ -41,6 +44,33 @@ public class ComparePaddingMain {
         // Statistical analysis
         analyzeData(efficientPeak, inefficientPeak);
     }
+
+    private static void runInefficientFirstThenEfficient() {
+        prepareEnvironmentForDataCreation(false, INEFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
+        // Memory usage for efficient dataset
+        HeapMonitor.resetPeakHeapUsage();
+        HeapMonitor.startMonitoring();
+        createData(false, INEFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
+        HeapMonitor.stopMonitoring();
+        double efficientPeak = HeapMonitor.getPeakHeapUsage();
+        //System.out.printf("Peak Memory Used for Efficient Dataset: %.2f MB%n", efficientPeak);
+
+        // Memory usage for inefficient dataset
+        HeapMonitor.resetPeakHeapUsage();
+
+        prepareEnvironmentForDataCreation(true, EFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
+
+        HeapMonitor.startMonitoring();
+        createData(true, EFFICIENT_DATA_FILE, NUMBER_OF_DATA_POINTS);
+        HeapMonitor.stopMonitoring();
+        double inefficientPeak = HeapMonitor.getPeakHeapUsage();
+        //System.out.printf("Peak Memory Used for Inefficient Dataset: %.2f MB%n", inefficientPeak);
+
+        // Statistical analysis
+        analyzeData(efficientPeak, inefficientPeak);
+    }
+
+
 
     private static void analyzeData(double efficientPeak, double inefficientPeak) {
         DataAnalyzer dataAnalyzer = new DataAnalyzer();

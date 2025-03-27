@@ -96,6 +96,33 @@ public class DataAnalyzer {
         return isSignificantlyDifferent(efficientData, inefficientData, DEFAULT_SIGNIFICANCE_LEVEL);
     }
 
+    public void displayStatisticalAnalysis(List<Double> efficientData, List<Double> inefficientData, double efficientPeakMem, double inefficientPeakMem, FileDataManager fileManager) {
+        StringBuilder analysisResult = new StringBuilder();
+
+        analysisResult.append("Statistical Analysis:\n");
+        analysisResult.append("----------------------------------------------------------------\n");
+        analysisResult.append(String.format("| %-29s | %-11s | %-14s |\n", "Metric", "Dataset 1", "Dataset 2"));
+        analysisResult.append(String.format("| %-29s | %-11s | %-14s |\n", "", "(Efficient)", "(Inefficient)"));
+        analysisResult.append("----------------------------------------------------------------\n");
+        analysisResult.append(String.format("| Number of Data Points         | %-11d | %-14d |\n", efficientData.size(), inefficientData.size()));
+        analysisResult.append(getRow("Average (nanoseconds)", calculateAverage(efficientData), calculateAverage(inefficientData)));
+        analysisResult.append(getRow("Standard Deviation (ns)", calculateStandardDeviation(efficientData), calculateStandardDeviation(inefficientData)));
+        analysisResult.append(getRow("Peak Memory (MB)", efficientPeakMem, inefficientPeakMem));
+        analysisResult.append("----------------------------------------------------------------\n");
+
+        if (isSignificantlyDifferent(efficientData, inefficientData)) {
+            analysisResult.append("The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.\n");
+        } else {
+            analysisResult.append("The difference between Dataset 1 and Dataset 2 is statistically **insignificant** at the 1.0% level.\n");
+        }
+
+        // Print the analysis result
+        System.out.println(analysisResult);
+
+        // Save the analysis to the file
+        fileManager.appendLine(analysisResult.toString());
+    }
+
     public void displayStatisticalAnalysis(List<Double> efficientData, List<Double> inefficientData, double efficientPeakMem, double inefficientPeakMem) {
         System.out.println("Statistical Analysis:");
         System.out.println("----------------------------------------------------------------");
@@ -103,7 +130,7 @@ public class DataAnalyzer {
         System.out.printf("| %-29s | %-11s | %-14s |\n", "", "(Efficient)", "(Inefficient)");
         System.out.println("----------------------------------------------------------------");
         System.out.printf("| Number of Data Points         | %-11d | %-14d |\n", efficientData.size(), inefficientData.size());
-        printRow("Average", calculateAverage(efficientData), calculateAverage(inefficientData));
+        printRow("Average (nanoseconds)", calculateAverage(efficientData), calculateAverage(inefficientData));
         printRow("Standard Deviation", calculateStandardDeviation(efficientData), calculateStandardDeviation(inefficientData));
         printRow("Peak Memory (MB)", efficientPeakMem, inefficientPeakMem);
 
@@ -123,5 +150,9 @@ public class DataAnalyzer {
     // Prints a formatted row in the statistical analysis table
     private void printRow(String metric, double efficientValue, double inefficientValue) {
         System.out.printf("| %-29s | %-11.3f | %-14.3f |\n", metric, efficientValue, inefficientValue);
+    }
+
+    private String getRow(String metric, double dataset1Value, double dataset2Value) {
+        return String.format("| %-29s | %-11.3f | %-14.3f |\n", metric, dataset1Value, dataset2Value);
     }
 }

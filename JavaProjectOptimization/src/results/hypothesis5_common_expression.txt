@@ -1,0 +1,94 @@
+Running efficient first, then inefficient...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000000    | 10000000       |
+| Average                       | 29.878      | 31.121         |
+| Standard Deviation            | 1314.917    | 1248.122       |
+| Peak Memory (MB)              | 791.000     | 1478.002       |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **insignificant** at the 1.0% level.
+
+Running efficient first, then inefficient...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000000    | 10000000       |
+| Average                       | 31.587      | 27.853         |
+| Standard Deviation            | 1103.134    | 968.107        |
+| Peak Memory (MB)              | 789.000     | 1419.002       |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Running efficient first, then inefficient...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000000    | 10000000       |
+| Average                       | 27.781      | 29.681         |
+| Standard Deviation            | 621.316     | 1016.703       |
+| Peak Memory (MB)              | 735.000     | 1413.002       |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Analyzing common expression elimination performance...
+Running inefficient first, then efficient...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000000    | 10000000       |
+| Average                       | 26.319      | 27.142         |
+| Standard Deviation            | 636.657     | 171.043        |
+| Peak Memory (MB)              | 1473.002    | 791.000        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Running inefficient first, then efficient...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000000    | 10000000       |
+| Average                       | 28.002      | 29.126         |
+| Standard Deviation            | 566.379     | 732.843        |
+| Peak Memory (MB)              | 1466.002    | 791.002        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Running inefficient first, then efficient...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000000    | 10000000       |
+| Average                       | 28.351      | 28.616         |
+| Standard Deviation            | 1421.943    | 327.149        |
+| Peak Memory (MB)              | 1425.002    | 789.000        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **insignificant** at the 1.0% level.
+
+Running inefficient first, then efficient...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000000    | 10000000       |
+| Average                       | 44.203      | 31.064         |
+| Standard Deviation            | 10166.024   | 2042.109       |
+| Peak Memory (MB)              | 1424.002    | 806.002        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+
+
