@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class CompareBitwiseOperations {
+public class Hypo4CompareBitwiseOperations {
     private final List<Double> executionTimes = new ArrayList<>();
-
-    public CompareBitwiseOperations(boolean isEfficient, int iterations) {
+    public Hypo4CompareBitwiseOperations(boolean isEfficient, int iterations) {
         for (int i = 0; i < iterations; i++) {
             long start = System.nanoTime();
             if (isEfficient) {

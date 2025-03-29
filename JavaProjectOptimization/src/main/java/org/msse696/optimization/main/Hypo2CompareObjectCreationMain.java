@@ -1,28 +1,36 @@
 package org.msse696.optimization.main;
 
-import org.msse696.optimization.compare.CompareCommonExpressions;
+import org.msse696.optimization.compare.Hypo2CompareObjectCreation;
 import org.msse696.optimization.helper.DataAnalyzer;
+import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
 
 import java.util.List;
 
-public class CompareCommonExpressionsMain {
-    private static final int NUMBER_OF_ITERATIONS = 10_000_000;
+public class Hypo2CompareObjectCreationMain {
+    private static final int NUMBER_OF_ITERATIONS = 1000;
+    private static final String RESULTS_DIRECTORY = "src/results/";
+    private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis2_object_creation_efficiency.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing common expression elimination performance...");
+        System.out.println("Analyzing object creation performance...");
 
-        //System.out.println("\nRunning efficient first, then inefficient...");
-        //runEfficientFirstThenInefficient();
+        System.out.println("Running efficient first, then inefficient...");
+        //for (int i = 0; i < 5; i++)
+            //runEfficientFirstThenInefficient();
+
 
         System.out.println("Running inefficient first, then efficient...");
-        runInefficientFirstThenEfficient();
+        //for (int i = 0; i < 5; i++)
+            runInefficientFirstThenEfficient();
+
     }
 
     private static void runEfficientFirstThenInefficient() {
-
+        // JVM warm-up with efficient creation
         createData(true, NUMBER_OF_ITERATIONS);
-        // Efficient calculation
+
+        // Efficient object creation
         HeapMonitor.startMonitoring();
         List<Double> efficientData = createData(true, NUMBER_OF_ITERATIONS);
         HeapMonitor.stopMonitoring();
@@ -30,8 +38,10 @@ public class CompareCommonExpressionsMain {
 
         HeapMonitor.resetPeakHeapUsage();
 
+        // JVM warm-up with inefficient creation
         createData(false, NUMBER_OF_ITERATIONS);
-        // Inefficient calculation
+
+        // Inefficient object creation
         HeapMonitor.startMonitoring();
         List<Double> inefficientData = createData(false, NUMBER_OF_ITERATIONS);
         HeapMonitor.stopMonitoring();
@@ -41,8 +51,10 @@ public class CompareCommonExpressionsMain {
     }
 
     private static void runInefficientFirstThenEfficient() {
+        // JVM warm-up with inefficient creation
         createData(false, NUMBER_OF_ITERATIONS);
-        // Inefficient calculation
+
+        // Inefficient object creation
         HeapMonitor.startMonitoring();
         List<Double> inefficientData = createData(false, NUMBER_OF_ITERATIONS);
         HeapMonitor.stopMonitoring();
@@ -50,8 +62,10 @@ public class CompareCommonExpressionsMain {
 
         HeapMonitor.resetPeakHeapUsage();
 
+        // JVM warm-up with efficient creation
         createData(true, NUMBER_OF_ITERATIONS);
-        // Efficient calculation
+
+        // Efficient object creation
         HeapMonitor.startMonitoring();
         List<Double> efficientData = createData(true, NUMBER_OF_ITERATIONS);
         HeapMonitor.stopMonitoring();
@@ -61,13 +75,15 @@ public class CompareCommonExpressionsMain {
     }
 
     private static List<Double> createData(boolean isEfficient, int iterations) {
-        CompareCommonExpressions comparator = new CompareCommonExpressions(isEfficient, iterations);
+        Hypo2CompareObjectCreation comparator = new Hypo2CompareObjectCreation(isEfficient, iterations);
         return comparator.getExecutionTimes();
     }
 
     private static void analyzeData(List<Double> efficientData, List<Double> inefficientData,
                                     double efficientPeakHeapUsage, double inefficientPeakHeapUsage) {
+        FileDataManager fileManager = new FileDataManager(RESULTS_FILENAME);
         DataAnalyzer dataAnalyzer = new DataAnalyzer();
-        dataAnalyzer.displayStatisticalAnalysis(efficientData, inefficientData, efficientPeakHeapUsage, inefficientPeakHeapUsage);
+
+        dataAnalyzer.displayStatisticalAnalysis(efficientData, inefficientData, efficientPeakHeapUsage, inefficientPeakHeapUsage, fileManager);
     }
 }

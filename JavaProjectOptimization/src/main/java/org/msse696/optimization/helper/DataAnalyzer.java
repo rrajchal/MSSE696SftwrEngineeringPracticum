@@ -7,13 +7,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * DataAnalyzer provides methods for statistical analysis of two datasets.
+ * It calculates metrics like average, standard deviation, and checks
+ * whether datasets are significantly different using a t-test.
+ */
 public class DataAnalyzer {
 
+    // Constants for significance level and critical values
     private static final double DEFAULT_SIGNIFICANCE_LEVEL = 0.01; // Constant for default significance level
     private static final double CRITICAL_VALUE_95 = 1.96;          // Critical value for 95% confidence
     private static final double CRITICAL_VALUE_99 = 2.576;         // Critical value for 99% confidence
 
-    // Reads data from the specified file
+    /**
+     * Reads numerical data from a file line-by-line and converts it to a list of doubles.
+     *
+     * @param filePath Path of the file containing numerical data.
+     * @return A List of Double values representing the dataset.
+     */
     public List<Double> readDataFromFile(String filePath) {
         List<Double> data = new ArrayList<>();
         File file = new File(filePath);
@@ -49,7 +60,12 @@ public class DataAnalyzer {
         return sum / data.size();
     }
 
-    // Calculates the standard deviation of a dataset
+    /**
+     * Calculates the standard deviation of a dataset.
+     *
+     * @param data The dataset as a List of Double values.
+     * @return The standard deviation or 0 if the dataset is empty.
+     */
     public double calculateStandardDeviation(List<Double> data) {
         if (data.isEmpty()) return 0;
         double mean = calculateAverage(data);
@@ -60,7 +76,14 @@ public class DataAnalyzer {
         return Math.sqrt(sumOfSquares / data.size());
     }
 
-    // Determines if two datasets are significantly different
+    /**
+     * Determines whether two datasets are significantly different using a t-test.
+     *
+     * @param efficientData   Dataset 1 (efficient implementation).
+     * @param inefficientData Dataset 2 (inefficient implementation).
+     * @param significanceLevel The significance level to use for the t-test.
+     * @return True if the datasets are significantly different, otherwise false.
+     */
     public boolean isSignificantlyDifferent(List<Double> efficientData, List<Double> inefficientData, double significanceLevel) {
         if (efficientData.isEmpty() || inefficientData.isEmpty()) {
             System.err.println("Error: One or both datasets are empty.");
@@ -92,10 +115,26 @@ public class DataAnalyzer {
         return Math.abs(tStatistic) > criticalValue;
     }
 
+    /**
+     * Overloaded method that uses the default significance level of 1%.
+     *
+     * @param efficientData   Dataset 1 (efficient implementation).
+     * @param inefficientData Dataset 2 (inefficient implementation).
+     * @return True if the datasets are significantly different, otherwise false.
+     */
     public boolean isSignificantlyDifferent(List<Double> efficientData, List<Double> inefficientData) {
         return isSignificantlyDifferent(efficientData, inefficientData, DEFAULT_SIGNIFICANCE_LEVEL);
     }
 
+    /**
+     * Displays the statistical analysis of two datasets, including averages,
+     * standard deviations, and whether the difference is statistically significant.
+     *
+     * @param efficientData   Dataset 1 (efficient implementation).
+     * @param inefficientData Dataset 2 (inefficient implementation).
+     * @param efficientPeakMem Peak memory usage of Dataset 1.
+     * @param inefficientPeakMem Peak memory usage of Dataset 2.
+     */
     public void displayStatisticalAnalysis(List<Double> efficientData, List<Double> inefficientData, double efficientPeakMem, double inefficientPeakMem, FileDataManager fileManager) {
         StringBuilder analysisResult = new StringBuilder();
 

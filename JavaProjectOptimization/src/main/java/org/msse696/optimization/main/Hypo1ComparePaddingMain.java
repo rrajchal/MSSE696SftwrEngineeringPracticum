@@ -1,18 +1,18 @@
 package org.msse696.optimization.main;
 
-import org.msse696.optimization.compare.ComparePadding;
+import org.msse696.optimization.compare.Hypo1ComparePadding;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
 
 import java.util.List;
 
-public class ComparePaddingMain {
+public class Hypo1ComparePaddingMain {
 
     private static final String DATA_DIRECTORY = "src/data/";
     private static final String EFFICIENT_DATA_FILE = DATA_DIRECTORY + "compare_padding_efficient.txt";
     private static final String INEFFICIENT_DATA_FILE = DATA_DIRECTORY + "compare_padding_inefficient.txt";
-    private static final int NUMBER_OF_DATA_POINTS = 10000;
+    private static final int NUMBER_OF_DATA_POINTS = 10_000_000;
 
     public static void main(String[] args) {
         System.out.println("Analyzing time taken to run...");
@@ -87,7 +87,7 @@ public class ComparePaddingMain {
         // Use FileDataManager to clear the file before writing new data
         FileDataManager fileDataManager = new FileDataManager(filePath);
         fileDataManager.clearData();
-        new ComparePadding(isEfficient, filePath, numberOfIterations);
+        new Hypo1ComparePadding(isEfficient, filePath, numberOfIterations);
     }
 
     /**
@@ -103,7 +103,7 @@ public class ComparePaddingMain {
      */
     private static void prepareEnvironmentForDataCreation(boolean isEfficient, String filePath, int numberOfIterations) {
         FileDataManager fileDataManager = new FileDataManager(filePath);
-        new ComparePadding(isEfficient, filePath, numberOfIterations);
+        new Hypo1ComparePadding(isEfficient, filePath, numberOfIterations);
         fileDataManager.clearData();
     }
 
