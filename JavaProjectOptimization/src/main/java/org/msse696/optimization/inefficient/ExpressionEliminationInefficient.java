@@ -5,8 +5,9 @@ public class ExpressionEliminationInefficient {
         for (int i = 0; i < iterations; i++) {
             int x = 10;
             int y = 5;
-            int z1 = x * Math.abs(y) + x; // Common subexpression calculated twice
-            int z2 = x * Math.abs(y) + y; // Common subexpression calculated again
+            // Common subexpression calculated twice
+            int z1 = x * Math.abs(y) + x;
+            int z2 = x * Math.abs(y) + y;
             int z = z1 + z2;
         }
     }

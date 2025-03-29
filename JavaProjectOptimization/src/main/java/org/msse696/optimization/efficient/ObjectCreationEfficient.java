@@ -10,7 +10,6 @@ public class ObjectCreationEfficient {
 
     public void processUsers(int numberOfIterations) {
         User user = new User("", 0, "", "", 0.0, ""); // Create the object once
-
         for (int i = 0; i < numberOfIterations; i++) {
             user.setName("User" + i);
             user.setAge(i);
