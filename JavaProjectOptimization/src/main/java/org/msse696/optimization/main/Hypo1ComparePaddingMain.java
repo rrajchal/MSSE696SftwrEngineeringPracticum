@@ -1,6 +1,6 @@
 package org.msse696.optimization.main;
 
-import org.msse696.optimization.compare.Hypo1ComparePadding;
+import org.msse696.optimization.compare.Hypo1CompareVariableDeclarationOrderPerformance;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
@@ -84,10 +84,7 @@ public class Hypo1ComparePaddingMain {
     }
 
     private static void createData(boolean isEfficient, String filePath, int numberOfIterations) {
-        // Use FileDataManager to clear the file before writing new data
-        FileDataManager fileDataManager = new FileDataManager(filePath);
-        fileDataManager.clearData();
-        new Hypo1ComparePadding(isEfficient, filePath, numberOfIterations);
+        new Hypo1CompareVariableDeclarationOrderPerformance(isEfficient, numberOfIterations);
     }
 
     /**
@@ -103,7 +100,7 @@ public class Hypo1ComparePaddingMain {
      */
     private static void prepareEnvironmentForDataCreation(boolean isEfficient, String filePath, int numberOfIterations) {
         FileDataManager fileDataManager = new FileDataManager(filePath);
-        new Hypo1ComparePadding(isEfficient, filePath, numberOfIterations);
+        new Hypo1CompareVariableDeclarationOrderPerformance(isEfficient, numberOfIterations);
         fileDataManager.clearData();
     }
 
