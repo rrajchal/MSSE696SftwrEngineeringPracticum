@@ -11,7 +11,8 @@ import java.util.List;
  * The PaddingAnalyzer class analyzes the field arrangement in a given class
  * to identify and optimize memory usage by minimizing padding.
  */
-public class PaddingAnalyzer {
+public class PaddingAnalyzer implements Analyzer {
+
     private static final String OUTPUT_REPORT = "target/results/reports/padding_report.html";
 
     /**
@@ -21,11 +22,13 @@ public class PaddingAnalyzer {
         public String name;
         public String type;
         public int size;
+        public int offset; // Offset including padding for actual order
 
         FieldAnalysis(String name, String type, int size) {
             this.name = name;
             this.type = type;
             this.size = size;
+            this.offset = 0; // Initialized to 0, calculated later
         }
     }
 
@@ -36,12 +39,14 @@ public class PaddingAnalyzer {
      * @param clazz The class to analyze.
      * @return True if optimization is required, false otherwise.
      */
-    public static boolean analyze(Class<?> clazz) {
+    @Override
+    public boolean analyze(Class<?> clazz) {
         Field[] fields = clazz.getDeclaredFields();
         List<FieldAnalysis> actualOrder = new ArrayList<>();
         List<FieldAnalysis> recommendedOrder = new ArrayList<>();
 
-        int totalBytes = 0;
+        int actualTotalBytes = 0;
+        int recommendedTotalBytes = 0;
 
         System.out.println("Analyzing class: " + clazz.getName());
         for (Field field : fields) {
@@ -54,28 +59,32 @@ public class PaddingAnalyzer {
 
             actualOrder.add(new FieldAnalysis(field.getName(), type, size));
             recommendedOrder.add(new FieldAnalysis(field.getName(), type, size));
-            totalBytes += size;
-            System.out.println(field.getName() + " (" + type + "): " + size + " bytes");
         }
 
         // Sorting recommended order in descending size for efficient padding
         recommendedOrder.sort(Comparator.comparingInt((FieldAnalysis fa) -> fa.size).reversed());
 
+        // Calculate object size for actual and recommended orders
+        actualTotalBytes = calculateObjectSize(actualOrder);
+        recommendedTotalBytes = calculateObjectSize(recommendedOrder);
+
         // Check if optimization is necessary
         boolean optimizationNeeded = !isSameOrder(actualOrder, recommendedOrder);
         if (optimizationNeeded) {
             System.out.println("\nOptimization is required. Creating report...");
+            System.out.println("Actual object size: " + actualTotalBytes + " bytes");
+            System.out.println("Recommended object size: " + recommendedTotalBytes + " bytes");
 
             // Prepare data for the HTML report
             String[][] actualData = prepareTableData(actualOrder);
             String[][] recommendedData = prepareTableData(recommendedOrder);
 
-            // Generate the report using HtmlReport
-            HtmlReport.generateHtmlReport(
+            // Generate the report using the dedicated method
+            generateReport(
                     "Padding Analysis Report for " + clazz.getName(),
-                    "Actual Order",
+                    "Actual Order (Total Size: " + actualTotalBytes + " bytes)",
                     actualData,
-                    "Recommended Order",
+                    "Recommended Order (Total Size: " + recommendedTotalBytes + " bytes)",
                     recommendedData,
                     OUTPUT_REPORT
             );
@@ -87,17 +96,55 @@ public class PaddingAnalyzer {
     }
 
     /**
+     * Generates an HTML report using the provided data.
+     *
+     * @param title            The title of the report.
+     * @param actualHeader     The header for actual analysis data.
+     * @param actualData       The actual analysis data.
+     * @param recommendedHeader The header for recommended improvements.
+     * @param recommendedData  The recommended improvement data.
+     * @param outputPath       The file path where the report will be saved.
+     */
+    @Override
+    public void generateReport(String title, String actualHeader, String[][] actualData, String recommendedHeader, String[][] recommendedData, String outputPath) {
+        HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
+        System.out.println("HTML report generated successfully: " + outputPath);
+    }
+
+    /**
+     * Calculates the total object size including padding for proper alignment.
+     *
+     * @param fieldAnalysisList List of fields to analyze.
+     * @return Total object size including padding.
+     */
+    private int calculateObjectSize(List<FieldAnalysis> fieldAnalysisList) {
+        int totalSize = 0;
+        int currentOffset = 0;
+
+        for (FieldAnalysis fa : fieldAnalysisList) {
+            int alignment = fa.size; // Assume alignment equals field size for simplicity
+            int padding = (currentOffset % alignment == 0) ? 0 : alignment - (currentOffset % alignment);
+
+            fa.offset = currentOffset + padding; // Update field offset considering padding
+            currentOffset = fa.offset + fa.size; // Move to next field's offset
+            totalSize = currentOffset; // Update total size
+        }
+
+        return totalSize;
+    }
+
+    /**
      * Converts field analysis data into a 2D array suitable for HTML table generation.
      *
      * @param fieldAnalysisList List of FieldAnalysis objects to convert.
      * @return A 2D string array representing the table rows.
      */
-    private static String[][] prepareTableData(List<FieldAnalysis> fieldAnalysisList) {
-        String[][] tableData = new String[fieldAnalysisList.size() + 1][3];
-        tableData[0] = new String[]{"Field Name", "Type", "Size (bytes)"}; // Header row
+    private String[][] prepareTableData(List<FieldAnalysis> fieldAnalysisList) {
+        String[][] tableData = new String[fieldAnalysisList.size() + 1][4];
+        tableData[0] = new String[]{"Field Name", "Type", "Size (bytes)", "Offset"}; // Header row
         for (int i = 0; i < fieldAnalysisList.size(); i++) {
             FieldAnalysis fa = fieldAnalysisList.get(i);
-            tableData[i + 1] = new String[]{fa.name, fa.type, String.valueOf(fa.size)};
+            tableData[i + 1] = new String[]{fa.name, fa.type, String.valueOf(fa.size), String.valueOf(fa.offset)};
         }
         return tableData;
     }
@@ -127,26 +174,16 @@ public class PaddingAnalyzer {
      * @param type The field type as a string.
      * @return The size of the field type in bytes, or -1 if unknown.
      */
-    public static int getFieldSize(String type) {
+    public int getFieldSize(String type) {
         return switch (type) {
-            case "boolean" -> 1;
-            case "byte" -> 1;
-            case "char" -> 2;
-            case "short" -> 2;
-            case "int" -> 4;
-            case "float" -> 4;
-            case "long" -> 8;
-            case "double" -> 8;
+            case "boolean", "byte" -> 1;
+            case "char", "short" -> 2;
+            case "int", "float" -> 4;
+            case "long", "double" -> 8;
 
             // Boxed types
-            case "Boolean" -> 16;
-            case "Byte" -> 16;
-            case "Character" -> 16;
-            case "Short" -> 16;
-            case "Integer" -> 16;
-            case "Float" -> 16;
-            case "Long" -> 24;
-            case "Double" -> 24;
+            case "Boolean", "Byte", "Character", "Short", "Integer", "Float" -> 16;
+            case "Long", "Double" -> 24;
 
             // Other common types
             case "Object" -> 16;
@@ -156,7 +193,12 @@ public class PaddingAnalyzer {
         };
     }
 
-    public static String getReportName() {
+    /**
+     * Returns the report file path.
+     *
+     * @return The report file path.
+     */
+    public String getReportName() {
         return OUTPUT_REPORT;
     }
 }

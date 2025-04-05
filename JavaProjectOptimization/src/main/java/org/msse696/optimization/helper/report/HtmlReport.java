@@ -39,7 +39,7 @@ public class HtmlReport {
         htmlContent.append("<style>");
         htmlContent.append("body { font-family: Arial, sans-serif; margin: 20px; }");
         htmlContent.append(".container { max-width: 800px; margin: auto; }");
-        htmlContent.append("h1 { text-align: center; color: green; }"); // Title in green
+        htmlContent.append("h1 { text-align: center; color: blue; }"); // Title in blue
         htmlContent.append("table { width: 100%; border-collapse: collapse; margin-top: 20px; }");
         htmlContent.append("th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }");
         htmlContent.append("th { background-color: #f4f4f4; }");
