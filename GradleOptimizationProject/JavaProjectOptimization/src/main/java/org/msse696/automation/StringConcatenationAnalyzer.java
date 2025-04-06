@@ -1,10 +1,10 @@
 package org.msse696.automation;
 
+import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.AssignExpr;
-import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.stmt.ForStmt;
@@ -28,7 +28,8 @@ public class StringConcatenationAnalyzer implements Analyzer {
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();
         typeSolver.add(new ReflectionTypeSolver());
         JavaSymbolSolver symbolSolver = new JavaSymbolSolver(typeSolver);
-        StaticJavaParser.getConfiguration().setSymbolResolver(symbolSolver);
+        ParserConfiguration parserConfiguration = new ParserConfiguration();
+        parserConfiguration.setSymbolResolver(symbolSolver);
     }
 
     @Override
@@ -53,7 +54,6 @@ public class StringConcatenationAnalyzer implements Analyzer {
 
         } catch (Exception e) {
             System.err.println("Error analyzing Java file: " + javaFile.getPath());
-            e.printStackTrace();
         }
 
         if (optimizationNeeded.get()) {
@@ -167,7 +167,8 @@ public class StringConcatenationAnalyzer implements Analyzer {
         HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
     }
 
-    public String getReportName() {
+    @Override
+    public String getReport() {
         return OUTPUT_REPORT;
     }
 }

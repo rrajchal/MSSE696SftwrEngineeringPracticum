@@ -149,11 +149,11 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
     }
 
     /**
-     * Generates the recommended data for the report.
+     * Generates the recommended improvements for detected inefficiencies.
      *
-     * @return A 2D array containing the recommendation text and examples.
+     * @return A 2D array containing recommendations and examples of optimizations.
      */
-    private String[][] generateRecommendedData() {
+    public String[][] generateRecommendedData() {
         return new String[][]{
                 {"Recommendation", "Avoid creating new objects inside loops. Reuse objects wherever possible."},
                 {"Example (Inefficient)", """
@@ -189,12 +189,8 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
         HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
     }
 
-    /**
-     * Returns the path of the generated report file.
-     *
-     * @return The report file path.
-     */
-    public String getReportName() {
+    @Override
+    public String getReport() {
         return OUTPUT_REPORT;
     }
 }

@@ -113,7 +113,6 @@ public class PaddingAnalyzer implements Analyzer {
             return optimizationNeeded;
         } catch (Exception e) {
             System.err.println("Error analyzing file: " + javaFile.getPath());
-            e.printStackTrace();
         }
 
         return false;
@@ -222,7 +221,8 @@ public class PaddingAnalyzer implements Analyzer {
         HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
     }
 
-    public String getReportName() {
+    @Override
+    public String getReport() {
         return OUTPUT_REPORT;
     }
 }
