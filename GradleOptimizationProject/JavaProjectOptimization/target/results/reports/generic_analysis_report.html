@@ -1,0 +1,15 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Generic Analysis Report for org.msse696.automation.StringConcatenationAnalyzerTest$StringConcatenationInefficient</title><style>body { font-family: Arial, sans-serif; margin: 20px; }.container { max-width: 800px; margin: auto; }h1 { text-align: center; color: blue; }table { width: 100%; border-collapse: collapse; margin-top: 20px; }th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }th { background-color: #f4f4f4; }.actual-header { color: red; }.recommended-header { color: green; }tr:nth-child(even) { background-color: #f9f9f9; }</style></head><body><div class='container'><h1>Generic Analysis Report for org.msse696.automation.StringConcatenationAnalyzerTest$StringConcatenationInefficient</h1><h3 class='actual-header'>Methods with Detected Inefficiencies</h3><table><tr><th>Method Name</th><th>Issue</th></tr><tr><td>concatenateStrings</td><td>Inefficiency detected</td></tr></table><h3 class='recommended-header'>Recommendations for Optimization</h3><table><tr><th>Recommendation</th><th>Review detected inefficiencies and optimize accordingly. Example optimizations might include: </th></tr><tr><td>Example 1</td><td><pre><code>
+Avoid string concatenation in loops. Use StringBuilder or StringBuffer instead:
+StringBuilder result = new StringBuilder();
+for (int i = 0; i < iterations; i++) {
+    result.append(i);  // Efficient
+}
+</code></pre>
+</td></tr><tr><td>Example 2</td><td><pre><code>
+Reuse objects wherever possible instead of creating new ones inside loops:
+MyObject obj = new MyObject();
+for (int i = 0; i < iterations; i++) {
+    obj.process(i);  // Efficient
+}
+</code></pre>
+</td></tr></table></div></body></html>

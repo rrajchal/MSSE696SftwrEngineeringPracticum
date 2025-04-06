@@ -112,7 +112,6 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
     @Override
     public void generateReport(String title, String actualHeader, String[][] actualData, String recommendedHeader, String[][] recommendedData, String outputPath) {
         HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
-        System.out.println("HTML report generated successfully: " + outputPath);
     }
 
     /**
@@ -140,7 +139,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
      * @return True if inefficient object creation inside loops is detected, false otherwise.
      */
     private boolean detectObjectCreationInLoop(String code) {
-        System.out.println("Analyzing code for loop and object creation patterns:\n" + code);
+        // System.out.println("Analyzing code for loop and object creation patterns:\n" + code);
 
         // Regex pattern to detect loops and their bodies
         Pattern loopPattern = Pattern.compile("(for\\s*\\(.*?\\).*?\\{.*?\\}|while\\s*\\(.*?\\).*?\\{.*?\\})", Pattern.DOTALL);
@@ -151,8 +150,6 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
 
         while (loopMatcher.find()) {
             String loopContent = loopMatcher.group(); // Extract full loop content
-            System.out.println("Loop detected:\n" + loopContent);
-
             Matcher creationMatcher = creationPattern.matcher(loopContent);
             if (creationMatcher.find()) {
                 System.out.println("Object creation detected inside loop:\n" + creationMatcher.group());
@@ -160,7 +157,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
             }
         }
 
-        System.out.println("No inefficient object creation detected.");
+        // System.out.println("No inefficient object creation detected.");
         return false;
     }
 

@@ -108,7 +108,6 @@ public class PaddingAnalyzer implements Analyzer {
     @Override
     public void generateReport(String title, String actualHeader, String[][] actualData, String recommendedHeader, String[][] recommendedData, String outputPath) {
         HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
-        System.out.println("HTML report generated successfully: " + outputPath);
     }
 
     /**

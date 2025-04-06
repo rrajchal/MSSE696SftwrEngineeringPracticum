@@ -1,0 +1,42 @@
+Run 1
+Analyzing object creation performance...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000       | 10000          |
+| Average                       | 0.800       | 0.634          |  // millisecond
+| Standard Deviation            | 0.774       | 0.175          |
+| Peak Memory (MB)              | 220.510     | 321.162        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Run 2
+Analyzing object creation performance...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000       | 10000          |
+| Average                       | 629770.780  | 655426.630     |
+| Standard Deviation            | 136028.417  | 196945.955     |
+| Peak Memory (MB)              | 218.487     | 321.163        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Run 3
+Analyzing object creation performance...
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 10000       | 10000          |
+| Average                       | 635465.170  | 643021.040     |
+| Standard Deviation            | 186024.630  | 177803.773     |
+| Peak Memory (MB)              | 217.500     | 321.290        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
