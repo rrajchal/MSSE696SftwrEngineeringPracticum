@@ -12,9 +12,7 @@ public interface Analyzer {
      * @param javaFile The File.java file to analyze.
      * @return True if optimization is needed, false otherwise.
      */
-    default boolean analyze(File javaFile) {
-        return false;
-    }
+    boolean analyze(File javaFile);
 
     /**
      * Generates an HTML report using provided analysis data.
