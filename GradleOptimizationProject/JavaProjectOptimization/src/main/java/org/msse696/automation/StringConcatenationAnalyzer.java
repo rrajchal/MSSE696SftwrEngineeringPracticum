@@ -23,6 +23,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class StringConcatenationAnalyzer implements Analyzer {
 
     private static final String OUTPUT_REPORT = "target/results/reports/string_concatenation_report.html";
+    private boolean isEfficient;
 
     public StringConcatenationAnalyzer() {
         CombinedTypeSolver typeSolver = new CombinedTypeSolver();
@@ -62,13 +63,13 @@ public class StringConcatenationAnalyzer implements Analyzer {
                     "Methods with Inefficient String Concatenation",
                     prepareReportData(inefficientMethods),
                     "Recommendations for Optimization",
-                    generateRecommendedData(),
+                    getRecommendedData(),
                     OUTPUT_REPORT
             );
         } else {
             System.out.println("No optimization required. Report will not be generated.");
         }
-
+        isEfficient = !optimizationNeeded.get();
         return optimizationNeeded.get();
     }
 
@@ -134,7 +135,8 @@ public class StringConcatenationAnalyzer implements Analyzer {
         return data;
     }
 
-    private String[][] generateRecommendedData() {
+    @Override
+    public String[][] getRecommendedData() {
         return new String[][]{
                 {"Recommendation", "Avoid string concatenation in loops. Use StringBuilder or StringBuffer instead."},
                 {"Example (Inefficient)", """
@@ -170,5 +172,10 @@ public class StringConcatenationAnalyzer implements Analyzer {
     @Override
     public String getReport() {
         return OUTPUT_REPORT;
+    }
+
+    @Override
+    public boolean isEfficient() {
+        return isEfficient;
     }
 }

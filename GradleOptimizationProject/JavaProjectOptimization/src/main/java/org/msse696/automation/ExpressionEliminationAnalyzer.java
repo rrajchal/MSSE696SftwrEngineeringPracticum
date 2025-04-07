@@ -20,6 +20,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ExpressionEliminationAnalyzer implements Analyzer {
 
     private static final String OUTPUT_REPORT = "target/results/reports/expression_elimination_report.html";
+    private boolean isEfficient;
 
     /**
      * Analyzes a Java file to detect redundant calculations of common subexpressions within loops.
@@ -62,13 +63,13 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
                     "Methods with Redundant Calculations",
                     prepareReportData(inefficientMethods),
                     "Recommendations for Optimization",
-                    generateRecommendedData(),
+                    getRecommendedData(),
                     OUTPUT_REPORT
             );
         } else {
             System.out.println("\nNo optimization required. Report will not be generated.");
         }
-
+        isEfficient = !optimizationNeeded.get();
         return optimizationNeeded.get();
     }
 
@@ -175,12 +176,8 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
         return data;
     }
 
-    /**
-     * Generates the recommended improvements for detected inefficiencies.
-     *
-     * @return A 2D array containing recommendations and examples of optimizations.
-     */
-    public String[][] generateRecommendedData() {
+    @Override
+    public String[][] getRecommendedData() {
         return new String[][]{
                 {"Recommendation", "Cache intermediate results of common subexpressions to avoid redundant calculations."},
                 {"Example (Inefficient)", """
@@ -207,5 +204,10 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
     @Override
     public String getReport() {
         return OUTPUT_REPORT;
+    }
+
+    @Override
+    public boolean isEfficient() {
+        return isEfficient;
     }
 }

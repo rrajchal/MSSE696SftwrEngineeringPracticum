@@ -35,4 +35,17 @@ public interface Analyzer {
      * @return The report file path as a String.
      */
     String getReport();
+
+    /**
+     * Returns whether coding practice is efficient or not
+     * @return true if coding practice is efficient
+     */
+    boolean isEfficient();
+
+    /**
+     * Returns the recommended optimization examples for inefficient and efficient code.
+     *
+     * @return A 2D array containing examples of inefficient and efficient code placement.
+     */
+    String[][] getRecommendedData();
 }

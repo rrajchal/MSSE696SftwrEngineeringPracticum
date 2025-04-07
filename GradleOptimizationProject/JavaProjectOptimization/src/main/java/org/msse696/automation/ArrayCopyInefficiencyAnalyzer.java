@@ -19,6 +19,7 @@ import java.util.List;
 public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
 
     private static final String OUTPUT_REPORT = "target/results/reports/array_copy_inefficiency_report.html";
+    private boolean isEfficient;
 
     /**
      * Analyzes the given Java file for inefficient array copying practices.
@@ -65,7 +66,7 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
         } else {
             System.out.println("\nNo inefficiencies detected. Report will not be generated.");
         }
-
+        isEfficient = !inefficiencyDetected;
         return inefficiencyDetected;
     }
 
@@ -126,22 +127,18 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
         HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
     }
 
-    /**
-     * Returns the path to the generated HTML report.
-     *
-     * @return The report file path.
-     */
     @Override
     public String getReport() {
         return OUTPUT_REPORT;
     }
 
-    /**
-     * Returns the recommended optimization examples for inefficient and efficient array copying.
-     *
-     * @return A 2D array containing examples of inefficient and efficient practices.
-     */
-    private String[][] getRecommendedData() {
+    @Override
+    public boolean isEfficient() {
+        return isEfficient;
+    }
+
+    @Override
+    public String[][] getRecommendedData() {
         return new String[][]{
             {"Inefficient Code", """
             <pre><code>

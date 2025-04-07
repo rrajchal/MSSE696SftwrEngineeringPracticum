@@ -18,6 +18,7 @@ import java.util.regex.Pattern;
 public class PaddingAnalyzer implements Analyzer {
 
     private static final String OUTPUT_REPORT = "target/results/reports/padding_report.html";
+    private boolean isEfficient;
 
     /**
      * A simple class to represent field analysis data.
@@ -46,6 +47,7 @@ public class PaddingAnalyzer implements Analyzer {
     public boolean analyze(File javaFile) {
         List<FieldAnalysis> actualOrder = new ArrayList<>();
         List<FieldAnalysis> recommendedOrder = new ArrayList<>();
+        isEfficient = true;
 
         int actualTotalBytes = 0;
         int recommendedTotalBytes = 0;
@@ -87,15 +89,15 @@ public class PaddingAnalyzer implements Analyzer {
             recommendedTotalBytes = calculateObjectSize(recommendedOrder);
 
             // Check if optimization is necessary
-            boolean optimizationNeeded = !isSameOrder(actualOrder, recommendedOrder);
-            if (optimizationNeeded) {
+            boolean isEfficient = isSameOrder(actualOrder, recommendedOrder);
+            if (!isEfficient) {
                 System.out.println("\nOptimization is required. Creating report...");
                 System.out.println("Actual object size: " + actualTotalBytes + " bytes");
                 System.out.println("Recommended object size: " + recommendedTotalBytes + " bytes");
 
                 // Prepare data for the HTML report
                 String[][] actualData = prepareTableData(actualOrder);
-                String[][] recommendedData = prepareTableData(recommendedOrder);
+                String[][] recommendedData = getRecommendedData();
 
                 // Generate the report
                 generateReport(
@@ -106,15 +108,14 @@ public class PaddingAnalyzer implements Analyzer {
                         recommendedData,
                         OUTPUT_REPORT
                 );
+                return true;
             } else {
                 System.out.println("\nNo optimization required. Report will not be generated.");
+                return false;
             }
-
-            return optimizationNeeded;
         } catch (Exception e) {
             System.err.println("Error analyzing file: " + javaFile.getPath());
         }
-
         return false;
     }
 
@@ -224,5 +225,36 @@ public class PaddingAnalyzer implements Analyzer {
     @Override
     public String getReport() {
         return OUTPUT_REPORT;
+    }
+
+    @Override
+    public boolean isEfficient() {
+        return isEfficient;
+    }
+
+    @Override
+    public String[][] getRecommendedData() {
+        return new String[][]{
+                {"Inefficient Code", """
+            <pre><code>
+            public class PaddingTestClassInefficient {
+                boolean flag;
+                long id;
+                char grade;
+                int value; // Inefficient field arrangement
+            }
+            </code></pre>
+            """},
+                {"Efficient Code", """
+            <pre><code>
+            public class PaddingTestClassEfficient {
+                long id;
+                int value;
+                char grade;
+                boolean flag; // Efficient field arrangement
+            }
+            </code></pre>
+            """}
+        };
     }
 }

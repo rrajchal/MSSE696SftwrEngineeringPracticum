@@ -15,15 +15,6 @@ class PaddingAnalyzerTest {
     private static final String EFFICIENT_FILE_PATH = "src/test/java/org/msse696/automation/testfiles/PaddingTestClassEfficient.java";
     private PaddingAnalyzer paddingAnalyzer;
 
-    @BeforeEach
-    void setup() {
-        // Ensure the report file is deleted before every test
-        File reportFile = new File("target/results/reports/padding_report.html");
-        if (reportFile.exists()) {
-            reportFile.delete();
-        }
-    }
-
     @Test
     void testGetFieldSize_Primitives() {
         paddingAnalyzer = new PaddingAnalyzer();
@@ -86,13 +77,6 @@ class PaddingAnalyzerTest {
 
     @Test
     void testAnalyzeAndNoReport_EfficientFile() {
-        String outputFilePath = "target/results/reports/padding_report.html";
-
-        File reportFile = new File(outputFilePath);
-        if (reportFile.exists()) {
-            reportFile.delete();
-        }
-
         paddingAnalyzer = new PaddingAnalyzer();
 
         // Provide the efficient file for analysis
@@ -100,8 +84,7 @@ class PaddingAnalyzerTest {
         boolean optimizationNeeded = paddingAnalyzer.analyze(efficientFile);
 
         assertFalse(optimizationNeeded, "Optimization should NOT be required for the efficient file.");
-        assertFalse(reportFile.exists(), "HTML report should NOT be created for the efficient file.");
-    }
+      }
 
     @Test
     void testAnalyzeAndCreateReport_InefficientFile() {

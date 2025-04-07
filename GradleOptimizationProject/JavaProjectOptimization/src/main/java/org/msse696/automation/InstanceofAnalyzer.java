@@ -20,6 +20,7 @@ import java.util.List;
 public class InstanceofAnalyzer implements Analyzer {
 
     private static final String OUTPUT_REPORT = "target/results/reports/instanceof_analysis_report.html";
+    private boolean isEfficient;
 
     /**
      * Analyzes the given Java file for inefficient type validation practices.
@@ -66,7 +67,7 @@ public class InstanceofAnalyzer implements Analyzer {
         } else {
             System.out.println("\nNo inefficiencies detected. Report will not be generated.");
         }
-
+        isEfficient = !inefficiencyDetected;
         return inefficiencyDetected;
     }
 
@@ -125,22 +126,18 @@ public class InstanceofAnalyzer implements Analyzer {
         HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
     }
 
-    /**
-     * Returns the path to the generated HTML report.
-     *
-     * @return The report file path.
-     */
     @Override
     public String getReport() {
         return OUTPUT_REPORT;
     }
 
-    /**
-     * Returns the recommended optimization examples for inefficient and efficient code.
-     *
-     * @return A 2D array containing examples of inefficient and efficient code placement.
-     */
-    private String[][] getRecommendedData() {
+    @Override
+    public boolean isEfficient() {
+        return isEfficient;
+    }
+
+    @Override
+    public String[][] getRecommendedData() {
         return new String[][]{
             {"Inefficient Code", """
             <pre><code>

@@ -4,7 +4,6 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.BinaryExpr;
-import com.github.javaparser.ast.expr.NameExpr;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.Statement;
@@ -22,6 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ArithmeticOperationAnalyzer implements Analyzer {
 
     private static final String OUTPUT_REPORT = "target/results/reports/arithmetic_operation_report.html";
+    private boolean isEfficient;
 
     /**
      * Analyzes a Java file to detect inefficient arithmetic operations inside loops.
@@ -55,7 +55,6 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
             });
         } catch (Exception e) {
             System.err.println("Error analyzing file: " + javaFile.getPath());
-            e.printStackTrace();
         }
 
         // Generate report if inefficiencies were detected
@@ -66,7 +65,7 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
                 "Methods with Inefficient Arithmetic Operations",
                 prepareReportData(inefficientMethods),
                 "Recommendations for Optimization",
-                generateRecommendedData(),
+                getRecommendedData(),
                 OUTPUT_REPORT
             );
         } else {
@@ -84,19 +83,20 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
      */
     private boolean detectInefficientOperations(MethodDeclaration method) {
         List<ForStmt> loops = method.findAll(ForStmt.class);
-
+        isEfficient = true;
         for (ForStmt loop : loops) {
             System.out.println("Analyzing loop body: " + loop.getBody());
 
             if (loop.getBody().isBlockStmt()) {
                 for (Statement statement : loop.getBody().asBlockStmt().getStatements()) {
                     System.out.println("Statement found: " + statement);
-
-                    if (checkForInefficiency(statement)) {
+                    isEfficient = !checkForInefficiency(statement);
+                    if (!isEfficient) {
                         return true;
                     }
                 }
             } else if (checkForInefficiency(loop.getBody())) {
+                isEfficient = false;
                 return true;
             }
         }
@@ -151,12 +151,8 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
         return data;
     }
 
-    /**
-     * Generates the recommended improvements for detected inefficiencies.
-     *
-     * @return A 2D array containing recommendations and examples of optimizations.
-     */
-    public String[][] generateRecommendedData() {
+    @Override
+    public String[][] getRecommendedData() {
         return new String[][]{
             {"Recommendation", "Replace arithmetic operations with bitwise operations where possible."},
             {"Example (Inefficient)", """
@@ -188,5 +184,10 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
     @Override
     public String getReport() {
         return OUTPUT_REPORT;
+    }
+
+    @Override
+    public boolean isEfficient() {
+        return isEfficient;
     }
 }

@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 public class LoopObjectCreationAnalyzer implements Analyzer {
 
     private static final String OUTPUT_REPORT = "target/results/reports/loop_object_creation_report.html";
+    private boolean isEfficient;
 
     /**
      * Analyzes a Java file to detect inefficient object creation inside loops.
@@ -65,7 +66,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
                 actualData[i + 1] = inefficientMethods.get(i);
             }
 
-            String[][] recommendedData = generateRecommendedData();
+            String[][] recommendedData = getRecommendedData();
 
             // Generate the report using the dedicated function
             generateReport(
@@ -79,7 +80,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
         } else {
             System.out.println("\nNo optimization required. Report will not be generated.");
         }
-
+        isEfficient = !optimizationNeeded;
         return optimizationNeeded;
     }
 
@@ -148,12 +149,8 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
         return false;
     }
 
-    /**
-     * Generates the recommended improvements for detected inefficiencies.
-     *
-     * @return A 2D array containing recommendations and examples of optimizations.
-     */
-    public String[][] generateRecommendedData() {
+    @Override
+    public String[][] getRecommendedData() {
         return new String[][]{
                 {"Recommendation", "Avoid creating new objects inside loops. Reuse objects wherever possible."},
                 {"Example (Inefficient)", """
@@ -192,5 +189,10 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
     @Override
     public String getReport() {
         return OUTPUT_REPORT;
+    }
+
+    @Override
+    public boolean isEfficient() {
+        return isEfficient;
     }
 }
