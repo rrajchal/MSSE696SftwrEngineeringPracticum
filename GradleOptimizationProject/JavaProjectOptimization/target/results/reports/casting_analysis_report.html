@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Casting Analysis Report</title><style>body { font-family: Arial, sans-serif; margin: 20px; }.container { max-width: 800px; margin: auto; }h1 { text-align: center; color: blue; }table { width: 100%; border-collapse: collapse; margin-top: 20px; }th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }th { background-color: #f4f4f4; }.actual-header { color: red; }.recommended-header { color: green; }tr:nth-child(even) { background-color: #f9f9f9; }</style></head><body><div class='container'><h1>Casting Analysis Report</h1><h3 class='actual-header'>Methods with Inefficient Casting</h3><table><tr><th>Method Name</th><th>Issue</th></tr><tr><td>execute</td><td>Explicit casting detected where direct assignment is possible</td></tr></table><h3 class='recommended-header'>Recommendations for Optimization</h3><table><tr><th>Inefficient Code</th><th><pre><code>
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Casting Analysis Report</title><style>body { font-family: Arial, sans-serif; margin: 20px; }.container { max-width: 800px; margin: auto; }h1 { text-align: center; color: blue; }table { width: 100%; border-collapse: collapse; margin-top: 20px; }th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }th { background-color: #f4f4f4; }.actual-header { color: red; }.recommended-header { color: green; }tr:nth-child(even) { background-color: #f9f9f9; }</style></head><body><div class='container'><h1>Casting Analysis Report</h1><h3 class='actual-header'>Methods with Inefficient Casting</h3><table><tr><th>Method Name</th><th>Issue</th></tr><tr><td>execute</td><td>Explicit casting detected where direct assignment is possible</td></tr></table><h3 class='recommended-header'>Recommendations for Optimization</h3><table><tr><th>Example</th><th>Code</th></tr><tr><td>Inefficient Code</td><td><pre><code>
 public void execute(int iterations) {
     for (int i = 0; i < iterations; i++) {
         Integer assignedValue = (Integer) i; // Explicit casting
@@ -6,7 +6,7 @@ public void execute(int iterations) {
     }
 }
 </code></pre>
-</th></tr><tr><td>Efficient Code</td><td><pre><code>
+</td></tr><tr><td>Efficient Code</td><td><pre><code>
 public void execute(int iterations) {
     for (int i = 0; i < iterations; i++) {
         Integer assignedValue = i; // Direct assignment

@@ -22,14 +22,8 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
     private static final String OUTPUT_REPORT = "target/results/reports/expression_elimination_report.html";
     private boolean isEfficient;
 
-    /**
-     * Analyzes a Java file to detect redundant calculations of common subexpressions within loops.
-     *
-     * @param javaFile The Java file to analyze.
-     * @return True if inefficiencies are detected, false otherwise.
-     */
     @Override
-    public boolean analyze(File javaFile) {
+    public boolean analyze(File javaFile, boolean createReport) {
         AtomicBoolean optimizationNeeded = new AtomicBoolean(false); // AtomicBoolean for thread safety
         List<String[]> inefficientMethods = new ArrayList<>();
 
@@ -56,7 +50,7 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
         }
 
         // Generate report if inefficiencies are detected
-        if (optimizationNeeded.get()) {
+        if (optimizationNeeded.get() && createReport) {
             System.out.println("\nOptimization is required. Creating report...");
             generateReport(
                     "Expression Elimination Analysis Report",

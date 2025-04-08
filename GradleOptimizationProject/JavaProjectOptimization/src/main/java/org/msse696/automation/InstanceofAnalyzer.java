@@ -22,14 +22,8 @@ public class InstanceofAnalyzer implements Analyzer {
     private static final String OUTPUT_REPORT = "target/results/reports/instanceof_analysis_report.html";
     private boolean isEfficient;
 
-    /**
-     * Analyzes the given Java file for inefficient type validation practices.
-     *
-     * @param javaFile The Java file to analyze.
-     * @return True if inefficiencies are detected, false otherwise.
-     */
-    @Override
-    public boolean analyze(File javaFile) {
+     @Override
+    public boolean analyze(File javaFile, boolean createReport) {
         System.out.println("Analyzing file: " + javaFile.getName());
         List<String[]> inefficiencies = new ArrayList<>(); // Tracks inefficiencies for report generation
         boolean inefficiencyDetected = false;
@@ -54,7 +48,7 @@ public class InstanceofAnalyzer implements Analyzer {
         }
 
         // Only generate a report if inefficiencies are detected
-        if (inefficiencyDetected) {
+        if (inefficiencyDetected && createReport) {
             System.out.println("\nInefficiencies detected. Generating report...");
             generateReport(
                 "Type Validation Analysis Report",
@@ -139,6 +133,7 @@ public class InstanceofAnalyzer implements Analyzer {
     @Override
     public String[][] getRecommendedData() {
         return new String[][]{
+            {"Example", "Code"},
             {"Inefficient Code", """
             <pre><code>
             public void execute(int iterations) {

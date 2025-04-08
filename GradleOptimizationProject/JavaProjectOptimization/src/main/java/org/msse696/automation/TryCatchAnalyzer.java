@@ -22,14 +22,8 @@ public class TryCatchAnalyzer implements Analyzer {
     private static final String OUTPUT_REPORT = "target/results/reports/try_catch_analysis_report.html";
     private boolean isEfficient;
 
-    /**
-     * Analyzes the placement of try-catch blocks within the given Java file.
-     *
-     * @param javaFile The Java file to analyze.
-     * @return True if inefficiencies are detected, false otherwise.
-     */
     @Override
-    public boolean analyze(File javaFile) {
+    public boolean analyze(File javaFile, boolean createReport) {
         System.out.println("Analyzing file: " + javaFile.getName());
         List<String[]> inefficiencies = new ArrayList<>(); // Tracks inefficiencies for report generation
         boolean inefficiencyDetected = false;
@@ -54,7 +48,7 @@ public class TryCatchAnalyzer implements Analyzer {
         }
 
         // Only generate a report if inefficiencies are detected
-        if (inefficiencyDetected) {
+        if (inefficiencyDetected && createReport) {
             System.out.println("\nInefficiencies detected. Generating report...");
             generateReport(
                     "Try-Catch Placement Analysis Report",
@@ -143,6 +137,7 @@ public class TryCatchAnalyzer implements Analyzer {
     @Override
     public String[][] getRecommendedData() {
         return new String[][]{
+                {"Example", "Code"},
                 {"Inefficient Code", """
             <pre><code>
             public void execute(int iterations) {

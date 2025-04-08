@@ -37,14 +37,8 @@ public class PaddingAnalyzer implements Analyzer {
         }
     }
 
-    /**
-     * Analyzes a Java file for field arrangements to optimize memory usage.
-     *
-     * @param javaFile The Java file to analyze.
-     * @return True if optimization is required, false otherwise.
-     */
     @Override
-    public boolean analyze(File javaFile) {
+    public boolean analyze(File javaFile, boolean createReport) {
         List<FieldAnalysis> actualOrder = new ArrayList<>();
         List<FieldAnalysis> recommendedOrder = new ArrayList<>();
         isEfficient = true;
@@ -90,7 +84,7 @@ public class PaddingAnalyzer implements Analyzer {
 
             // Check if optimization is necessary
             boolean isEfficient = isSameOrder(actualOrder, recommendedOrder);
-            if (!isEfficient) {
+            if (!isEfficient && createReport) {
                 System.out.println("\nOptimization is required. Creating report...");
                 System.out.println("Actual object size: " + actualTotalBytes + " bytes");
                 System.out.println("Recommended object size: " + recommendedTotalBytes + " bytes");
@@ -235,6 +229,7 @@ public class PaddingAnalyzer implements Analyzer {
     @Override
     public String[][] getRecommendedData() {
         return new String[][]{
+                {"Example", "Code"},
                 {"Inefficient Code", """
             <pre><code>
             public class PaddingTestClassInefficient {

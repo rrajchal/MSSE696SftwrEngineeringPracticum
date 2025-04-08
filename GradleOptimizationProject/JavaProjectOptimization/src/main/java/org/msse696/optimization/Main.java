@@ -10,12 +10,12 @@ public class Main {
 
         // Analyze StringConcatenationEfficient.java
         File efficientFile = new File("src/main/java/org/msse696/optimization/efficient/StringConcatenationEfficient.java");
-        boolean efficientResult = analyzer.analyze(efficientFile);
+        boolean efficientResult = analyzer.analyze(efficientFile, true);
 
 
         // Analyze StringConcatenationInefficient.java
         File inefficientFile = new File("src/main/java/org/msse696/optimization/inefficient/StringConcatenationInefficient.java");
-        boolean inefficientResult = analyzer.analyze(inefficientFile);
+        boolean inefficientResult = analyzer.analyze(inefficientFile, true);
 
     }
 }

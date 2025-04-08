@@ -23,14 +23,8 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
     private static final String OUTPUT_REPORT = "target/results/reports/arithmetic_operation_report.html";
     private boolean isEfficient;
 
-    /**
-     * Analyzes a Java file to detect inefficient arithmetic operations inside loops.
-     *
-     * @param javaFile The Java file to analyze.
-     * @return True if optimization is needed, false otherwise.
-     */
     @Override
-    public boolean analyze(File javaFile) {
+    public boolean analyze(File javaFile, boolean createReport) {
         AtomicBoolean optimizationNeeded = new AtomicBoolean(false);
         List<String[]> inefficientMethods = new ArrayList<>();
 
@@ -58,7 +52,7 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
         }
 
         // Generate report if inefficiencies were detected
-        if (optimizationNeeded.get()) {
+        if (optimizationNeeded.get() && createReport) {
             System.out.println("\nOptimization is required. Creating report...");
             generateReport(
                 "Arithmetic Operation Analysis Report",

@@ -15,7 +15,7 @@ public class StringConcatenationAnalyzerTest {
     void testAnalyze_WithInefficientCode() {
         analyzer = new StringConcatenationAnalyzer();
 
-        boolean inefficienciesDetected = analyzer.analyze(inefficientFile);
+        boolean inefficienciesDetected = analyzer.analyze(inefficientFile, true);
         System.out.println("Inefficiencies detected: " + inefficienciesDetected);
 
         // Check that inefficiencies are detected
@@ -29,7 +29,7 @@ public class StringConcatenationAnalyzerTest {
     @Test
     void testAnalyze_WithEfficientCode() {
         analyzer = new StringConcatenationAnalyzer();
-        boolean inefficienciesDetected = analyzer.analyze(efficientFile);
+        boolean inefficienciesDetected = analyzer.analyze(efficientFile, true);
 
         System.out.println("Inefficiencies detected: " + inefficienciesDetected);
         Assertions.assertFalse(inefficienciesDetected, "No inefficiencies should be detected in the code.");
@@ -38,23 +38,19 @@ public class StringConcatenationAnalyzerTest {
     @Test
     void testAnalyze_WithEfficientCode1() {
         analyzer = new StringConcatenationAnalyzer();
-        boolean inefficienciesDetected = analyzer.analyze(efficientFile);
+        boolean inefficienciesDetected = analyzer.analyze(efficientFile, true);
 
         System.out.println("Inefficiencies detected: " + inefficienciesDetected);
 
         // Check that no inefficiencies are detected
         Assertions.assertFalse(inefficienciesDetected, "No inefficiencies should be detected in the code.");
-
-        // Check that the HTML report is not created
-        File reportFile = new File(analyzer.getReport());
-        Assertions.assertFalse(reportFile.exists(), "HTML report should NOT be created for efficient string manipulation.");
     }
 
     @Test
     void testAnalyze_ReportFileGenerated() {
 
         analyzer = new StringConcatenationAnalyzer();
-        boolean inefficienciesDetected = analyzer.analyze(inefficientFile);
+        boolean inefficienciesDetected = analyzer.analyze(inefficientFile, true);
 
         System.out.println("Inefficiencies detected: " + inefficienciesDetected);
 

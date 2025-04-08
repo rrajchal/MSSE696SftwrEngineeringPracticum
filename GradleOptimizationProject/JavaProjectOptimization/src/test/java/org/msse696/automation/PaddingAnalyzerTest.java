@@ -37,7 +37,7 @@ class PaddingAnalyzerTest {
 
         // Provide the file with inefficient field arrangement
         File inefficientFile = new File(INEFFICIENT_FILE_PATH);
-        boolean optimizationNeeded = paddingAnalyzer.analyze(inefficientFile);
+        boolean optimizationNeeded = paddingAnalyzer.analyze(inefficientFile, true);
 
         assertTrue(optimizationNeeded, "Optimization should be needed for an inefficient file.");
     }
@@ -48,7 +48,7 @@ class PaddingAnalyzerTest {
 
         // Provide the file with efficient field arrangement
         File efficientFile = new File(EFFICIENT_FILE_PATH);
-        boolean optimizationNeeded = paddingAnalyzer.analyze(efficientFile);
+        boolean optimizationNeeded = paddingAnalyzer.analyze(efficientFile, true);
 
         assertFalse(optimizationNeeded, "Optimization should not be needed for an efficient file.");
     }
@@ -81,7 +81,7 @@ class PaddingAnalyzerTest {
 
         // Provide the efficient file for analysis
         File efficientFile = new File(EFFICIENT_FILE_PATH);
-        boolean optimizationNeeded = paddingAnalyzer.analyze(efficientFile);
+        boolean optimizationNeeded = paddingAnalyzer.analyze(efficientFile, true);
 
         assertFalse(optimizationNeeded, "Optimization should NOT be required for the efficient file.");
       }
@@ -99,7 +99,7 @@ class PaddingAnalyzerTest {
 
         // Provide the inefficient file for analysis
         File inefficientFile = new File(INEFFICIENT_FILE_PATH);
-        boolean optimizationNeeded = paddingAnalyzer.analyze(inefficientFile);
+        boolean optimizationNeeded = paddingAnalyzer.analyze(inefficientFile, true);
 
         assertTrue(optimizationNeeded, "Optimization should be required for the inefficient file.");
         assertTrue(reportFile.exists(), "HTML report should be created for the inefficient file.");

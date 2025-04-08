@@ -34,7 +34,7 @@ public class StringConcatenationAnalyzer implements Analyzer {
     }
 
     @Override
-    public boolean analyze(File javaFile) {
+    public boolean analyze(File javaFile, boolean createReport) {
         AtomicBoolean optimizationNeeded = new AtomicBoolean(false);
         List<String[]> inefficientMethods = new ArrayList<>();
 
@@ -57,7 +57,7 @@ public class StringConcatenationAnalyzer implements Analyzer {
             System.err.println("Error analyzing Java file: " + javaFile.getPath());
         }
 
-        if (optimizationNeeded.get()) {
+        if (optimizationNeeded.get() && createReport) {
             generateReport(
                     "String Concatenation Analysis Report",
                     "Methods with Inefficient String Concatenation",

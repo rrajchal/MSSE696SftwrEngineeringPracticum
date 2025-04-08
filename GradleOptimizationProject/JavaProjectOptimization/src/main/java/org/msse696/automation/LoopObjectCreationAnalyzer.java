@@ -18,14 +18,8 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
     private static final String OUTPUT_REPORT = "target/results/reports/loop_object_creation_report.html";
     private boolean isEfficient;
 
-    /**
-     * Analyzes a Java file to detect inefficient object creation inside loops.
-     *
-     * @param javaFile The Java file to analyze.
-     * @return True if optimization is needed, false otherwise.
-     */
     @Override
-    public boolean analyze(File javaFile) {
+    public boolean analyze(File javaFile, boolean createReport) {
         boolean optimizationNeeded = false;
 
         // Data for report generation
@@ -56,7 +50,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
             e.printStackTrace();
         }
 
-        if (optimizationNeeded) {
+        if (optimizationNeeded && createReport) {
             System.out.println("\nOptimization is required. Creating report...");
 
             // Prepare data for the HTML report

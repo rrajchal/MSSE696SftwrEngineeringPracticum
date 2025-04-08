@@ -26,7 +26,7 @@ class CastingAnalyzerTest {
         File inefficientFile = new File(INEFFICIENT_FILE_PATH);
 
         // Analyze inefficient code
-        boolean inefficienciesDetected = analyzer.analyze(inefficientFile);
+        boolean inefficienciesDetected = analyzer.analyze(inefficientFile, true);
         Assertions.assertTrue(inefficienciesDetected, "Inefficiencies should be detected for explicit casting where direct assignment is possible.");
 
         // Verify that the report is created
@@ -39,7 +39,7 @@ class CastingAnalyzerTest {
         File efficientFile = new File(EFFICIENT_FILE_PATH);
 
         // Analyze efficient code
-        boolean inefficienciesDetected = analyzer.analyze(efficientFile);
+        boolean inefficienciesDetected = analyzer.analyze(efficientFile, true);
         Assertions.assertFalse(inefficienciesDetected, "No inefficiencies should be detected for direct assignment.");
     }
 }

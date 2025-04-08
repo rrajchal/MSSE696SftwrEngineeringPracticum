@@ -21,14 +21,8 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
     private static final String OUTPUT_REPORT = "target/results/reports/array_copy_inefficiency_report.html";
     private boolean isEfficient;
 
-    /**
-     * Analyzes the given Java file for inefficient array copying practices.
-     *
-     * @param javaFile The Java file to analyze.
-     * @return True if inefficiencies are detected, false otherwise.
-     */
     @Override
-    public boolean analyze(File javaFile) {
+    public boolean analyze(File javaFile, boolean createReport) {
         System.out.println("Analyzing file: " + javaFile.getName());
         List<String[]> inefficiencies = new ArrayList<>();
         boolean inefficiencyDetected = false;
@@ -53,7 +47,7 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
         }
 
         // Generate a report if inefficiencies are detected
-        if (inefficiencyDetected) {
+        if (inefficiencyDetected && createReport) {
             System.out.println("\nInefficiencies detected. Generating report...");
             generateReport(
                 "Array Copy Inefficiency Analysis Report",
@@ -140,6 +134,7 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
     @Override
     public String[][] getRecommendedData() {
         return new String[][]{
+            {"Example", "Code"},
             {"Inefficient Code", """
             <pre><code>
             public void copyArray(int size) {

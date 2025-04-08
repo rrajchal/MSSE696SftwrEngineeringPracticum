@@ -26,7 +26,7 @@ class InstanceofAnalyzerTest {
         File inefficientFile = new File(INEFFICIENT_FILE_PATH);
 
         // Analyze inefficient code
-        boolean inefficienciesDetected = analyzer.analyze(inefficientFile);
+        boolean inefficienciesDetected = analyzer.analyze(inefficientFile, true);
         Assertions.assertTrue(inefficienciesDetected, "Inefficiencies should be detected for type validation using try-catch blocks.");
 
         // Verify that the report is created
@@ -39,7 +39,7 @@ class InstanceofAnalyzerTest {
         File efficientFile = new File(EFFICIENT_FILE_PATH);
 
         // Analyze efficient code
-        boolean inefficienciesDetected = analyzer.analyze(efficientFile);
+        boolean inefficienciesDetected = analyzer.analyze(efficientFile, true);
         Assertions.assertFalse(inefficienciesDetected, "No inefficiencies should be detected for type validation using instanceof.");
     }
 }

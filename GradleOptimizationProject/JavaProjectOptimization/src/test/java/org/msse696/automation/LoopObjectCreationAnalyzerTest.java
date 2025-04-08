@@ -15,7 +15,7 @@ public class LoopObjectCreationAnalyzerTest {
 
         // Provide the actual .java file path to the analyzer
         File inefficientFile = new File(INEFFICIENT_FILE_PATH);
-        boolean optimizationNeeded = analyzer.analyze(inefficientFile);
+        boolean optimizationNeeded = analyzer.analyze(inefficientFile, true);
 
         System.out.println("Optimization needed: " + optimizationNeeded);
 
@@ -33,7 +33,7 @@ public class LoopObjectCreationAnalyzerTest {
 
         // Provide the actual .java file path to the analyzer
         File efficientFile = new File(EFFICIENT_FILE_PATH);
-        boolean optimizationNeeded = analyzer.analyze(efficientFile);
+        boolean optimizationNeeded = analyzer.analyze(efficientFile, true);
 
         System.out.println("Optimization needed: " + optimizationNeeded);
 

@@ -24,14 +24,8 @@ public class CastingAnalyzer implements Analyzer {
     private static final String OUTPUT_REPORT = "target/results/reports/casting_analysis_report.html";
     private boolean isEfficient;
 
-    /**
-     * Analyzes the given Java file for inefficient explicit casting practices.
-     *
-     * @param javaFile The Java file to analyze.
-     * @return True if inefficiencies are detected, false otherwise.
-     */
     @Override
-    public boolean analyze(File javaFile) {
+    public boolean analyze(File javaFile, boolean createReort) {
         System.out.println("Analyzing file: " + javaFile.getName());
         List<String[]> inefficiencies = new ArrayList<>();
         boolean inefficiencyDetected = false;
@@ -55,7 +49,7 @@ public class CastingAnalyzer implements Analyzer {
         }
 
         // Generate a report if inefficiencies are detected
-        if (inefficiencyDetected) {
+        if (inefficiencyDetected && createReort) {
             System.out.println("\nInefficiencies detected. Generating report...");
             generateReport(
                 "Casting Analysis Report",
@@ -172,6 +166,7 @@ public class CastingAnalyzer implements Analyzer {
     @Override
     public String[][] getRecommendedData() {
         return new String[][]{
+            {"Example", "Code"},
             {"Inefficient Code", """
             <pre><code>
             public void execute(int iterations) {

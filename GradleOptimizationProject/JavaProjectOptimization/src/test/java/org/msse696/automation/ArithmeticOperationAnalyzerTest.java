@@ -18,7 +18,7 @@ class ArithmeticOperationAnalyzerTest {
 
         // Provide the inefficient file for analysis
         File inefficientFile = new File(INEFFICIENT_FILE_PATH);
-        boolean optimizationNeeded = analyzer.analyze(inefficientFile);
+        boolean optimizationNeeded = analyzer.analyze(inefficientFile, true);
 
         System.out.println("Optimization needed: " + optimizationNeeded);
 
@@ -36,7 +36,7 @@ class ArithmeticOperationAnalyzerTest {
 
         // Provide the efficient file for analysis
         File efficientFile = new File(EFFICIENT_FILE_PATH);
-        boolean optimizationNeeded = analyzer.analyze(efficientFile);
+        boolean optimizationNeeded = analyzer.analyze(efficientFile, true);
 
         System.out.println("Optimization needed: " + optimizationNeeded);
 

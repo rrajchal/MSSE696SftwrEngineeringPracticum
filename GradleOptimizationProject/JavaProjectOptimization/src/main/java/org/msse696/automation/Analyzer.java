@@ -10,9 +10,10 @@ public interface Analyzer {
      * Analyzes a given class to check for inefficiencies.
      *
      * @param javaFile The File.java file to analyze.
+     * @param createReport true will create report in addition to analyze
      * @return True if optimization is needed, false otherwise.
      */
-    boolean analyze(File javaFile);
+    boolean analyze(File javaFile, boolean createReport);
 
     /**
      * Generates an HTML report using provided analysis data.
