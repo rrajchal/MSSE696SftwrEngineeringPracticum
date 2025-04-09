@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Combined Inefficiency Analysis Report</title><style>body { font-family: Arial, sans-serif; margin: 20px; }.container { max-width: 800px; margin: auto; }h1 { text-align: center; color: navy; }h2 { color: darkred; margin-top: 30px; }h3 { color: darkgreen; margin-top: 20px; }p { font-weight: bold; margin-top: 15px; }pre { background-color: #f4f4f4; padding: 10px; border: 1px solid #ccc; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }code { font-family: monospace; }ul { list-style-type: none; padding: 0; }li a { color: blue; text-decoration: none; }li a:hover { text-decoration: underline; }table { width: 100%; border-collapse: collapse; margin-top: 10px; }th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }th { background-color: #f0f0f0; }</style></head><body><div class='container'><h1>Combined Inefficiency Analysis Report</h1><h2>Analyzers that Detected Inefficiencies:</h2><ul><li><a href='#arithmeticoperation-recommendations'>ArithmeticOperationAnalyzer</a></li><li><a href='#arraycopyinefficiency-recommendations'>ArrayCopyInefficiencyAnalyzer</a></li><li><a href='#instanceof-recommendations'>InstanceofAnalyzer</a></li><li><a href='#loopinefficiency-recommendations'>LoopInefficiencyAnalyzer</a></li><li><a href='#loopobjectcreation-recommendations'>LoopObjectCreationAnalyzer</a></li><li><a href='#stringconcatenation-recommendations'>StringConcatenationAnalyzer</a></li></ul><p><strong>Total Inefficiencies Detected: 6</strong></p><h2>Recommendations by Analyzer:</h2><h3 id='loopinefficiency-recommendations'>LoopInefficiencyAnalyzer</h3><table><tr><th>Inefficient Code</th><th>Efficient Code</th></tr><tr><td><pre><code><pre><code>
+for (int i = 0; i < size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre>
+</code></pre></td><td><pre><code><pre><code>
+int length = size.length(); // Precompute loop limit
+for (int i = 0; i < length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre>
+</code></pre></td></tr></table><h3 id='stringconcatenation-recommendations'>StringConcatenationAnalyzer</h3><table><tr><th>Inefficient Code</th><th>Efficient Code</th></tr><tr><td><pre><code><pre><code>
+public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i < iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre>
+</code></pre></td><td><pre><code><pre><code>
+public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre>
+</code></pre></td></tr></table><h3 id='instanceof-recommendations'>InstanceofAnalyzer</h3><table><tr><th>Inefficient Code</th><th>Efficient Code</th></tr><tr><td><pre><code><pre><code>
+public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i < iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre>
+</code></pre></td><td><pre><code><pre><code>
+public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i < iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre>
+</code></pre></td></tr></table><h3 id='arraycopyinefficiency-recommendations'>ArrayCopyInefficiencyAnalyzer</h3><table><tr><th>Inefficient Code</th><th>Efficient Code</th></tr><tr><td><pre><code><pre><code>
+public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Manual copy using a loop
+    for (int i = 0; i < size; i++) {
+        destination[i] = source[i];
+    }
+}
+</code></pre>
+</code></pre></td><td><pre><code><pre><code>
+public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Use System.arraycopy
+    System.arraycopy(source, 0, destination, 0, size);
+}
+</code></pre>
+</code></pre></td></tr></table><h3 id='arithmeticoperation-recommendations'>ArithmeticOperationAnalyzer</h3><table><tr><th>Inefficient Code</th><th>Efficient Code</th></tr><tr><td><pre><code><pre><code>
+int result = 1;
+for (int i = 0; i < iterations; i++) {
+    result = result * 2;  // Inefficient multiplication by 2
+    result = result / 2;  // Inefficient division by 2
+}
+</code></pre>
+</code></pre></td><td><pre><code><pre><code>
+int result = 1;
+for (int i = 0; i < iterations; i++) {
+    result = result << 1;  // Efficient: Bitwise left shift (multiply by 2)
+    result = result >> 1;  // Efficient: Bitwise right shift (divide by 2)
+}
+</code></pre>
+</code></pre></td></tr></table><h3 id='loopobjectcreation-recommendations'>LoopObjectCreationAnalyzer</h3><table><tr><th>Inefficient Code</th><th>Efficient Code</th></tr><tr><td><pre><code><pre><code>
+for (int i = 0; i < 10; i++) {
+    SomeObject obj = new SomeObject();  // Inefficient: New object created in each iteration
+}
+</code></pre>
+</code></pre></td><td><pre><code><pre><code>
+SomeObject obj = new SomeObject();  // Efficient: Object reused across iterations
+for (int i = 0; i < 10; i++) {
+    obj.process(i);
+}
+</code></pre>
+</code></pre></td></tr></table></div></body></html>
