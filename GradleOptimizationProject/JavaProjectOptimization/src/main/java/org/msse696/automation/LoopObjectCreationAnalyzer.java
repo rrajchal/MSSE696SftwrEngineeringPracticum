@@ -48,7 +48,6 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
             }
         } catch (Exception e) {
             System.err.println("Error analyzing file: " + javaFile.getPath());
-            e.printStackTrace();
         }
 
         if (optimizationNeeded && createReport) {
@@ -88,7 +87,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
     private List<String> simulateMethodExtraction(String fileContent) {
         // Simulate extracting methods using regex for simplicity
         List<String> methods = new ArrayList<>();
-        Pattern methodPattern = Pattern.compile("(public|private|protected)\\s+.*?\\{.*?\\}", Pattern.DOTALL);
+        Pattern methodPattern = Pattern.compile("(public|private|protected)\\s+.*?\\{.*?}", Pattern.DOTALL);
         Matcher methodMatcher = methodPattern.matcher(fileContent);
 
         while (methodMatcher.find()) {
@@ -125,7 +124,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
         Debug.info("Analyzing code for loop and object creation patterns:\n" + code);
 
         // Regex pattern to detect loops and their bodies
-        Pattern loopPattern = Pattern.compile("(for\\s*\\(.*?\\).*?\\{.*?\\}|while\\s*\\(.*?\\).*?\\{.*?\\})", Pattern.DOTALL);
+        Pattern loopPattern = Pattern.compile("(for\\s*\\(.*?\\).*?\\{.*?}|while\\s*\\(.*?\\).*?\\{.*?})", Pattern.DOTALL);
         Matcher loopMatcher = loopPattern.matcher(code);
 
         // Regex pattern to detect object creation

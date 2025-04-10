@@ -14,23 +14,20 @@ import java.util.Map;
  * The {@code InefficiencyAnalyzerRunner} class orchestrates the analysis of Java source code
  * for various types of inefficiencies. It utilizes a collection of individual {@link Analyzer}
  * implementations to identify potential performance bottlenecks and provides access to the
- * recommended data. It leverages the {@link HtmlReport} class for generating reports.
- *
- * <p>This class implements the {@link Analyzer} interface, allowing it to be integrated into
- * a larger analysis pipeline. It manages the execution of multiple specific analyzers
- * and collects their recommended inefficient and efficient code examples.
+ * recommended data.
  */
 public class InefficiencyAnalyzerRunner implements Analyzer {
+    @Getter
     private File javaFile;
     private final List<Analyzer> analyzers;
-    private final String outputReportPath = "target/results/reports/combined_inefficiency_report.html";
-    private final Map<String, List<String[]>> analyzerRecommendations = new HashMap<>();
-    private final List<String> analyzedAnalyzers = new ArrayList<>();
+    final String outputReportPath = "target/results/reports/combined_inefficiency_report.html";
+    final Map<String, List<String[]>> analyzerRecommendations = new HashMap<>();
+    final List<String> analyzedAnalyzers = new ArrayList<>();
     private boolean isEfficientOverall = true;
     @Getter
     private int totalInefficiencyCount = 0;
     @Getter
-    private List<String[]> allRecommendations = new ArrayList<>();
+    List<String[]> allRecommendations = new ArrayList<>();
 
     public InefficiencyAnalyzerRunner() {
         analyzers = new ArrayList<>();
@@ -49,7 +46,7 @@ public class InefficiencyAnalyzerRunner implements Analyzer {
     @Override
     public boolean analyze(File javaFile, boolean createReport) {
         if (!javaFile.exists() || !javaFile.isFile() || !javaFile.getName().endsWith(".java")) {
-            System.err.println("Invalid Java file path provided.");
+            Debug.error("Invalid Java file path provided.");
             isEfficientOverall = false;
             return false;
         }
@@ -66,7 +63,7 @@ public class InefficiencyAnalyzerRunner implements Analyzer {
                 String[][] recommendations = analyzer.getRecommendedData();
                 if (recommendations != null && recommendations.length > 1) {
                     List<String[]> recommendationsList = new ArrayList<>();
-                    recommendationsList.add(new String[]{"Analyzer", "Inefficient Code", "Efficient Code"});
+                    //recommendationsList.add(new String[]{"Analyzer", "Inefficient Code", "Efficient Code"});
                     if (recommendations.length > 2) {
                         recommendationsList.add(new String[]{analyzerName, recommendations[1][1], recommendations[2][1]});
                         totalInefficiencyCount++;
@@ -79,47 +76,12 @@ public class InefficiencyAnalyzerRunner implements Analyzer {
                 }
             }
         }
-
-        if (createReport) {
-            generateReport("Inefficiency Analysis Report for " + javaFile.getName(),
-                    "Detected Inefficiencies",
-                    prepareActualData(),
-                    "Recommendations",
-                    prepareRecommendedData(),
-                    outputReportPath);
-            Debug.info("\nAnalysis complete. Report generated: " + outputReportPath);
-        } else {
-            Debug.info("\nAnalysis complete.");
-        }
-
         return !isEfficientOverall;
-    }
-
-    private String[][] prepareActualData() {
-        List<String[]> actualDataList = new ArrayList<>();
-        actualDataList.add(new String[]{"Analyzer", "Status"});
-        for (String analyzer : analyzedAnalyzers) {
-            actualDataList.add(new String[]{analyzer, "Detected Inefficiencies"});
-        }
-        if (analyzedAnalyzers.isEmpty()) {
-            actualDataList.add(new String[]{"No Analyzer", "No Inefficiencies Detected"});
-        }
-        return actualDataList.toArray(new String[0][]);
-    }
-
-    private String[][] prepareRecommendedData() {
-        List<String[]> recommendedDataList = new ArrayList<>();
-        if (!allRecommendations.isEmpty()) {
-            recommendedDataList.addAll(allRecommendations);
-        } else {
-            recommendedDataList.add(new String[]{"No Recommendations", "N/A", "N/A"});
-        }
-        return recommendedDataList.toArray(new String[0][]);
     }
 
     @Override
     public void generateReport(String title, String actualHeader, String[][] actualData, String recommendedHeader, String[][] recommendedData, String outputPath) {
-        HtmlReport.generateHtmlReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
+        HtmlReport.generateHtmlTableReport(title, actualHeader, actualData, recommendedHeader, recommendedData, outputPath);
     }
 
     @Override
@@ -134,7 +96,14 @@ public class InefficiencyAnalyzerRunner implements Analyzer {
 
     @Override
     public String[][] getRecommendedData() {
-        // Return all collected recommendations
-        return allRecommendations.toArray(new String[0][]);
+        // Return all collected recommendations (without the header)
+        if (allRecommendations.size() > 1) {
+            List<String[]> dataOnly = new ArrayList<>();
+            for (int i = 1; i < allRecommendations.size(); i++) {
+                dataOnly.add(allRecommendations.get(i));
+            }
+            return dataOnly.toArray(new String[0][]);
+        }
+        return new String[0][0];
     }
 }

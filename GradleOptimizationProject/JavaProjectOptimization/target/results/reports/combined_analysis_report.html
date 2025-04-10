@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Combined Inefficiency Analysis Report</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+.container { max-width: 800px; margin: auto; }
+h1 { text-align: center; color: blue; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+th { background-color: #f4f4f4; }
+.actual-header { color: red; }
+.recommended-header { color: green; }
+tr:nth-child(even) { background-color: #f9f9f9; }
+h2 { color: navy; margin-top: 30px; }
+h3 { color: darkgreen; margin-top: 20px; }
+p { font-weight: bold; margin-top: 15px; }
+pre { background-color: #f4f4f4; padding: 10px; border: 1px solid #ccc; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+code { font-family: monospace; }
+ul { list-style-type: none; padding: 0; }
+li a { color: blue; text-decoration: none; }
+li a:hover { text-decoration: underline; }
+hr { border: 1px solid #ccc; margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class='container'>
+<h1>Combined Inefficiency Analysis Report</h1>
+<h2>Analysis Summary:</h2>
+<ul>
+<li><a href='#combinedtestclass-report'>CombinedTestClass.java</a> (6 inefficiencies)</li>
+<li><a href='#combinedtestclass1-report'>CombinedTestClass1.java</a> (5 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 11</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='combinedtestclass-report'>Inefficiency Report for CombinedTestClass.java</h3>
+<table>
+<tr><th>Analyzer</th><th>Inefficient Code</th><th>Efficient Code</th></tr>
+<tr><td>ArrayCopyInefficiencyAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Manual copy using a loop
+    for (int i = 0; i &lt; size; i++) {
+        destination[i] = source[i];
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Use System.arraycopy
+    System.arraycopy(source, 0, destination, 0, size);
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+<tr><td>InstanceofAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+<tr><td>LoopInefficiencyAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+<tr><td>LoopObjectCreationAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+for (int i = 0; i &lt; 10; i++) {
+    SomeObject obj = new SomeObject();  // Inefficient: New object created in each iteration
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+SomeObject obj = new SomeObject();  // Efficient: Object reused across iterations
+for (int i = 0; i &lt; 10; i++) {
+    obj.process(i);
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+<tr><td>StringConcatenationAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+</table>
+<hr>
+<h3 id='combinedtestclass1-report'>Inefficiency Report for CombinedTestClass1.java</h3>
+<table>
+<tr><th>Analyzer</th><th>Inefficient Code</th><th>Efficient Code</th></tr>
+<tr><td>InstanceofAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+<tr><td>LoopInefficiencyAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+<tr><td>LoopObjectCreationAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+for (int i = 0; i &lt; 10; i++) {
+    SomeObject obj = new SomeObject();  // Inefficient: New object created in each iteration
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+SomeObject obj = new SomeObject();  // Efficient: Object reused across iterations
+for (int i = 0; i &lt; 10; i++) {
+    obj.process(i);
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+<tr><td>StringConcatenationAnalyzer</td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td><td><pre><code>&lt;pre&gt;&lt;code&gt;
+public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre></td></tr>
+</table>
+<hr>
+</div>
+</body>
+</html>

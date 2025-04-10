@@ -1,4 +1,42 @@
-<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><meta name='viewport' content='width=device-width, initial-scale=1.0'><title>Array Copy Inefficiency Analysis Report</title><style>body { font-family: Arial, sans-serif; margin: 20px; }.container { max-width: 800px; margin: auto; }h1 { text-align: center; color: blue; }table { width: 100%; border-collapse: collapse; margin-top: 20px; }th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }th { background-color: #f4f4f4; }.actual-header { color: red; }.recommended-header { color: green; }tr:nth-child(even) { background-color: #f9f9f9; }</style></head><body><div class='container'><h1>Array Copy Inefficiency Analysis Report</h1><h3 class='actual-header'>Methods with Inefficient Array Copying</h3><table><tr><th>Method Name</th><th>Issue</th></tr><tr><td>copyArray</td><td>Manual array copying using loops detected</td></tr></table><h3 class='recommended-header'>Recommendations for Optimization</h3><table><tr><th>Example</th><th>Code</th></tr><tr><td>Inefficient Code</td><td><pre><code>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Array Copy Inefficiency Analysis Report</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+.container { max-width: 800px; margin: auto; }
+h1 { text-align: center; color: blue; }
+table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+th { background-color: #f4f4f4; }
+.actual-header { color: red; }
+.recommended-header { color: green; }
+tr:nth-child(even) { background-color: #f9f9f9; }
+h2 { color: navy; margin-top: 30px; }
+h3 { color: darkgreen; margin-top: 20px; }
+p { font-weight: bold; margin-top: 15px; }
+pre { background-color: #f4f4f4; padding: 10px; border: 1px solid #ccc; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+code { font-family: monospace; }
+ul { list-style-type: none; padding: 0; }
+li a { color: blue; text-decoration: none; }
+li a:hover { text-decoration: underline; }
+hr { border: 1px solid #ccc; margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class='container'>
+<h1>Array Copy Inefficiency Analysis Report</h1>
+<h3 class='actual-header'>Methods with Inefficient Array Copying</h3>
+<table>
+<tr><th>Method Name</th><th>Issue</th></tr>
+<tr><td>copyArray</td><td>Manual array copying using loops detected</td></tr>
+</table>
+<h3 class='recommended-header'>Recommendations for Optimization</h3>
+<table>
+<tr><th>Example</th><th>Code</th></tr>
+<tr>Inefficient Code<pre><code>
 public void copyArray(int size) {
     int[] source = new int[size];
     int[] destination = new int[size];
@@ -10,7 +48,8 @@ public void copyArray(int size) {
     }
 }
 </code></pre>
-</td></tr><tr><td>Efficient Code</td><td><pre><code>
+</tr>
+<tr>Efficient Code<pre><code>
 public void copyArray(int size) {
     int[] source = new int[size];
     int[] destination = new int[size];
@@ -20,4 +59,8 @@ public void copyArray(int size) {
     System.arraycopy(source, 0, destination, 0, size);
 }
 </code></pre>
-</td></tr></table></div></body></html>
+</tr>
+</table>
+</div>
+</body>
+</html>
