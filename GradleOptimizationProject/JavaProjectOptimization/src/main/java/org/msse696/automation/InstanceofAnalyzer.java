@@ -6,6 +6,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.InstanceOfExpr;
 import com.github.javaparser.ast.stmt.TryStmt;
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -24,18 +25,18 @@ public class InstanceofAnalyzer implements Analyzer {
 
      @Override
     public boolean analyze(File javaFile, boolean createReport) {
-        System.out.println("Analyzing file: " + javaFile.getName());
+        Debug.info("Analyzing file: " + javaFile.getName());
         List<String[]> inefficiencies = new ArrayList<>(); // Tracks inefficiencies for report generation
         boolean inefficiencyDetected = false;
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             // Parse the Java file into a CompilationUnit
             CompilationUnit compilationUnit = StaticJavaParser.parse(fileInputStream);
-            System.out.println("Parsed CompilationUnit:\n" + compilationUnit);
+            Debug.info("Parsed CompilationUnit:\n" + compilationUnit);
 
             // Analyze methods within the file
             for (MethodDeclaration method : compilationUnit.findAll(MethodDeclaration.class)) {
-                System.out.println("Analyzing method: " + method.getName());
+                Debug.info("Analyzing method: " + method.getName());
                 boolean methodHasInefficiency = detectInefficientTypeValidation(method);
                 if (methodHasInefficiency) {
                     inefficiencyDetected = true;
@@ -49,7 +50,7 @@ public class InstanceofAnalyzer implements Analyzer {
 
         // Only generate a report if inefficiencies are detected
         if (inefficiencyDetected && createReport) {
-            System.out.println("\nInefficiencies detected. Generating report...");
+            Debug.info("\nInefficiencies detected. Generating report...");
             generateReport(
                 "Type Validation Analysis Report",
                 "Methods with Inefficient Type Validation",
@@ -59,7 +60,7 @@ public class InstanceofAnalyzer implements Analyzer {
                 OUTPUT_REPORT
             );
         } else {
-            System.out.println("\nNo inefficiencies detected. Report will not be generated.");
+            Debug.info("\nNo inefficiencies detected. Report will not be generated.");
         }
         isEfficient = !inefficiencyDetected;
         return inefficiencyDetected;
@@ -76,7 +77,7 @@ public class InstanceofAnalyzer implements Analyzer {
         List<TryStmt> tryStmts = method.findAll(TryStmt.class);
         for (TryStmt tryStmt : tryStmts) {
             if (tryStmt.findFirst(BinaryExpr.class, expr -> expr.getOperator().name().contains("InstanceOf")).isEmpty()) {
-                System.out.println("Inefficient type validation detected inside try-catch block.");
+                Debug.info("Inefficient type validation detected inside try-catch block.");
                 return true;
             }
         }
@@ -84,7 +85,7 @@ public class InstanceofAnalyzer implements Analyzer {
         // Ensure instanceof is properly used for type checking in the method
         List<InstanceOfExpr> instanceofExpressions = method.findAll(InstanceOfExpr.class);
         if (!instanceofExpressions.isEmpty()) {
-            System.out.println("Efficient type validation detected using instanceof.");
+            Debug.info("Efficient type validation detected using instanceof.");
         }
         return false;
     }

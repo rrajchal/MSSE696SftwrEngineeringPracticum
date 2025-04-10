@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo3CompareStringConcatenation;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Hypo3CompareStringConcatenationMain {
     private static final int NUMBER_OF_ITERATIONS = 1000;
 
     public static void main(String[] args) {
-        System.out.println("Analyzing string concatenation performance...");
+        Debug.info("Analyzing string concatenation performance...");
 
-        System.out.println("Running efficient concatenation first...");
+        Debug.info("Running efficient concatenation first...");
         //for (int i = 0; i < 5; i++)
         //runEfficientFirst();
 
-        System.out.println("\nRunning inefficient concatenation first...");
+        Debug.info("\nRunning inefficient concatenation first...");
         for (int i = 0; i < 5; i++)
         runInefficientFirst();
     }

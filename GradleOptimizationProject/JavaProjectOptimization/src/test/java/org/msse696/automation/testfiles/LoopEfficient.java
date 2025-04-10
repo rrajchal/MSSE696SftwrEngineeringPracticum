@@ -1,5 +1,7 @@
 package org.msse696.automation.testfiles;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 public class LoopEfficient {
     public void execute(String size) {
         int length = size.length(); // Precompute loop limit
@@ -10,6 +12,6 @@ public class LoopEfficient {
 
     private void performOperation(char c) {
         // Mock operation logic
-        System.out.println("Performing operation on: " + c);
+        Debug.info("Performing operation on: " + c);
     }
 }

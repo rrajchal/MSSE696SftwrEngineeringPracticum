@@ -1,5 +1,6 @@
 package org.msse696.optimization.helper;
 import org.junit.jupiter.api.Test;
+import org.msse696.optimization.helper.debug.Debug;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,7 +49,7 @@ class HeapMonitorTest {
 
         // Verify that peak heap usage is reset
         assertEquals(0, peakHeapUsage, "Peak heap usage should be reset to 0");
-        System.out.println("Peak heap usage after reset: " + peakHeapUsage);
+        Debug.info("Peak heap usage after reset: " + peakHeapUsage);
     }
 
     @Test

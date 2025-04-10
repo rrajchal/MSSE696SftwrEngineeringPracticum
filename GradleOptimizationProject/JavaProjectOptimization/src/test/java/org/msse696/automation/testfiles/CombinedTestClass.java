@@ -1,6 +1,8 @@
 // CombinedTestClass.java
 package org.msse696.automation.testfiles;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 public class CombinedTestClass {
 
     public void inefficientArithmetic(int iterations) {
@@ -54,7 +56,7 @@ public class CombinedTestClass {
     public void inefficientInstanceof(Object obj) {
         try {
             String str = (String) obj; // Might throw ClassCastException
-            System.out.println(str.toUpperCase());
+            Debug.info(str.toUpperCase());
         } catch (ClassCastException e) {
             System.err.println("Not a string");
         }
@@ -63,29 +65,29 @@ public class CombinedTestClass {
     public void efficientInstanceof(Object obj) {
         if (obj instanceof String) {
             String str = (String) obj;
-            System.out.println(str.toUpperCase());
+            Debug.info(str.toUpperCase());
         } else {
-            System.out.println("Not a string");
+            Debug.info("Not a string");
         }
     }
 
     public void inefficientLoopOperation(String data) {
         for (int i = 0; i < data.length(); i++) { // length() called in each iteration
-            System.out.println(data.charAt(i));
+            Debug.info(data.charAt(i));
         }
     }
 
     public void efficientLoopOperation(String data) {
         int length = data.length();
         for (int i = 0; i < length; i++) {
-            System.out.println(data.charAt(i));
+            Debug.info(data.charAt(i));
         }
     }
 
     public void inefficientLoopObjectCreation() {
         for (int i = 0; i < 10; i++) {
             String temp = new String("temp-" + i); // Object created inside loop
-            System.out.println(temp);
+            Debug.info(temp);
         }
     }
 
@@ -93,7 +95,7 @@ public class CombinedTestClass {
         String tempPrefix = "temp-";
         for (int i = 0; i < 10; i++) {
             String temp = tempPrefix + i; // No new String object created in each iteration (mostly)
-            System.out.println(temp);
+            Debug.info(temp);
         }
     }
 
@@ -131,7 +133,7 @@ public class CombinedTestClass {
         for (String item : items) {
             try {
                 int value = Integer.parseInt(item);
-                System.out.println("Value: " + value);
+                Debug.info("Value: " + value);
             } catch (NumberFormatException e) {
                 System.err.println("Invalid format: " + item);
             }
@@ -142,7 +144,7 @@ public class CombinedTestClass {
         try {
             for (String item : items) {
                 int value = Integer.parseInt(item);
-                System.out.println("Value: " + value);
+                Debug.info("Value: " + value);
             }
         } catch (NumberFormatException e) {
             System.err.println("Error parsing a number in the list.");

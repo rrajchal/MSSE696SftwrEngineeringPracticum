@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo10CompareArrayCopyPerformance;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -14,13 +15,13 @@ public class Hypo10CompareArrayCopyPerformanceMain {
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis10_array_copy_efficiency.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing array copying performance...");
+        Debug.info("Analyzing array copying performance...");
 
-        System.out.println("Running efficient first, then inefficient...");
+        Debug.info("Running efficient first, then inefficient...");
         //for (int i = 0; i < 5; i++)
         //    runEfficientFirstThenInefficient();
 
-        System.out.println("\nRunning inefficient first, then efficient...");
+        Debug.info("\nRunning inefficient first, then efficient...");
         for (int i = 0; i < 5; i++)
            runInefficientFirstThenEfficient();
     }

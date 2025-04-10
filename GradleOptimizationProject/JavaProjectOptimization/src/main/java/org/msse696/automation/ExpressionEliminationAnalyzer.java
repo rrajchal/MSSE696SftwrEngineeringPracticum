@@ -6,6 +6,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.*;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.Statement;
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -27,22 +28,22 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
         AtomicBoolean optimizationNeeded = new AtomicBoolean(false); // AtomicBoolean for thread safety
         List<String[]> inefficientMethods = new ArrayList<>();
 
-        System.out.println("Analyzing file: " + javaFile.getName());
+        Debug.info("Analyzing file: " + javaFile.getName());
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             CompilationUnit compilationUnit = StaticJavaParser.parse(fileInputStream); // Parse the file
-            System.out.println("Parsed CompilationUnit:\n" + compilationUnit);
+            Debug.info("Parsed CompilationUnit:\n" + compilationUnit);
 
             // Analyze each method in the file
             compilationUnit.findAll(MethodDeclaration.class).forEach(method -> {
-                System.out.println("Analyzing method: " + method.getName());
+                Debug.info("Analyzing method: " + method.getName());
 
                 if (detectCommonSubexpressions(method)) {
                     optimizationNeeded.set(true); // Optimization needed for this method
                     inefficientMethods.add(new String[]{method.getNameAsString(), "Redundant calculations detected"});
-                    System.out.println("Issue detected in method: " + method.getName());
+                    Debug.info("Issue detected in method: " + method.getName());
                 } else {
-                    System.out.println("No issues detected in method: " + method.getName());
+                    Debug.info("No issues detected in method: " + method.getName());
                 }
             });
         } catch (Exception e) {
@@ -51,7 +52,7 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
 
         // Generate report if inefficiencies are detected
         if (optimizationNeeded.get() && createReport) {
-            System.out.println("\nOptimization is required. Creating report...");
+            Debug.info("\nOptimization is required. Creating report...");
             generateReport(
                     "Expression Elimination Analysis Report",
                     "Methods with Redundant Calculations",
@@ -61,7 +62,7 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
                     OUTPUT_REPORT
             );
         } else {
-            System.out.println("\nNo optimization required. Report will not be generated.");
+            Debug.info("\nNo optimization required. Report will not be generated.");
         }
         isEfficient = !optimizationNeeded.get();
         return optimizationNeeded.get();
@@ -77,7 +78,7 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
         List<ForStmt> loops = method.findAll(ForStmt.class); // Retrieve all for-loops in the method
 
         for (ForStmt loop : loops) {
-            System.out.println("Analyzing loop body: " + loop.getBody());
+            Debug.info("Analyzing loop body: " + loop.getBody());
 
             Map<String, Integer> expressionCount = new HashMap<>(); // Tracks occurrences of subexpressions
 
@@ -93,7 +94,7 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
             // Check for redundant expressions
             for (Map.Entry<String, Integer> entry : expressionCount.entrySet()) {
                 if (entry.getValue() > 1) { // Expression occurs more than once
-                    System.out.println("Redundant calculation detected: " + entry.getKey());
+                    Debug.info("Redundant calculation detected: " + entry.getKey());
                     return true;
                 }
             }
@@ -110,7 +111,7 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
     private void analyzeStatement(Statement statement, Map<String, Integer> expressionCount) {
         if (statement.isExpressionStmt()) {
             Expression expression = statement.asExpressionStmt().getExpression();
-            System.out.println("Expression type: " + expression.getClass().getSimpleName());
+            Debug.info("Expression type: " + expression.getClass().getSimpleName());
 
             // Handle VariableDeclarationExpr (e.g., int x = 10;)
             if (expression instanceof VariableDeclarationExpr variableDeclarationExpr) {

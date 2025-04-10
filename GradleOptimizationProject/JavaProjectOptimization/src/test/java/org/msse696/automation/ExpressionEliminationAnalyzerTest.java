@@ -1,6 +1,7 @@
 package org.msse696.automation;
 
 import org.junit.jupiter.api.Test;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.io.File;
 
@@ -20,7 +21,7 @@ class ExpressionEliminationAnalyzerTest {
         File inefficientFile = new File(INEFFICIENT_FILE_PATH);
         boolean optimizationNeeded = analyzer.analyze(inefficientFile, true);
 
-        System.out.println("Optimization needed: " + optimizationNeeded);
+        Debug.info("Optimization needed: " + optimizationNeeded);
 
         // Assert that inefficiencies are detected
         assertTrue(optimizationNeeded, "Optimization should be needed for redundant calculations.");
@@ -38,7 +39,7 @@ class ExpressionEliminationAnalyzerTest {
         File efficientFile = new File(EFFICIENT_FILE_PATH);
         boolean optimizationNeeded = analyzer.analyze(efficientFile, true);
 
-        System.out.println("Optimization needed: " + optimizationNeeded);
+        Debug.info("Optimization needed: " + optimizationNeeded);
 
         // Assert that no inefficiencies are detected
         assertFalse(optimizationNeeded, "Optimization should NOT be needed for efficient code.");

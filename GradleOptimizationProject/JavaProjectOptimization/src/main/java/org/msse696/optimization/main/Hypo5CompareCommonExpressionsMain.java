@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo5CompareCommonExpressions;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Hypo5CompareCommonExpressionsMain {
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis5_common_expression.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing common expression elimination performance...");
+        Debug.info("Analyzing common expression elimination performance...");
 
-        System.out.println("\nRunning efficient first, then inefficient...");
+        Debug.info("\nRunning efficient first, then inefficient...");
         //for (int i = 0; i < 5; i++)
         //    runEfficientFirstThenInefficient();
 
-        System.out.println("Running inefficient first, then efficient...");
+        Debug.info("Running inefficient first, then efficient...");
         for (int i = 0; i < 5; i++)
             runInefficientFirstThenEfficient();
     }

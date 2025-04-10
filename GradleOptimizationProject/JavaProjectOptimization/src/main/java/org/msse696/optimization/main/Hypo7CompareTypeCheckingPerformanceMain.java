@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo7CompareTypeCheckingPerformance;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Hypo7CompareTypeCheckingPerformanceMain {
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis7_type_checking_efficiency.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing type checking performance...");
+        Debug.info("Analyzing type checking performance...");
 
-        System.out.println("Running efficient first, then inefficient...");
+        Debug.info("Running efficient first, then inefficient...");
         //for (int i = 0; i < 5; i++)
         //    runEfficientFirstThenInefficient();
 
-        System.out.println("\nRunning inefficient first, then efficient...");
+        Debug.info("\nRunning inefficient first, then efficient...");
         //for (int i = 0; i < 5; i++)
             runInefficientFirstThenEfficient();
     }

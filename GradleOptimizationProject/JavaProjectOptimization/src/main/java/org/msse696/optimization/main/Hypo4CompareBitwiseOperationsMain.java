@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo4CompareBitwiseOperations;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.HeapMonitor;
 import org.msse696.optimization.helper.FileDataManager;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Hypo4CompareBitwiseOperationsMain {
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis4_bitwise_arithmetic.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing bitwise vs arithmetic performance...");
+        Debug.info("Analyzing bitwise vs arithmetic performance...");
 
-        //System.out.println("Running efficient first, then inefficient...");
+        //Debug.info("Running efficient first, then inefficient...");
         //for (int i = 0; i < 5; i++)
         //    runEfficientFirstThenInefficient();
 
-        //System.out.println("Running inefficient first, then efficient...");
+        //Debug.info("Running inefficient first, then efficient...");
         for (int i = 0; i < 5; i++)
             runInefficientFirstThenEfficient();
     }

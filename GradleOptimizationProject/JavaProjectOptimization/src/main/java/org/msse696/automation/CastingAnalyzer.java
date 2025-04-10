@@ -7,6 +7,7 @@ import com.github.javaparser.ast.expr.CastExpr;
 import com.github.javaparser.ast.expr.Expression;
 import com.github.javaparser.ast.expr.VariableDeclarationExpr;
 import com.github.javaparser.ast.type.Type;
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -26,17 +27,17 @@ public class CastingAnalyzer implements Analyzer {
 
     @Override
     public boolean analyze(File javaFile, boolean createReort) {
-        System.out.println("Analyzing file: " + javaFile.getName());
+        Debug.info("Analyzing file: " + javaFile.getName());
         List<String[]> inefficiencies = new ArrayList<>();
         boolean inefficiencyDetected = false;
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             // Parse the Java file into a CompilationUnit
             CompilationUnit compilationUnit = StaticJavaParser.parse(fileInputStream);
-            System.out.println("Parsed CompilationUnit:\n" + compilationUnit);
+            Debug.info("Parsed CompilationUnit:\n" + compilationUnit);
             // Analyze methods within the file
             for (MethodDeclaration method : compilationUnit.findAll(MethodDeclaration.class)) {
-                System.out.println("Analyzing method: " + method.getName());
+                Debug.info("Analyzing method: " + method.getName());
                 boolean methodHasInefficiency = detectInefficientCasting(method);
                 if (methodHasInefficiency) {
                     inefficiencyDetected = true;
@@ -50,7 +51,7 @@ public class CastingAnalyzer implements Analyzer {
 
         // Generate a report if inefficiencies are detected
         if (inefficiencyDetected && createReort) {
-            System.out.println("\nInefficiencies detected. Generating report...");
+            Debug.info("\nInefficiencies detected. Generating report...");
             generateReport(
                 "Casting Analysis Report",
                 "Methods with Inefficient Casting",
@@ -60,7 +61,7 @@ public class CastingAnalyzer implements Analyzer {
                 OUTPUT_REPORT
             );
         } else {
-            System.out.println("\nNo inefficiencies detected. Report will not be generated.");
+            Debug.info("\nNo inefficiencies detected. Report will not be generated.");
         }
         isEfficient = !inefficiencyDetected;
         return inefficiencyDetected;
@@ -93,7 +94,7 @@ public class CastingAnalyzer implements Analyzer {
 
                             // Check for inefficient casting: primitive to compatible wrapper
                             if (isPrimitiveWrapperPair(variableTypeName, castTypeName)) {
-                                System.out.println("Inefficient explicit casting detected for: " + castExpr);
+                                Debug.info("Inefficient explicit casting detected for: " + castExpr);
                                 inefficiencyDetected.set(true); // Set the class-level flag
                             }
                         }

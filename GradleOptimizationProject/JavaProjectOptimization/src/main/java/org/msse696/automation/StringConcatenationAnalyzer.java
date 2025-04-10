@@ -12,6 +12,7 @@ import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.CombinedTypeSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -40,16 +41,16 @@ public class StringConcatenationAnalyzer implements Analyzer {
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             CompilationUnit compilationUnit = StaticJavaParser.parse(fileInputStream);
-            System.out.println("Parsed CompilationUnit:\n" + compilationUnit.toString());
+            Debug.info("Parsed CompilationUnit:\n" + compilationUnit.toString());
 
             compilationUnit.findAll(MethodDeclaration.class).forEach(method -> {
-                System.out.println("Analyzing method: " + method.getName());
+                Debug.info("Analyzing method: " + method.getName());
                 if (detectStringConcatenationInLoop(method)) {
                     optimizationNeeded.set(true);
                     inefficientMethods.add(new String[]{method.getNameAsString(), "String concatenation inside loop detected"});
-                    System.out.println("Issue detected in method: " + method.getName());
+                    Debug.info("Issue detected in method: " + method.getName());
                 } else {
-                    System.out.println("No issues detected in method: " + method.getName());
+                    Debug.info("No issues detected in method: " + method.getName());
                 }
             });
 
@@ -67,21 +68,21 @@ public class StringConcatenationAnalyzer implements Analyzer {
                     OUTPUT_REPORT
             );
         } else {
-            System.out.println("No optimization required. Report will not be generated.");
+            Debug.info("No optimization required. Report will not be generated.");
         }
         isEfficient = !optimizationNeeded.get();
         return optimizationNeeded.get();
     }
 
     private boolean detectStringConcatenationInLoop(MethodDeclaration method) {
-        System.out.println("Analyzing method: " + method.getName());
+        Debug.info("Analyzing method: " + method.getName());
         List<ForStmt> loops = method.findAll(ForStmt.class);
 
         for (ForStmt loop : loops) {
-            System.out.println("Analyzing loop body: " + loop.getBody());
+            Debug.info("Analyzing loop body: " + loop.getBody());
             if (loop.getBody().isBlockStmt()) {
                 for (Statement statement : loop.getBody().asBlockStmt().getStatements()) {
-                    System.out.println("Statement found: " + statement);
+                    Debug.info("Statement found: " + statement);
                     if (checkForConcatenation(statement)) {
                         return true;
                     }
@@ -97,7 +98,7 @@ public class StringConcatenationAnalyzer implements Analyzer {
         // Check if the statement is an assignment expression (`result += i`)
         if (statement.isExpressionStmt() && statement.asExpressionStmt().getExpression() instanceof AssignExpr) {
             AssignExpr assignExpr = statement.asExpressionStmt().getExpression().asAssignExpr();
-            System.out.println("Analyzing Assignment Expression: " + assignExpr);
+            Debug.info("Analyzing Assignment Expression: " + assignExpr);
 
             // Check if the operator is PLUS_ASSIGN (+=)
             if (assignExpr.getOperator() == AssignExpr.Operator.PLUS) {
@@ -107,7 +108,7 @@ public class StringConcatenationAnalyzer implements Analyzer {
 
                     // TEMPORARY ASSUMPTION: Assume "result" is a String
                     if ("result".equals(variableName)) {
-                        System.out.println("Inefficient string concatenation detected: " + assignExpr);
+                        Debug.info("Inefficient string concatenation detected: " + assignExpr);
                         return true; // Flag as inefficient concatenation
                     }
                 }
@@ -118,7 +119,7 @@ public class StringConcatenationAnalyzer implements Analyzer {
         if (statement.isExpressionStmt() && statement.asExpressionStmt().getExpression() instanceof MethodCallExpr) {
             MethodCallExpr methodCallExpr = statement.asExpressionStmt().getExpression().asMethodCallExpr();
             if ("append".equals(methodCallExpr.getNameAsString())) {
-                System.out.println("Efficient string concatenation detected (StringBuilder): " + methodCallExpr);
+                Debug.info("Efficient string concatenation detected (StringBuilder): " + methodCallExpr);
             }
         }
 

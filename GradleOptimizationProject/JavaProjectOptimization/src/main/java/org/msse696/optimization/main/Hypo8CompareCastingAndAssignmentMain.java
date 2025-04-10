@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo8CompareCastingAndAssignment;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Hypo8CompareCastingAndAssignmentMain {
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis8_casting_vs_assignment.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing casting vs assignment performance...");
+        Debug.info("Analyzing casting vs assignment performance...");
 
-        System.out.println("Running efficient first, then inefficient...");
+        Debug.info("Running efficient first, then inefficient...");
         //for (int i = 0; i < 5; i++)
         //  runEfficientFirstThenInefficient();
 
-        //System.out.println("\nRunning inefficient first, then efficient...");
+        //Debug.info("\nRunning inefficient first, then efficient...");
         for (int i = 0; i < 5; i++)
             runInefficientFirstThenEfficient();
     }

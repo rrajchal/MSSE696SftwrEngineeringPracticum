@@ -1,5 +1,7 @@
 package org.msse696.optimization.helper;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -135,7 +137,7 @@ public class DataAnalyzer {
      * @param efficientPeakMem Peak memory usage of Dataset 1.
      * @param inefficientPeakMem Peak memory usage of Dataset 2.
      */
-    public void displayStatisticalAnalysis(List<Double> efficientData, List<Double> inefficientData, double efficientPeakMem, double inefficientPeakMem, FileDataManager fileManager) {
+    public String displayStatisticalAnalysis(List<Double> efficientData, List<Double> inefficientData, double efficientPeakMem, double inefficientPeakMem, FileDataManager fileManager) {
         StringBuilder analysisResult = new StringBuilder();
 
         analysisResult.append("Statistical Analysis:\n");
@@ -156,29 +158,31 @@ public class DataAnalyzer {
         }
 
         // Print the analysis result
-        System.out.println(analysisResult);
+        Debug.info(analysisResult.toString());
 
         // Save the analysis to the file
         fileManager.appendLine(analysisResult.toString());
+
+        return analysisResult.toString();
     }
 
     public void displayStatisticalAnalysis(List<Double> efficientData, List<Double> inefficientData, double efficientPeakMem, double inefficientPeakMem) {
-        System.out.println("Statistical Analysis:");
-        System.out.println("----------------------------------------------------------------");
+        Debug.info("Statistical Analysis:");
+        Debug.info("----------------------------------------------------------------");
         System.out.printf("| %-29s | %-11s | %-14s |\n", "Metric", "Dataset 1", "Dataset 2");
         System.out.printf("| %-29s | %-11s | %-14s |\n", "", "(Efficient)", "(Inefficient)");
-        System.out.println("----------------------------------------------------------------");
+        Debug.info("----------------------------------------------------------------");
         System.out.printf("| Number of Data Points         | %-11d | %-14d |\n", efficientData.size(), inefficientData.size());
         printRow("Average (nanoseconds)", calculateAverage(efficientData), calculateAverage(inefficientData));
         printRow("Standard Deviation", calculateStandardDeviation(efficientData), calculateStandardDeviation(inefficientData));
         printRow("Peak Memory (MB)", efficientPeakMem, inefficientPeakMem);
 
-        System.out.println("----------------------------------------------------------------");
+        Debug.info("----------------------------------------------------------------");
 
         if (isSignificantlyDifferent(efficientData, inefficientData)) {
-            System.out.println("The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.");
+            Debug.info("The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.");
         } else {
-            System.out.println("The difference between Dataset 1 and Dataset 2 is statistically **insignificant** at the 1.0% level.");
+            Debug.info("The difference between Dataset 1 and Dataset 2 is statistically **insignificant** at the 1.0% level.");
         }
     }
 

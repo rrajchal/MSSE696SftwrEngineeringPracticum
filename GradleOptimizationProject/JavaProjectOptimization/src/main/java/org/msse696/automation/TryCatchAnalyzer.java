@@ -6,6 +6,7 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.TryStmt;
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -24,18 +25,18 @@ public class TryCatchAnalyzer implements Analyzer {
 
     @Override
     public boolean analyze(File javaFile, boolean createReport) {
-        System.out.println("Analyzing file: " + javaFile.getName());
+        Debug.info("Analyzing file: " + javaFile.getName());
         List<String[]> inefficiencies = new ArrayList<>(); // Tracks inefficiencies for report generation
         boolean inefficiencyDetected = false;
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             // Parse the Java file into a CompilationUnit
             CompilationUnit compilationUnit = StaticJavaParser.parse(fileInputStream);
-            System.out.println("Parsed CompilationUnit:\n" + compilationUnit);
+            Debug.info("Parsed CompilationUnit:\n" + compilationUnit);
 
             // Analyze methods within the file
             for (MethodDeclaration method : compilationUnit.findAll(MethodDeclaration.class)) {
-                System.out.println("Analyzing method: " + method.getName());
+                Debug.info("Analyzing method: " + method.getName());
                 boolean methodHasInefficiency = detectTryCatchInLoop(method);
                 if (methodHasInefficiency) {
                     inefficiencyDetected = true;
@@ -49,7 +50,7 @@ public class TryCatchAnalyzer implements Analyzer {
 
         // Only generate a report if inefficiencies are detected
         if (inefficiencyDetected && createReport) {
-            System.out.println("\nInefficiencies detected. Generating report...");
+            Debug.info("\nInefficiencies detected. Generating report...");
             generateReport(
                     "Try-Catch Placement Analysis Report",
                     "Methods with Inefficient Try-Catch Placement",
@@ -59,7 +60,7 @@ public class TryCatchAnalyzer implements Analyzer {
                     OUTPUT_REPORT
             );
         } else {
-            System.out.println("\nNo inefficiencies detected. Report will not be generated.");
+            Debug.info("\nNo inefficiencies detected. Report will not be generated.");
         }
         isEfficient = !inefficiencyDetected;
         return inefficiencyDetected;
@@ -77,7 +78,7 @@ public class TryCatchAnalyzer implements Analyzer {
         for (ForStmt loop : loops) {
             // Check if the loop contains a try-catch block directly
             if (!loop.findAll(TryStmt.class).isEmpty()) {
-                System.out.println("Inefficient try-catch placement detected inside loop.");
+                Debug.info("Inefficient try-catch placement detected inside loop.");
                 return true; // Inefficient placement detected
             }
 
@@ -86,7 +87,7 @@ public class TryCatchAnalyzer implements Analyzer {
                     .filter(node -> node instanceof BlockStmt).orElse(null);
 
             if (parentBlock != null && !parentBlock.findAll(TryStmt.class).isEmpty()) {
-                System.out.println("Try-catch block found outside loop (efficient placement).");
+                Debug.info("Try-catch block found outside loop (efficient placement).");
             }
         }
 

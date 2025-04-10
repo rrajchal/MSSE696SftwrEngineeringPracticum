@@ -1,5 +1,7 @@
 package org.msse696.automation.testfiles;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 public class InstanceofInefficient {
     public void execute(int iterations) {
         Object obj = "123"; // Example object as a String representing a number
@@ -14,6 +16,6 @@ public class InstanceofInefficient {
 
     private void performOperation(Object obj) {
         // Mock operation logic
-        System.out.println("Performing operation on: " + obj);
+        Debug.info("Performing operation on: " + obj);
     }
 }

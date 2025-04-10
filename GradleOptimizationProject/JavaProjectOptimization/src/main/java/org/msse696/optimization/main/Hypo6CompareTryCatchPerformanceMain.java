@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo6CompareTryCatchPerformance;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Hypo6CompareTryCatchPerformanceMain {
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis6_try_catch_efficiency.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing try-catch placement performance...");
+        Debug.info("Analyzing try-catch placement performance...");
 
-        System.out.println("Running efficient first, then inefficient...");
+        Debug.info("Running efficient first, then inefficient...");
         //for (int i = 0; i < 3; i++)
         runEfficientFirstThenInefficient();
 
-        System.out.println("\nRunning inefficient first, then efficient...");
+        Debug.info("\nRunning inefficient first, then efficient...");
         //for (int i = 0; i < 5; i++)
        // runInefficientFirstThenEfficient();
     }

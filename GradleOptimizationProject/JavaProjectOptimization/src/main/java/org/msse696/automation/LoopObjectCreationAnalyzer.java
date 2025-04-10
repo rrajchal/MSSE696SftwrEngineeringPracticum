@@ -1,5 +1,6 @@
 package org.msse696.automation;
 
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -25,12 +26,12 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
         // Data for report generation
         List<String[]> inefficientMethods = new ArrayList<>();
 
-        System.out.println("Analyzing file: " + javaFile.getName());
+        Debug.info("Analyzing file: " + javaFile.getName());
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             // Simulate reading the file content
             String fileContent = new String(fileInputStream.readAllBytes());
-            System.out.println("Parsed file content:\n" + fileContent);
+            Debug.info("Parsed file content:\n" + fileContent);
 
             // Extract methods (simulating method analysis for simplicity)
             List<String> methods = simulateMethodExtraction(fileContent);
@@ -42,7 +43,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
                     // Store the method name and detected issue for the report
                     String methodName = extractMethodName(methodCode);
                     inefficientMethods.add(new String[]{methodName, "Object creation inside loop detected"});
-                    System.out.println("Issue detected in method: " + methodName);
+                    Debug.info("Issue detected in method: " + methodName);
                 }
             }
         } catch (Exception e) {
@@ -51,7 +52,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
         }
 
         if (optimizationNeeded && createReport) {
-            System.out.println("\nOptimization is required. Creating report...");
+            Debug.info("\nOptimization is required. Creating report...");
 
             // Prepare data for the HTML report
             String[][] actualData = new String[inefficientMethods.size() + 1][2];
@@ -72,7 +73,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
                     OUTPUT_REPORT
             );
         } else {
-            System.out.println("\nNo optimization required. Report will not be generated.");
+            Debug.info("\nNo optimization required. Report will not be generated.");
         }
         isEfficient = !optimizationNeeded;
         return optimizationNeeded;
@@ -121,7 +122,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
      * @return True if inefficient object creation inside loops is detected, false otherwise.
      */
     private boolean detectObjectCreationInLoop(String code) {
-        System.out.println("Analyzing code for loop and object creation patterns:\n" + code);
+        Debug.info("Analyzing code for loop and object creation patterns:\n" + code);
 
         // Regex pattern to detect loops and their bodies
         Pattern loopPattern = Pattern.compile("(for\\s*\\(.*?\\).*?\\{.*?\\}|while\\s*\\(.*?\\).*?\\{.*?\\})", Pattern.DOTALL);
@@ -134,12 +135,12 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
             String loopContent = loopMatcher.group(); // Extract full loop content
             Matcher creationMatcher = creationPattern.matcher(loopContent);
             if (creationMatcher.find()) {
-                System.out.println("Object creation detected inside loop:\n" + creationMatcher.group());
+                Debug.info("Object creation detected inside loop:\n" + creationMatcher.group());
                 return true; // Inefficient object creation detected
             }
         }
 
-        System.out.println("No inefficient object creation detected.");
+        Debug.info("No inefficient object creation detected.");
         return false;
     }
 

@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo9CompareLoopTerminationPerformance;
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Hypo9CompareLoopTerminationPerformanceMain {
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis9_loop_termination_efficiency.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing loop termination performance...");
+        Debug.info("Analyzing loop termination performance...");
 
-        System.out.println("Running efficient first, then inefficient...");
+        Debug.info("Running efficient first, then inefficient...");
         //for (int i = 0; i < 5; i++)
         //    runEfficientFirstThenInefficient();
 
-        System.out.println("\nRunning inefficient first, then efficient...");
+        Debug.info("\nRunning inefficient first, then efficient...");
         //for (int i = 0; i < 5; i++)
             runInefficientFirstThenEfficient();
     }

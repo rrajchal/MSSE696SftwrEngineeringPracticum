@@ -1,5 +1,6 @@
 package org.msse696.automation;
 
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -46,17 +47,17 @@ public class PaddingAnalyzer implements Analyzer {
         int actualTotalBytes = 0;
         int recommendedTotalBytes = 0;
 
-        System.out.println("Analyzing file: " + javaFile.getName());
+        Debug.info("Analyzing file: " + javaFile.getName());
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             // Read file content
             String fileContent = new String(fileInputStream.readAllBytes(), StandardCharsets.UTF_8);
-            System.out.println("File content successfully read.");
+            Debug.info("File content successfully read.");
 
             // Extract fields using regex
             List<String[]> fields = extractFields(fileContent);
             if (fields.isEmpty()) {
-                System.out.println("No fields found in the file.");
+                Debug.info("No fields found in the file.");
                 return false;
             }
 
@@ -67,7 +68,7 @@ public class PaddingAnalyzer implements Analyzer {
                 int size = getFieldSize(type);
 
                 if (size == -1) {
-                    System.out.println("Unknown type: " + type);
+                    Debug.info("Unknown type: " + type);
                     continue;
                 }
 
@@ -85,9 +86,9 @@ public class PaddingAnalyzer implements Analyzer {
             // Check if optimization is necessary
             boolean isEfficient = isSameOrder(actualOrder, recommendedOrder);
             if (!isEfficient && createReport) {
-                System.out.println("\nOptimization is required. Creating report...");
-                System.out.println("Actual object size: " + actualTotalBytes + " bytes");
-                System.out.println("Recommended object size: " + recommendedTotalBytes + " bytes");
+                Debug.info("\nOptimization is required. Creating report...");
+                Debug.info("Actual object size: " + actualTotalBytes + " bytes");
+                Debug.info("Recommended object size: " + recommendedTotalBytes + " bytes");
 
                 // Prepare data for the HTML report
                 String[][] actualData = prepareTableData(actualOrder);
@@ -104,7 +105,7 @@ public class PaddingAnalyzer implements Analyzer {
                 );
                 return true;
             } else {
-                System.out.println("\nNo optimization required. Report will not be generated.");
+                Debug.info("\nNo optimization required. Report will not be generated.");
                 return false;
             }
         } catch (Exception e) {

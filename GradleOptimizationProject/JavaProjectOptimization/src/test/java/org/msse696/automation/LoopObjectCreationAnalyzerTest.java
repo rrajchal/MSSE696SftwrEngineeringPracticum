@@ -2,6 +2,7 @@ package org.msse696.automation;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.io.File;
 
@@ -17,7 +18,7 @@ public class LoopObjectCreationAnalyzerTest {
         File inefficientFile = new File(INEFFICIENT_FILE_PATH);
         boolean optimizationNeeded = analyzer.analyze(inefficientFile, true);
 
-        System.out.println("Optimization needed: " + optimizationNeeded);
+        Debug.info("Optimization needed: " + optimizationNeeded);
 
         // Assert that inefficiencies are detected
         Assertions.assertTrue(optimizationNeeded, "Optimization should be required for inefficient object creation in a loop.");
@@ -35,7 +36,7 @@ public class LoopObjectCreationAnalyzerTest {
         File efficientFile = new File(EFFICIENT_FILE_PATH);
         boolean optimizationNeeded = analyzer.analyze(efficientFile, true);
 
-        System.out.println("Optimization needed: " + optimizationNeeded);
+        Debug.info("Optimization needed: " + optimizationNeeded);
 
         // Assert that no inefficiencies are detected
         Assertions.assertFalse(optimizationNeeded, "Optimization should NOT be required for efficient loop object creation.");

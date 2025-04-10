@@ -1,5 +1,7 @@
 package org.msse696.optimization.helper;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -26,7 +28,7 @@ public class FileDataManager {
         if (parentDir != null && !parentDir.exists()) {
             boolean isDirCreated = parentDir.mkdirs();
             if (isDirCreated) {
-                System.out.println("Directory created: " + parentDir.getAbsolutePath());
+                Debug.info("Directory created: " + parentDir.getAbsolutePath());
             }
         }
     }
@@ -38,7 +40,7 @@ public class FileDataManager {
             if (!file.exists()) {
                 boolean isFileCreated = file.createNewFile();
                 if (isFileCreated) {
-                    System.out.println("File created: " + filePath);
+                    Debug.info("File created: " + filePath);
                 }
             }
 
@@ -99,13 +101,13 @@ public class FileDataManager {
             if (!file.exists()) {
                 boolean isFileCreated = file.createNewFile();
                 if (isFileCreated) {
-                    System.out.println("File created: " + filePath);
+                    Debug.info("File created: " + filePath);
                 }
             }
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, false))) {
                 writer.write(""); // Clears the content of the file
             }
-            //System.out.println("File cleared: " + filePath);
+            //Debug.info("File cleared: " + filePath);
         } catch (IOException e) {
             System.err.println("Error clearing file: " + e.getMessage());
         }

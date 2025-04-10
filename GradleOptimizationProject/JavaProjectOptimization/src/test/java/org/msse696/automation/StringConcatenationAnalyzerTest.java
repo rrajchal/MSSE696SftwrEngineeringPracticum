@@ -2,6 +2,7 @@ package org.msse696.automation;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.io.File;
 
@@ -16,7 +17,7 @@ public class StringConcatenationAnalyzerTest {
         analyzer = new StringConcatenationAnalyzer();
 
         boolean inefficienciesDetected = analyzer.analyze(inefficientFile, true);
-        System.out.println("Inefficiencies detected: " + inefficienciesDetected);
+        Debug.info("Inefficiencies detected: " + inefficienciesDetected);
 
         // Check that inefficiencies are detected
         Assertions.assertTrue(inefficienciesDetected, "Inefficiencies should be detected in the code.");
@@ -31,7 +32,7 @@ public class StringConcatenationAnalyzerTest {
         analyzer = new StringConcatenationAnalyzer();
         boolean inefficienciesDetected = analyzer.analyze(efficientFile, true);
 
-        System.out.println("Inefficiencies detected: " + inefficienciesDetected);
+        Debug.info("Inefficiencies detected: " + inefficienciesDetected);
         Assertions.assertFalse(inefficienciesDetected, "No inefficiencies should be detected in the code.");
     }
 
@@ -40,7 +41,7 @@ public class StringConcatenationAnalyzerTest {
         analyzer = new StringConcatenationAnalyzer();
         boolean inefficienciesDetected = analyzer.analyze(efficientFile, true);
 
-        System.out.println("Inefficiencies detected: " + inefficienciesDetected);
+        Debug.info("Inefficiencies detected: " + inefficienciesDetected);
 
         // Check that no inefficiencies are detected
         Assertions.assertFalse(inefficienciesDetected, "No inefficiencies should be detected in the code.");
@@ -52,7 +53,7 @@ public class StringConcatenationAnalyzerTest {
         analyzer = new StringConcatenationAnalyzer();
         boolean inefficienciesDetected = analyzer.analyze(inefficientFile, true);
 
-        System.out.println("Inefficiencies detected: " + inefficienciesDetected);
+        Debug.info("Inefficiencies detected: " + inefficienciesDetected);
 
         // Verify that the report file is created
         File reportFile = new File(analyzer.getReport());

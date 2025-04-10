@@ -4,6 +4,7 @@ import org.msse696.optimization.compare.Hypo1CompareVariableDeclarationOrderPerf
 import org.msse696.optimization.helper.DataAnalyzer;
 import org.msse696.optimization.helper.FileDataManager;
 import org.msse696.optimization.helper.HeapMonitor;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Hypo1CompareVariableDeclarationOrderMain {
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis1_variable_order_efficiency.txt";
 
     public static void main(String[] args) {
-        System.out.println("Analyzing variable declaration order performance...");
+        Debug.info("Analyzing variable declaration order performance...");
 
-        System.out.println("Running optimized first, then unoptimized...");
+        Debug.info("Running optimized first, then unoptimized...");
         for (int i = 0; i < 5; i++)
             runOptimizedFirstThenUnoptimized();
 
-        System.out.println("\nRunning unoptimized first, then optimized...");
+        Debug.info("\nRunning unoptimized first, then optimized...");
         for (int i = 0; i < 5; i++)
             runUnoptimizedFirstThenOptimized();
     }

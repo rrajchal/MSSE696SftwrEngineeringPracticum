@@ -7,6 +7,7 @@ import com.github.javaparser.ast.expr.BinaryExpr;
 import com.github.javaparser.ast.expr.AssignExpr;
 import com.github.javaparser.ast.stmt.ForStmt;
 import com.github.javaparser.ast.stmt.Statement;
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -28,23 +29,23 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
         AtomicBoolean optimizationNeeded = new AtomicBoolean(false);
         List<String[]> inefficientMethods = new ArrayList<>();
 
-        System.out.println("Analyzing file: " + javaFile.getName());
+        Debug.info("Analyzing file: " + javaFile.getName());
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             // Parse the file
             CompilationUnit compilationUnit = StaticJavaParser.parse(fileInputStream);
-            System.out.println("Parsed CompilationUnit:\n" + compilationUnit.toString());
+            Debug.info("Parsed CompilationUnit:\n" + compilationUnit.toString());
 
             // Analyze each method in the Java file
             compilationUnit.findAll(MethodDeclaration.class).forEach(method -> {
-                System.out.println("Analyzing method: " + method.getName());
+                Debug.info("Analyzing method: " + method.getName());
 
                 if (detectInefficientOperations(method)) {
                     optimizationNeeded.set(true);
                     inefficientMethods.add(new String[]{method.getNameAsString(), "Inefficient arithmetic operations detected"});
-                    System.out.println("Issue detected in method: " + method.getName());
+                    Debug.info("Issue detected in method: " + method.getName());
                 } else {
-                    System.out.println("No issues detected in method: " + method.getName());
+                    Debug.info("No issues detected in method: " + method.getName());
                 }
             });
         } catch (Exception e) {
@@ -53,7 +54,7 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
 
         // Generate report if inefficiencies were detected
         if (optimizationNeeded.get() && createReport) {
-            System.out.println("\nOptimization is required. Creating report...");
+            Debug.info("\nOptimization is required. Creating report...");
             generateReport(
                 "Arithmetic Operation Analysis Report",
                 "Methods with Inefficient Arithmetic Operations",
@@ -63,7 +64,7 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
                 OUTPUT_REPORT
             );
         } else {
-            System.out.println("\nNo optimization required. Report will not be generated.");
+            Debug.info("\nNo optimization required. Report will not be generated.");
         }
 
         return optimizationNeeded.get();
@@ -79,11 +80,11 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
         List<ForStmt> loops = method.findAll(ForStmt.class);
         isEfficient = true;
         for (ForStmt loop : loops) {
-            System.out.println("Analyzing loop body: " + loop.getBody());
+            Debug.info("Analyzing loop body: " + loop.getBody());
 
             if (loop.getBody().isBlockStmt()) {
                 for (Statement statement : loop.getBody().asBlockStmt().getStatements()) {
-                    System.out.println("Statement found: " + statement);
+                    Debug.info("Statement found: " + statement);
                     isEfficient = !checkForInefficiency(statement);
                     if (!isEfficient) {
                         return true;
@@ -107,7 +108,7 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
         // Detect inefficient multiplication and division
         if (statement.isExpressionStmt() && statement.asExpressionStmt().getExpression() instanceof AssignExpr) {
             AssignExpr assignExpr = statement.asExpressionStmt().getExpression().asAssignExpr();
-            System.out.println("Analyzing Assignment Expression: " + assignExpr);
+            Debug.info("Analyzing Assignment Expression: " + assignExpr);
 
             if (assignExpr.getOperator() == AssignExpr.Operator.ASSIGN) {
                 if (assignExpr.getValue() instanceof BinaryExpr) {
@@ -119,7 +120,7 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
                             // Check if the right operand is the literal value 2
                             String literalValue = binaryExpr.getRight().asLiteralExpr().toString();
                             if ("2".equals(literalValue)) {
-                                System.out.println("Inefficient arithmetic operation detected: " + binaryExpr);
+                                Debug.info("Inefficient arithmetic operation detected: " + binaryExpr);
                                 return true;
                             }
                         }

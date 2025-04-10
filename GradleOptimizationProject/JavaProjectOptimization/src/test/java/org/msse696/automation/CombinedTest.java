@@ -3,6 +3,7 @@ package org.msse696.automation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.msse696.optimization.helper.debug.Debug;
 
 import java.io.File;
 
@@ -43,7 +44,7 @@ class CombinedTest {
         int totalInefficiencyCount = analyzer.getTotalInefficiencyCount();
 
         Assertions.assertTrue(totalInefficiencyCount > 0);
-        System.out.println("Total Inefficiencies: " + totalInefficiencyCount);
+        Debug.info("Total Inefficiencies: " + totalInefficiencyCount);
 
     }
 }

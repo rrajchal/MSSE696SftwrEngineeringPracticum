@@ -1,5 +1,7 @@
 package org.msse696.optimization.helper.report;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -95,7 +97,7 @@ public class HtmlReport {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write(htmlContent.toString());
-            System.out.println("HTML report generated successfully: " + outputFilePath);
+            Debug.info("HTML report generated successfully: " + outputFilePath);
         } catch (IOException e) {
             System.err.println("Error while writing the HTML file: " + outputFilePath);
         }

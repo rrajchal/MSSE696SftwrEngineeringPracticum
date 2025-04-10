@@ -5,6 +5,7 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.expr.MethodCallExpr;
 import com.github.javaparser.ast.stmt.ForStmt;
+import org.msse696.optimization.helper.debug.Debug;
 import org.msse696.optimization.helper.report.HtmlReport;
 
 import java.io.File;
@@ -23,18 +24,18 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
 
     @Override
     public boolean analyze(File javaFile, boolean createReport) {
-        System.out.println("Analyzing file: " + javaFile.getName());
+        Debug.info("Analyzing file: " + javaFile.getName());
         List<String[]> inefficiencies = new ArrayList<>();
         boolean inefficiencyDetected = false;
 
         try (FileInputStream fileInputStream = new FileInputStream(javaFile)) {
             // Parse the Java file into a CompilationUnit
             CompilationUnit compilationUnit = StaticJavaParser.parse(fileInputStream);
-            System.out.println("Parsed CompilationUnit:\n" + compilationUnit);
+            Debug.info("Parsed CompilationUnit:\n" + compilationUnit);
 
             // Analyze methods within the file
             for (MethodDeclaration method : compilationUnit.findAll(MethodDeclaration.class)) {
-                System.out.println("Analyzing method: " + method.getName());
+                Debug.info("Analyzing method: " + method.getName());
                 boolean methodHasInefficiency = detectInefficientArrayCopying(method);
                 if (methodHasInefficiency) {
                     inefficiencyDetected = true;
@@ -48,7 +49,7 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
 
         // Generate a report if inefficiencies are detected
         if (inefficiencyDetected && createReport) {
-            System.out.println("\nInefficiencies detected. Generating report...");
+            Debug.info("\nInefficiencies detected. Generating report...");
             generateReport(
                 "Array Copy Inefficiency Analysis Report",
                 "Methods with Inefficient Array Copying",
@@ -58,7 +59,7 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
                 OUTPUT_REPORT
             );
         } else {
-            System.out.println("\nNo inefficiencies detected. Report will not be generated.");
+            Debug.info("\nNo inefficiencies detected. Report will not be generated.");
         }
         isEfficient = !inefficiencyDetected;
         return inefficiencyDetected;
@@ -82,7 +83,7 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
                 .anyMatch(methodCall -> methodCall.getNameAsString().equals("arraycopy"));
 
             if (!systemArrayCopyUsed) {
-                System.out.println("Manual loop detected for array copying in method: " + method.getName());
+                Debug.info("Manual loop detected for array copying in method: " + method.getName());
                 return true; // Inefficient loop detected
             }
         }
