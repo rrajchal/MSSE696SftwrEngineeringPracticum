@@ -9,7 +9,7 @@ public class InstanceofInefficient {
             try {
                 performOperation(obj);
             } catch (ClassCastException | NumberFormatException e) {
-                System.err.println("Invalid cast or format: " + e.getMessage());
+                Debug.error("Invalid cast or format: " + e.getMessage());
             }
         }
     }

@@ -53,7 +53,7 @@ public class HtmlReport {
         File outputFile = new File(outputFilePath);
         File parentDir = outputFile.getParentFile();
         if (!parentDir.exists() && !parentDir.mkdirs()) {
-            System.err.println("Failed to create output directory: " + parentDir.getAbsolutePath());
+            Debug.error("Failed to create output directory: " + parentDir.getAbsolutePath());
             return;
         }
 
@@ -64,7 +64,7 @@ public class HtmlReport {
 
         // Actual table
         htmlContent.append("<h3 class='actual-header'>").append(actualHeader).append("</h3>\n");
-        htmlContent.append("<table>\n");
+        htmlContent.append("<table style='width:100%; border-collapse: collapse;'>\n");
         if (actualData.length > 0) {
             htmlContent.append("<tr>");
             for (String header : actualData[0]) {
@@ -83,7 +83,7 @@ public class HtmlReport {
 
         // Recommended table
         htmlContent.append("<h3 class='recommended-header'>").append(recommendedHeader).append("</h3>\n");
-        htmlContent.append("<table>\n");
+        htmlContent.append("<table style='width:100%; border-collapse: collapse;'>\n");
         if (recommendedData.length > 0) {
             htmlContent.append("<tr>");
             for (String header : recommendedData[0]) {
@@ -121,9 +121,9 @@ public class HtmlReport {
                 "<title>" + title + "</title>\n" +
                 "<style>\n" +
                 "body { font-family: Arial, sans-serif; margin: 20px; }\n" +
-                ".container { max-width: 800px; margin: auto; }\n" +
+                ".container { margin: auto; }\n" +
                 "h1 { text-align: center; color: blue; }\n" +
-                "table { width: 100%; border-collapse: collapse; margin-top: 20px; }\n" +
+                "table { width: 80%; border-collapse: collapse; margin-top: 20px; }\n" +
                 "th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }\n" +
                 "th { background-color: #f4f4f4; }\n" +
                 ".actual-header { color: red; }\n" +
@@ -179,13 +179,13 @@ public class HtmlReport {
         File outputFile = new File(outputFilePath);
         File parentDir = outputFile.getParentFile();
         if (!parentDir.exists() && !parentDir.mkdirs()) {
-            System.err.println("Failed to create output directory: " + parentDir.getAbsolutePath());
+            Debug.error("Failed to create output directory: " + parentDir.getAbsolutePath());
             return;
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write(htmlContent);
         } catch (IOException e) {
-            System.err.println("Error writing to HTML file: " + outputFilePath);
+            Debug.error("Error writing to HTML file: " + outputFilePath);
         }
     }
 }

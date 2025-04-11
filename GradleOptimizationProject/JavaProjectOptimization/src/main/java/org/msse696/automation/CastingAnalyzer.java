@@ -46,7 +46,7 @@ public class CastingAnalyzer implements Analyzer {
             }
 
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
 
         // Generate a report if inefficiencies are detected
@@ -169,24 +169,20 @@ public class CastingAnalyzer implements Analyzer {
         return new String[][]{
             {"Example", "Code"},
             {"Inefficient Code", """
-            <pre><code>
-            public void execute(int iterations) {
+             public void execute(int iterations) {
                 for (int i = 0; i < iterations; i++) {
                     Integer assignedValue = (Integer) i; // Explicit casting
                     int total = assignedValue + assignedValue;
                 }
             }
-            </code></pre>
             """},
             {"Efficient Code", """
-            <pre><code>
             public void execute(int iterations) {
                 for (int i = 0; i < iterations; i++) {
                     Integer assignedValue = i; // Direct assignment
                     int total = assignedValue + assignedValue;
                 }
             }
-            </code></pre>
             """}
         };
     }

@@ -109,7 +109,7 @@ public class PaddingAnalyzer implements Analyzer {
                 return false;
             }
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
         return false;
     }
@@ -232,24 +232,20 @@ public class PaddingAnalyzer implements Analyzer {
         return new String[][]{
                 {"Example", "Code"},
                 {"Inefficient Code", """
-            <pre><code>
             public class PaddingTestClassInefficient {
                 boolean flag;
                 long id;
                 char grade;
                 int value; // Inefficient field arrangement
             }
-            </code></pre>
             """},
                 {"Efficient Code", """
-            <pre><code>
             public class PaddingTestClassEfficient {
                 long id;
                 int value;
                 char grade;
                 boolean flag; // Efficient field arrangement
             }
-            </code></pre>
             """}
         };
     }

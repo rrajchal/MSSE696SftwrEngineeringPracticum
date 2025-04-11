@@ -45,7 +45,7 @@ public class TryCatchAnalyzer implements Analyzer {
             }
 
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
 
         // Only generate a report if inefficiencies are detected
@@ -140,20 +140,17 @@ public class TryCatchAnalyzer implements Analyzer {
         return new String[][]{
                 {"Example", "Code"},
                 {"Inefficient Code", """
-            <pre><code>
             public void execute(int iterations) {
                 for (int i = 0; i < iterations; i++) {
                     try {
                         performOperation();
                     } catch (Exception e) {
-                        System.err.println("An exception occurred: " + e.getMessage());
+                        Debug.error("An exception occurred: " + e.getMessage());
                     }
                 }
             }
-            </code></pre>
             """},
                 {"Efficient Code", """
-            <pre><code>
             public void execute(int iterations) {
                 try {
                     for (int i = 0; i < iterations; i++) {
@@ -163,7 +160,6 @@ public class TryCatchAnalyzer implements Analyzer {
                     System.err.println("An exception occurred: " + e.getMessage());
                 }
             }
-            </code></pre>
             """}
         };
     }

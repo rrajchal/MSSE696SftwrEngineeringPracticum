@@ -6,9 +6,9 @@
 <title>Arithmetic Operation Analysis Report</title>
 <style>
 body { font-family: Arial, sans-serif; margin: 20px; }
-.container { max-width: 800px; margin: auto; }
+.container { margin: auto; }
 h1 { text-align: center; color: blue; }
-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+table { width: 80%; border-collapse: collapse; margin-top: 20px; }
 th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
 th { background-color: #f4f4f4; }
 .actual-header { color: red; }
@@ -29,28 +29,24 @@ hr { border: 1px solid #ccc; margin: 20px 0; }
 <div class='container'>
 <h1>Arithmetic Operation Analysis Report</h1>
 <h3 class='actual-header'>Methods with Inefficient Arithmetic Operations</h3>
-<table>
+<table style='width:100%; border-collapse: collapse;'>
 <tr><th>Method Name</th><th>Issue</th></tr>
 <tr><td>performOperations</td><td>Inefficient arithmetic operations detected</td></tr>
 </table>
 <h3 class='recommended-header'>Recommendations for Optimization</h3>
-<table>
+<table style='width:100%; border-collapse: collapse;'>
 <tr><th>Recommendation</th><th>Replace arithmetic operations with bitwise operations where possible.</th></tr>
-<tr>Example (Inefficient)<pre><code>
-int result = 1;
+<tr>Example (Inefficient)int result = 1;
 for (int i = 0; i < iterations; i++) {
     result = result * 2;  // Inefficient multiplication by 2
     result = result / 2;  // Inefficient division by 2
 }
-</code></pre>
 </tr>
-<tr>Example (Optimized)<pre><code>
-int result = 1;
+<tr>Example (Optimized)int result = 1;
 for (int i = 0; i < iterations; i++) {
     result = result << 1;  // Efficient: Bitwise left shift (multiply by 2)
     result = result >> 1;  // Efficient: Bitwise right shift (divide by 2)
 }
-</code></pre>
 </tr>
 </table>
 </div>

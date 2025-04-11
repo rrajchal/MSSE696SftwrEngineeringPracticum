@@ -44,7 +44,7 @@ public class LoopInefficiencyAnalyzer implements Analyzer {
             }
 
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
 
         // Generate a report if inefficiencies are detected
@@ -161,19 +161,15 @@ public class LoopInefficiencyAnalyzer implements Analyzer {
         return new String[][]{
             {"Example", "Code"},
             {"Inefficient Code", """
-            <pre><code>
             for (int i = 0; i < size.length(); i++) { // Method called during iteration
                 performOperation(size.charAt(i));
             }
-            </code></pre>
             """},
             {"Efficient Code", """
-            <pre><code>
             int length = size.length(); // Precompute loop limit
             for (int i = 0; i < length; i++) {
                 performOperation(size.charAt(i));
             }
-            </code></pre>
             """}
         };
     }

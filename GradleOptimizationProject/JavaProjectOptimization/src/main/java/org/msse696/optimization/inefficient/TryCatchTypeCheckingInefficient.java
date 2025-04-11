@@ -1,5 +1,7 @@
 package org.msse696.optimization.inefficient;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 public class TryCatchTypeCheckingInefficient {
     public void execute(int iterations) {
         Object obj = "123"; // Example object as a String representing a number
@@ -7,7 +9,7 @@ public class TryCatchTypeCheckingInefficient {
             try {
                 performOperation(obj);
             } catch (ClassCastException | NumberFormatException e) {
-                System.err.println("Invalid cast or format: " + e.getMessage());
+                Debug.error("Invalid cast or format: " + e.getMessage());
             }
         }
     }

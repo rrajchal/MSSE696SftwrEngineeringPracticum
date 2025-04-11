@@ -53,29 +53,32 @@ public class InefficiencyAnalyzerRunner implements Analyzer {
         this.javaFile = javaFile;
         Debug.info("Starting inefficiency analysis for: " + javaFile.getName());
 
+        int fileInefficiencyCount = 0; // Counter for inefficiencies in the current file
+
         for (Analyzer analyzer : analyzers) {
             String analyzerName = analyzer.getClass().getSimpleName();
             Debug.info("\nRunning analyzer: " + analyzerName);
-            boolean inefficienciesFound = analyzer.analyze(javaFile, false); // Don't create individual reports
-            if (inefficienciesFound) {
+            boolean inefficienciesFoundByAnalyzer = analyzer.analyze(javaFile, false); // Get if THIS analyzer found issues
+            String[][] recommendations = analyzer.getRecommendedData();
+
+            if (inefficienciesFoundByAnalyzer && recommendations != null && recommendations.length > 1) {
                 isEfficientOverall = false;
                 analyzedAnalyzers.add(analyzerName);
-                String[][] recommendations = analyzer.getRecommendedData();
-                if (recommendations != null && recommendations.length > 1) {
-                    List<String[]> recommendationsList = new ArrayList<>();
-                    //recommendationsList.add(new String[]{"Analyzer", "Inefficient Code", "Efficient Code"});
-                    if (recommendations.length > 2) {
-                        recommendationsList.add(new String[]{analyzerName, recommendations[1][1], recommendations[2][1]});
-                        totalInefficiencyCount++;
-                    } else {
-                        recommendationsList.add(new String[]{analyzerName, recommendations[1][1], "N/A"});
-                        totalInefficiencyCount++;
-                    }
+                List<String[]> recommendationsList = new ArrayList<>();
+                if (recommendations.length > 2) {
+                    recommendationsList.add(new String[]{analyzerName, recommendations[1][1], recommendations[2][1]});
+                    fileInefficiencyCount++; // Increment for each actual recommendation
+                } else if (recommendations.length == 2) {
+                    recommendationsList.add(new String[]{analyzerName, recommendations[1][1], "N/A"});
+                    fileInefficiencyCount++; // Increment for each actual recommendation
+                }
+                if (!recommendationsList.isEmpty()) {
                     analyzerRecommendations.put(analyzerName, recommendationsList);
                     allRecommendations.addAll(recommendationsList);
                 }
             }
         }
+        totalInefficiencyCount += fileInefficiencyCount; // Accumulate file-level count
         return !isEfficientOverall;
     }
 

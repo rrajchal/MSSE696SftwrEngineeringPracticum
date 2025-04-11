@@ -47,7 +47,7 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
                 }
             });
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
 
         // Generate report if inefficiencies are detected
@@ -176,17 +176,13 @@ public class ExpressionEliminationAnalyzer implements Analyzer {
         return new String[][]{
                 {"Recommendation", "Cache intermediate results of common subexpressions to avoid redundant calculations."},
                 {"Example (Inefficient)", """
-            <pre><code>
             int z1 = x * Math.abs(y) + x;
             int z2 = x * Math.abs(y) + y;
-            </code></pre>
             """},
                 {"Example (Optimized)", """
-            <pre><code>
             int t1 = x * Math.abs(y);
             int z1 = t1 + x;
             int z2 = t1 + y;
-            </code></pre>
             """}
         };
     }

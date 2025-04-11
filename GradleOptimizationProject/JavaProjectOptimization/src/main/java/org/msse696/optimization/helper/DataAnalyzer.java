@@ -32,7 +32,7 @@ public class DataAnalyzer {
         File file = new File(filePath);
 
         if (!file.exists()) {
-            System.err.println("File not found: " + filePath);
+            Debug.error("File not found: " + filePath);
             return data;
         }
 
@@ -42,11 +42,11 @@ public class DataAnalyzer {
                 try {
                     data.add(Double.parseDouble(line.trim())); // Parse numbers
                 } catch (NumberFormatException e) {
-                    System.err.println("Skipping invalid number: " + line);
+                    Debug.error("Skipping invalid number: " + line);
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            Debug.error("Error reading file: " + e.getMessage());
         }
 
         return data;
@@ -88,12 +88,12 @@ public class DataAnalyzer {
      */
     public boolean isSignificantlyDifferent(List<Double> efficientData, List<Double> inefficientData, double significanceLevel) {
         if (efficientData.isEmpty() || inefficientData.isEmpty()) {
-            System.err.println("Error: One or both datasets are empty.");
+            Debug.error("Error: One or both datasets are empty.");
             return false;
         }
 
         if (efficientData.size() <= 1 || inefficientData.size() <= 1) {
-            System.err.println("Error: One or both datasets have insufficient data points for statistical analysis.");
+            Debug.error("Error: One or both datasets have insufficient data points for statistical analysis.");
             return false;
         }
 
@@ -103,7 +103,7 @@ public class DataAnalyzer {
         double stdDev2 = calculateStandardDeviation(inefficientData);
 
         if (stdDev1 == 0 || stdDev2 == 0) {
-            System.err.println("Error: One or both datasets have zero variance. Statistical comparison is invalid.");
+            Debug.error("Error: One or both datasets have zero variance. Statistical comparison is invalid.");
             return false;
         }
 

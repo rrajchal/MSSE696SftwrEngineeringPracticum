@@ -47,7 +47,7 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
 
         if (optimizationNeeded && createReport) {
@@ -148,19 +148,15 @@ public class LoopObjectCreationAnalyzer implements Analyzer {
         return new String[][]{
                 {"Recommendation", "Avoid creating new objects inside loops. Reuse objects wherever possible."},
                 {"Example (Inefficient)", """
-            <pre><code>
             for (int i = 0; i < 10; i++) {
                 SomeObject obj = new SomeObject();  // Inefficient: New object created in each iteration
             }
-            </code></pre>
             """},
                 {"Example (Optimized)", """
-            <pre><code>
             SomeObject obj = new SomeObject();  // Efficient: Object reused across iterations
             for (int i = 0; i < 10; i++) {
                 obj.process(i);
             }
-            </code></pre>
             """}
         };
     }

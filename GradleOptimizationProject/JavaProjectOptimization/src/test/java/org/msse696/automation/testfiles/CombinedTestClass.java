@@ -58,7 +58,7 @@ public class CombinedTestClass {
             String str = (String) obj; // Might throw ClassCastException
             Debug.info(str.toUpperCase());
         } catch (ClassCastException e) {
-            System.err.println("Not a string");
+            Debug.error("Not a string");
         }
     }
 
@@ -135,7 +135,7 @@ public class CombinedTestClass {
                 int value = Integer.parseInt(item);
                 Debug.info("Value: " + value);
             } catch (NumberFormatException e) {
-                System.err.println("Invalid format: " + item);
+                Debug.error("Invalid format: " + item);
             }
         }
     }
@@ -147,7 +147,7 @@ public class CombinedTestClass {
                 Debug.info("Value: " + value);
             }
         } catch (NumberFormatException e) {
-            System.err.println("Error parsing a number in the list.");
+            Debug.error("Error parsing a number in the list.");
         }
     }
 }

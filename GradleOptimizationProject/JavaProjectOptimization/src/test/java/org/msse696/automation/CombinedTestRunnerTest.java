@@ -30,6 +30,6 @@ public class CombinedTestRunnerTest {
             runners.add(runner);
         }
 
-        CombinedAnalysisReportGenerator.generateReport(runners, outputReportPath);
+        CombinedAnalysisReportGenerator.generateReport(runners, outputReportPath, false);
     }
 }

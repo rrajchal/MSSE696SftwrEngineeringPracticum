@@ -91,7 +91,7 @@ public class CombinedTestClass1 {
                 int value = Integer.parseInt(item);
                 Debug.info("Value: " + value);
             } catch (NumberFormatException e) {
-                System.err.println("Invalid format: " + item);
+                Debug.error("Invalid format: " + item);
             }
         }
     }
@@ -103,7 +103,7 @@ public class CombinedTestClass1 {
                 Debug.info("Value: " + value);
             }
         } catch (NumberFormatException e) {
-            System.err.println("Error parsing a number in the list.");
+            Debug.error("Error parsing a number in the list.");
         }
     }
 }

@@ -49,7 +49,7 @@ public class FileDataManager {
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
+            Debug.error("Error writing to file: " + e.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ public class FileDataManager {
         File file = new File(filePath);
 
         if (!file.exists()) {
-            System.err.println("File not found: " + filePath);
+            Debug.error("File not found: " + filePath);
             return data;
         }
 
@@ -84,11 +84,11 @@ public class FileDataManager {
                 try {
                     data.add(Double.parseDouble(line.trim()));
                 } catch (NumberFormatException e) {
-                    System.err.println("Skipping invalid number: " + line);
+                    Debug.error("Skipping invalid number: " + line);
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            Debug.error("Error reading file: " + e.getMessage());
         }
 
         return data;
@@ -109,7 +109,7 @@ public class FileDataManager {
             }
             //Debug.info("File cleared: " + filePath);
         } catch (IOException e) {
-            System.err.println("Error clearing file: " + e.getMessage());
+            Debug.error("Error clearing file: " + e.getMessage());
         }
     }
 }

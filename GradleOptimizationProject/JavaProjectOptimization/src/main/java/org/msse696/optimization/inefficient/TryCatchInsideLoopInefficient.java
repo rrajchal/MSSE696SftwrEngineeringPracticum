@@ -1,12 +1,14 @@
 package org.msse696.optimization.inefficient;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 public class TryCatchInsideLoopInefficient {
     public void execute(int iterations) {
         for (int i = 0; i < iterations; i++) {
             try {
                 performOperation();
             } catch (Exception e) {
-                System.err.println("An exception occurred: " + e.getMessage());
+                Debug.error("An exception occurred: " + e.getMessage());
             }
         }
     }

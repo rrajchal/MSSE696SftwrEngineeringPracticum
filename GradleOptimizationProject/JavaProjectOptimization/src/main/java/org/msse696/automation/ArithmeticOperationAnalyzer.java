@@ -1,5 +1,6 @@
 package org.msse696.automation;
 
+import com.github.javaparser.ParserConfiguration;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
@@ -49,7 +50,7 @@ public class ArithmeticOperationAnalyzer implements Analyzer {
                 }
             });
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
 
         // Generate report if inefficiencies were detected

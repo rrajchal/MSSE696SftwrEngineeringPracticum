@@ -45,7 +45,7 @@ public class InstanceofAnalyzer implements Analyzer {
             }
 
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
 
         // Only generate a report if inefficiencies are detected
@@ -136,21 +136,18 @@ public class InstanceofAnalyzer implements Analyzer {
         return new String[][]{
             {"Example", "Code"},
             {"Inefficient Code", """
-            <pre><code>
             public void execute(int iterations) {
                 Object obj = "123"; // Example object as a String representing a number
                 for (int i = 0; i < iterations; i++) {
                     try {
                         performOperation(obj);  // Tries to convert Object to String
                     } catch (ClassCastException | NumberFormatException e) {
-                        System.err.println("Invalid cast or format: " + e.getMessage());
+                        Debug.error("Invalid cast or format: " + e.getMessage());
                     }
                 }
             }
-            </code></pre>
             """},
             {"Efficient Code", """
-            <pre><code>
             public void execute(int iterations) {
                 Object obj = "123"; // Example object as a String representing a number
                 for (int i = 0; i < iterations; i++) {
@@ -159,7 +156,6 @@ public class InstanceofAnalyzer implements Analyzer {
                     }
                 }
             }
-            </code></pre>
             """}
         };
     }

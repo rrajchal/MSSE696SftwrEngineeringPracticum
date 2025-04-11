@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<title>Inefficiency Analysis Report</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; }
+.container { margin: auto; }
+h1 { text-align: center; color: blue; }
+table { width: 80%; border-collapse: collapse; margin-top: 20px; }
+th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+th { background-color: #f4f4f4; }
+.actual-header { color: red; }
+.recommended-header { color: green; }
+tr:nth-child(even) { background-color: #f9f9f9; }
+h2 { color: navy; margin-top: 30px; }
+h3 { color: darkgreen; margin-top: 20px; }
+p { font-weight: bold; margin-top: 15px; }
+pre { background-color: #f4f4f4; padding: 10px; border: 1px solid #ccc; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+code { font-family: monospace; }
+ul { list-style-type: none; padding: 0; }
+li a { color: blue; text-decoration: none; }
+li a:hover { text-decoration: underline; }
+hr { border: 1px solid #ccc; margin: 20px 0; }
+</style>
+</head>
+<body>
+<div class='container'>
+<h1>Inefficiency Analysis Report</h1>
+<h2>Analysis Summary:</h2>
+<ul>
+<li>Analyzer.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 0</strong></p>
+<p><strong>Total Java Files Analyzed: 1</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#arithmeticoperationanalyzer-report'>ArithmeticOperationAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 3</strong></p>
+<p><strong>Total Java Files Analyzed: 2</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='arithmeticoperationanalyzer-report'>Inefficiency Report for ArithmeticOperationAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#arraycopyinefficiencyanalyzer-report'>ArrayCopyInefficiencyAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 6</strong></p>
+<p><strong>Total Java Files Analyzed: 3</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='arraycopyinefficiencyanalyzer-report'>Inefficiency Report for ArrayCopyInefficiencyAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#castinganalyzer-report'>CastingAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 9</strong></p>
+<p><strong>Total Java Files Analyzed: 4</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='castinganalyzer-report'>Inefficiency Report for CastingAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#expressioneliminationanalyzer-report'>ExpressionEliminationAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 12</strong></p>
+<p><strong>Total Java Files Analyzed: 5</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='expressioneliminationanalyzer-report'>Inefficiency Report for ExpressionEliminationAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#inefficiencyanalyzerrunner-report'>InefficiencyAnalyzerRunner.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 14</strong></p>
+<p><strong>Total Java Files Analyzed: 6</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='inefficiencyanalyzerrunner-report'>Inefficiency Report for InefficiencyAnalyzerRunner.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#instanceofanalyzer-report'>InstanceofAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 17</strong></p>
+<p><strong>Total Java Files Analyzed: 7</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='instanceofanalyzer-report'>Inefficiency Report for InstanceofAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#loopinefficiencyanalyzer-report'>LoopInefficiencyAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 20</strong></p>
+<p><strong>Total Java Files Analyzed: 8</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='loopinefficiencyanalyzer-report'>Inefficiency Report for LoopInefficiencyAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#loopobjectcreationanalyzer-report'>LoopObjectCreationAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 23</strong></p>
+<p><strong>Total Java Files Analyzed: 9</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='loopobjectcreationanalyzer-report'>Inefficiency Report for LoopObjectCreationAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#paddinganalyzer-report'>PaddingAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 26</strong></p>
+<p><strong>Total Java Files Analyzed: 10</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='paddinganalyzer-report'>Inefficiency Report for PaddingAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#stringconcatenationanalyzer-report'>StringConcatenationAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 29</strong></p>
+<p><strong>Total Java Files Analyzed: 11</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='stringconcatenationanalyzer-report'>Inefficiency Report for StringConcatenationAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#trycatchanalyzer-report'>TryCatchAnalyzer.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 12</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='trycatchanalyzer-report'>Inefficiency Report for TryCatchAnalyzer.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li>Hypo10CompareArrayCopyPerformance.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 13</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo1ComparePadding.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 14</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo1CompareVariableDeclarationOrderPerformance.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 15</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo2CompareObjectCreation.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 16</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo3CompareStringConcatenation.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 17</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo4CompareBitwiseOperations.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 18</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo5CompareCommonExpressions.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 19</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo6CompareTryCatchPerformance.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 20</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo7CompareTypeCheckingPerformance.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 21</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo8CompareCastingAndAssignment.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 22</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo9CompareLoopTerminationPerformance.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 32</strong></p>
+<p><strong>Total Java Files Analyzed: 23</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#bitwiseoperationefficient-report'>BitwiseOperationEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 33</strong></p>
+<p><strong>Total Java Files Analyzed: 24</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#castingassignmentefficient-report'>CastingAssignmentEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 34</strong></p>
+<p><strong>Total Java Files Analyzed: 25</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>CopyArrayEfficient.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 34</strong></p>
+<p><strong>Total Java Files Analyzed: 26</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#expressioneliminationefficient-report'>ExpressionEliminationEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 35</strong></p>
+<p><strong>Total Java Files Analyzed: 27</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#instanceoftypecheckingefficient-report'>InstanceOfTypeCheckingEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 36</strong></p>
+<p><strong>Total Java Files Analyzed: 28</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#loopterminationnefficient-report'>LoopTerminationnefficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 37</strong></p>
+<p><strong>Total Java Files Analyzed: 29</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#objectcreationefficient-report'>ObjectCreationEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 38</strong></p>
+<p><strong>Total Java Files Analyzed: 30</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#stringconcatenationefficient-report'>StringConcatenationEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 39</strong></p>
+<p><strong>Total Java Files Analyzed: 31</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#trycatchoutsideloopefficient-report'>TryCatchOutsideLoopEfficient.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 42</strong></p>
+<p><strong>Total Java Files Analyzed: 32</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='trycatchoutsideloopefficient-report'>Inefficiency Report for TryCatchOutsideLoopEfficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>StringConcatenationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li>VariableDeclarationPaddingEfficient.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 42</strong></p>
+<p><strong>Total Java Files Analyzed: 33</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>AnalysisInterface.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 42</strong></p>
+<p><strong>Total Java Files Analyzed: 34</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#computationutils-report'>ComputationUtils.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 44</strong></p>
+<p><strong>Total Java Files Analyzed: 35</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='computationutils-report'>Inefficiency Report for ComputationUtils.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>StringConcatenationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#dataanalyzer-report'>DataAnalyzer.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 45</strong></p>
+<p><strong>Total Java Files Analyzed: 36</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Debug.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 45</strong></p>
+<p><strong>Total Java Files Analyzed: 37</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#filedatamanager-report'>FileDataManager.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 46</strong></p>
+<p><strong>Total Java Files Analyzed: 38</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#functionrunner-report'>FunctionRunner.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 47</strong></p>
+<p><strong>Total Java Files Analyzed: 39</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#generaterandomobjects-report'>GenerateRandomObjects.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 48</strong></p>
+<p><strong>Total Java Files Analyzed: 40</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#heapmonitor-report'>HeapMonitor.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 49</strong></p>
+<p><strong>Total Java Files Analyzed: 41</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>ObjectSizeFetcher.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 49</strong></p>
+<p><strong>Total Java Files Analyzed: 42</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#combinedanalysisreportgenerator-report'>CombinedAnalysisReportGenerator.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 51</strong></p>
+<p><strong>Total Java Files Analyzed: 43</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='combinedanalysisreportgenerator-report'>Inefficiency Report for CombinedAnalysisReportGenerator.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#htmlreport-report'>HtmlReport.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 54</strong></p>
+<p><strong>Total Java Files Analyzed: 44</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='htmlreport-report'>Inefficiency Report for HtmlReport.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li>SleepOneSeconds.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 54</strong></p>
+<p><strong>Total Java Files Analyzed: 45</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>User.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 54</strong></p>
+<p><strong>Total Java Files Analyzed: 46</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#arithmeticoperationinefficient-report'>ArithmeticOperationInefficient.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 56</strong></p>
+<p><strong>Total Java Files Analyzed: 47</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='arithmeticoperationinefficient-report'>Inefficiency Report for ArithmeticOperationInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>ArrayCopyInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Manual copy using a loop
+    for (int i = 0; i &lt; size; i++) {
+        destination[i] = source[i];
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>    public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Use System.arraycopy
+    System.arraycopy(source, 0, destination, 0, size);
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#castingassignmentinefficient-report'>CastingAssignmentInefficient.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 58</strong></p>
+<p><strong>Total Java Files Analyzed: 48</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='castingassignmentinefficient-report'>Inefficiency Report for CastingAssignmentInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>CastingAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'> public void execute(int iterations) {
+    for (int i = 0; i &lt; iterations; i++) {
+        Integer assignedValue = (Integer) i; // Explicit casting
+        int total = assignedValue + assignedValue;
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    for (int i = 0; i &lt; iterations; i++) {
+        Integer assignedValue = i; // Direct assignment
+        int total = assignedValue + assignedValue;
+    }
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#copyarrayinefficient-report'>CopyArrayInefficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 59</strong></p>
+<p><strong>Total Java Files Analyzed: 49</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#expressioneliminationinefficient-report'>ExpressionEliminationInefficient.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 62</strong></p>
+<p><strong>Total Java Files Analyzed: 50</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='expressioneliminationinefficient-report'>Inefficiency Report for ExpressionEliminationInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>ExpressionEliminationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int z1 = x * Math.abs(y) + x;
+int z2 = x * Math.abs(y) + y;
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int t1 = x * Math.abs(y);
+int z1 = t1 + x;
+int z2 = t1 + y;
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#loopterminationinefficient-report'>LoopTerminationInefficient.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 64</strong></p>
+<p><strong>Total Java Files Analyzed: 51</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='loopterminationinefficient-report'>Inefficiency Report for LoopTerminationInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#objectcreationinefficient-report'>ObjectCreationInefficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 65</strong></p>
+<p><strong>Total Java Files Analyzed: 52</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#stringconcatenationinefficient-report'>StringConcatenationInefficient.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 67</strong></p>
+<p><strong>Total Java Files Analyzed: 53</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='stringconcatenationinefficient-report'>Inefficiency Report for StringConcatenationInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>StringConcatenationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#trycatchinsideloopinefficient-report'>TryCatchInsideLoopInefficient.java</a> (4 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 71</strong></p>
+<p><strong>Total Java Files Analyzed: 54</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='trycatchinsideloopinefficient-report'>Inefficiency Report for TryCatchInsideLoopInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>StringConcatenationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>TryCatchAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation();
+        } catch (Exception e) {
+            System.err.println("An exception occurred: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    try {
+        for (int i = 0; i &lt; iterations; i++) {
+            performOperation();
+        }
+    } catch (Exception e) {
+        System.err.println("An exception occurred: " + e.getMessage());
+    }
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#trycatchtypecheckinginefficient-report'>TryCatchTypeCheckingInefficient.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 74</strong></p>
+<p><strong>Total Java Files Analyzed: 55</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='trycatchtypecheckinginefficient-report'>Inefficiency Report for TryCatchTypeCheckingInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>TryCatchAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation();
+        } catch (Exception e) {
+            System.err.println("An exception occurred: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    try {
+        for (int i = 0; i &lt; iterations; i++) {
+            performOperation();
+        }
+    } catch (Exception e) {
+        System.err.println("An exception occurred: " + e.getMessage());
+    }
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li>VariableDeclarationPaddingInefficient.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 74</strong></p>
+<p><strong>Total Java Files Analyzed: 56</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#hypo10comparearraycopyperformancemain-report'>Hypo10CompareArrayCopyPerformanceMain.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 75</strong></p>
+<p><strong>Total Java Files Analyzed: 57</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#hypo1comparevariabledeclarationordermain-report'>Hypo1CompareVariableDeclarationOrderMain.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 76</strong></p>
+<p><strong>Total Java Files Analyzed: 58</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#hypo2compareobjectcreationmain-report'>Hypo2CompareObjectCreationMain.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 77</strong></p>
+<p><strong>Total Java Files Analyzed: 59</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#hypo3comparestringconcatenationmain-report'>Hypo3CompareStringConcatenationMain.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 78</strong></p>
+<p><strong>Total Java Files Analyzed: 60</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#hypo4comparebitwiseoperationsmain-report'>Hypo4CompareBitwiseOperationsMain.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 79</strong></p>
+<p><strong>Total Java Files Analyzed: 61</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#hypo5comparecommonexpressionsmain-report'>Hypo5CompareCommonExpressionsMain.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 80</strong></p>
+<p><strong>Total Java Files Analyzed: 62</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo6CompareTryCatchPerformanceMain.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 80</strong></p>
+<p><strong>Total Java Files Analyzed: 63</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo7CompareTypeCheckingPerformanceMain.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 80</strong></p>
+<p><strong>Total Java Files Analyzed: 64</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#hypo8comparecastingandassignmentmain-report'>Hypo8CompareCastingAndAssignmentMain.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 81</strong></p>
+<p><strong>Total Java Files Analyzed: 65</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>Hypo9CompareLoopTerminationPerformanceMain.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 81</strong></p>
+<p><strong>Total Java Files Analyzed: 66</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#optimizationanalyzerapp-report'>OptimizationAnalyzerApp.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 82</strong></p>
+<p><strong>Total Java Files Analyzed: 67</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#optimizationanalyzerguiapp-report'>OptimizationAnalyzerGUIApp.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 83</strong></p>
+<p><strong>Total Java Files Analyzed: 68</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>ArithmeticOperationAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 83</strong></p>
+<p><strong>Total Java Files Analyzed: 69</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>ArrayCopyInefficiencyAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 83</strong></p>
+<p><strong>Total Java Files Analyzed: 70</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>CastingAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 83</strong></p>
+<p><strong>Total Java Files Analyzed: 71</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>CombinedTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 83</strong></p>
+<p><strong>Total Java Files Analyzed: 72</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#combinedtestrunnertest-report'>CombinedTestRunnerTest.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 84</strong></p>
+<p><strong>Total Java Files Analyzed: 73</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>ExpressionEliminationAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 84</strong></p>
+<p><strong>Total Java Files Analyzed: 74</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>InstanceofAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 84</strong></p>
+<p><strong>Total Java Files Analyzed: 75</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>LoopInefficiencyAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 84</strong></p>
+<p><strong>Total Java Files Analyzed: 76</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>LoopObjectCreationAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 84</strong></p>
+<p><strong>Total Java Files Analyzed: 77</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>PaddingAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 84</strong></p>
+<p><strong>Total Java Files Analyzed: 78</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>StringConcatenationAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 84</strong></p>
+<p><strong>Total Java Files Analyzed: 79</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#arithmeticoperationinefficient-report'>ArithmeticOperationInefficient.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 86</strong></p>
+<p><strong>Total Java Files Analyzed: 80</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='arithmeticoperationinefficient-report'>Inefficiency Report for ArithmeticOperationInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>ArrayCopyInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Manual copy using a loop
+    for (int i = 0; i &lt; size; i++) {
+        destination[i] = source[i];
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>    public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Use System.arraycopy
+    System.arraycopy(source, 0, destination, 0, size);
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li>ArrayCopyEfficient.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 86</strong></p>
+<p><strong>Total Java Files Analyzed: 81</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#arraycopyinefficient-report'>ArrayCopyInefficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 87</strong></p>
+<p><strong>Total Java Files Analyzed: 82</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#bitwiseoperationefficient-report'>BitwiseOperationEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 88</strong></p>
+<p><strong>Total Java Files Analyzed: 83</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#castingefficient-report'>CastingEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 89</strong></p>
+<p><strong>Total Java Files Analyzed: 84</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#castinginefficient-report'>CastingInefficient.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 91</strong></p>
+<p><strong>Total Java Files Analyzed: 85</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='castinginefficient-report'>Inefficiency Report for CastingInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>CastingAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'> public void execute(int iterations) {
+    for (int i = 0; i &lt; iterations; i++) {
+        Integer assignedValue = (Integer) i; // Explicit casting
+        int total = assignedValue + assignedValue;
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    for (int i = 0; i &lt; iterations; i++) {
+        Integer assignedValue = i; // Direct assignment
+        int total = assignedValue + assignedValue;
+    }
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#combinedtestclass-report'>CombinedTestClass.java</a> (6 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 97</strong></p>
+<p><strong>Total Java Files Analyzed: 86</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='combinedtestclass-report'>Inefficiency Report for CombinedTestClass.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>ArrayCopyInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Manual copy using a loop
+    for (int i = 0; i &lt; size; i++) {
+        destination[i] = source[i];
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>    public void copyArray(int size) {
+    int[] source = new int[size];
+    int[] destination = new int[size];
+    // Fill source array with dummy data
+    Arrays.fill(source, 1);
+    // Use System.arraycopy
+    System.arraycopy(source, 0, destination, 0, size);
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopObjectCreationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; 10; i++) {
+    SomeObject obj = new SomeObject();  // Inefficient: New object created in each iteration
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>SomeObject obj = new SomeObject();  // Efficient: Object reused across iterations
+for (int i = 0; i &lt; 10; i++) {
+    obj.process(i);
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>StringConcatenationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#combinedtestclass1-report'>CombinedTestClass1.java</a> (5 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 102</strong></p>
+<p><strong>Total Java Files Analyzed: 87</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='combinedtestclass1-report'>Inefficiency Report for CombinedTestClass1.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopObjectCreationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; 10; i++) {
+    SomeObject obj = new SomeObject();  // Inefficient: New object created in each iteration
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>SomeObject obj = new SomeObject();  // Efficient: Object reused across iterations
+for (int i = 0; i &lt; 10; i++) {
+    obj.process(i);
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>StringConcatenationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#expressioneliminationefficient-report'>ExpressionEliminationEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 103</strong></p>
+<p><strong>Total Java Files Analyzed: 88</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#expressioneliminationinefficient-report'>ExpressionEliminationInefficient.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 106</strong></p>
+<p><strong>Total Java Files Analyzed: 89</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='expressioneliminationinefficient-report'>Inefficiency Report for ExpressionEliminationInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>ExpressionEliminationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int z1 = x * Math.abs(y) + x;
+int z2 = x * Math.abs(y) + y;
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int t1 = x * Math.abs(y);
+int z1 = t1 + x;
+int z2 = t1 + y;
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#instanceofefficient-report'>InstanceofEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 107</strong></p>
+<p><strong>Total Java Files Analyzed: 90</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#instanceofinefficient-report'>InstanceofInefficient.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 110</strong></p>
+<p><strong>Total Java Files Analyzed: 91</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='instanceofinefficient-report'>Inefficiency Report for InstanceofInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>TryCatchAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation();
+        } catch (Exception e) {
+            System.err.println("An exception occurred: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    try {
+        for (int i = 0; i &lt; iterations; i++) {
+            performOperation();
+        }
+    } catch (Exception e) {
+        System.err.println("An exception occurred: " + e.getMessage());
+    }
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#loopefficient-report'>LoopEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 111</strong></p>
+<p><strong>Total Java Files Analyzed: 92</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#loopinefficient-report'>LoopInefficient.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 113</strong></p>
+<p><strong>Total Java Files Analyzed: 93</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='loopinefficient-report'>Inefficiency Report for LoopInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopInefficiencyAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; size.length(); i++) { // Method called during iteration
+    performOperation(size.charAt(i));
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>int length = size.length(); // Precompute loop limit
+for (int i = 0; i &lt; length; i++) {
+    performOperation(size.charAt(i));
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#loopobjectcreationefficient-report'>LoopObjectCreationEfficient.java</a> (1 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 114</strong></p>
+<p><strong>Total Java Files Analyzed: 94</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#loopobjectcreationinefficient-report'>LoopObjectCreationInefficient.java</a> (2 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 116</strong></p>
+<p><strong>Total Java Files Analyzed: 95</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='loopobjectcreationinefficient-report'>Inefficiency Report for LoopObjectCreationInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>LoopObjectCreationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>for (int i = 0; i &lt; 10; i++) {
+    SomeObject obj = new SomeObject();  // Inefficient: New object created in each iteration
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>SomeObject obj = new SomeObject();  // Efficient: Object reused across iterations
+for (int i = 0; i &lt; 10; i++) {
+    obj.process(i);
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li>PaddingTestClassEfficient.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 116</strong></p>
+<p><strong>Total Java Files Analyzed: 96</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>PaddingTestClassInefficient.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 116</strong></p>
+<p><strong>Total Java Files Analyzed: 97</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li><a href='#trycatchinsideloopinefficient-report'>TryCatchInsideLoopInefficient.java</a> (4 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 120</strong></p>
+<p><strong>Total Java Files Analyzed: 98</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='trycatchinsideloopinefficient-report'>Inefficiency Report for TryCatchInsideLoopInefficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>StringConcatenationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>TryCatchAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation();
+        } catch (Exception e) {
+            System.err.println("An exception occurred: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    try {
+        for (int i = 0; i &lt; iterations; i++) {
+            performOperation();
+        }
+    } catch (Exception e) {
+        System.err.println("An exception occurred: " + e.getMessage());
+    }
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li><a href='#trycatchoutsideloopefficient-report'>TryCatchOutsideLoopEfficient.java</a> (3 inefficiencies)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 123</strong></p>
+<p><strong>Total Java Files Analyzed: 99</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<h3 id='trycatchoutsideloopefficient-report'>Inefficiency Report for TryCatchOutsideLoopEfficient.java</h3>
+<table style='width:100%; border-collapse: collapse;'>
+<tr><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Analyzer</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Inefficient Code</th><th style='border: 1px solid #ddd; padding: 8px; text-align: left;'>Efficient Code</th></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>InstanceofAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        try {
+            performOperation(obj);  // Tries to convert Object to String
+        } catch (ClassCastException | NumberFormatException e) {
+            System.err.println("Invalid cast or format: " + e.getMessage());
+        }
+    }
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public void execute(int iterations) {
+    Object obj = "123"; // Example object as a String representing a number
+    for (int i = 0; i &lt; iterations; i++) {
+        if (obj instanceof String) {
+            performOperation(obj);  // Converts Object to String directly without try-catch
+        }
+    }
+}
+</code></pre></td></tr>
+<tr style='border: 1px solid #ddd;'><td style='border: 1px solid #ddd; padding: 8px;'>StringConcatenationAnalyzer</td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    String result = "";
+    for (int i = 0; i &lt; iterations; i++) {
+        result += i;  // Inefficient: New String objects created in each iteration
+    }
+    return result;
+}
+</code></pre></td><td style='border: 1px solid #ddd; padding: 8px;'><pre><code style='white-space: pre-wrap;'>public String concatenateStrings(int iterations) {
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i &lt; iterations; i++) {
+        result.append(i);  // Efficient: StringBuilder reused across iterations
+    }
+    return result.toString();
+}
+</code></pre></td></tr>
+</table>
+<hr>
+<li>TryCatchAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 123</strong></p>
+<p><strong>Total Java Files Analyzed: 100</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>DataAnalyzerTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 123</strong></p>
+<p><strong>Total Java Files Analyzed: 101</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+<li>HeapMonitorTest.java (No inefficiencies detected)</li>
+</ul>
+<p><strong>Total Inefficiencies Detected Across All Classes: 123</strong></p>
+<p><strong>Total Java Files Analyzed: 102</strong></p>
+<hr>
+<h2>Detailed Reports by Class:</h2>
+</div>
+</body>
+</html>

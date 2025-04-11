@@ -55,7 +55,7 @@ public class StringConcatenationAnalyzer implements Analyzer {
             });
 
         } catch (Exception e) {
-            System.err.println("Error analyzing Java file: " + javaFile.getPath());
+            Debug.error("Error analyzing Java file: " + javaFile.getPath());
         }
 
         if (optimizationNeeded.get() && createReport) {
@@ -141,7 +141,6 @@ public class StringConcatenationAnalyzer implements Analyzer {
         return new String[][]{
                 {"Recommendation", "Avoid string concatenation in loops. Use StringBuilder or StringBuffer instead."},
                 {"Example (Inefficient)", """
-            <pre><code>
             public String concatenateStrings(int iterations) {
                 String result = "";
                 for (int i = 0; i < iterations; i++) {
@@ -149,10 +148,8 @@ public class StringConcatenationAnalyzer implements Analyzer {
                 }
                 return result;
             }
-            </code></pre>
             """},
                 {"Example (Optimized)", """
-            <pre><code>
             public String concatenateStrings(int iterations) {
                 StringBuilder result = new StringBuilder();
                 for (int i = 0; i < iterations; i++) {
@@ -160,7 +157,6 @@ public class StringConcatenationAnalyzer implements Analyzer {
                 }
                 return result.toString();
             }
-            </code></pre>
             """}
         };
     }

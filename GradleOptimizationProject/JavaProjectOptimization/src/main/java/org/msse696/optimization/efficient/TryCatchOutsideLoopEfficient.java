@@ -1,5 +1,7 @@
 package org.msse696.optimization.efficient;
 
+import org.msse696.optimization.helper.debug.Debug;
+
 public class TryCatchOutsideLoopEfficient {
     public void execute(int iterations) {
         try {
@@ -7,7 +9,7 @@ public class TryCatchOutsideLoopEfficient {
                 performOperation();
             }
         } catch (Exception e) {
-            System.err.println("An exception occurred: " + e.getMessage());
+            Debug.error("An exception occurred: " + e.getMessage());
         }
     }
 

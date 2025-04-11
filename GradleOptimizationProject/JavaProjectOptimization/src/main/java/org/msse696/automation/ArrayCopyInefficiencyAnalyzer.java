@@ -44,7 +44,7 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
             }
 
         } catch (Exception e) {
-            System.err.println("Error analyzing file: " + javaFile.getPath());
+            Debug.error("Error analyzing file: " + javaFile.getPath());
         }
 
         // Generate a report if inefficiencies are detected
@@ -137,7 +137,6 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
         return new String[][]{
             {"Example", "Code"},
             {"Inefficient Code", """
-            <pre><code>
             public void copyArray(int size) {
                 int[] source = new int[size];
                 int[] destination = new int[size];
@@ -148,11 +147,9 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
                     destination[i] = source[i];
                 }
             }
-            </code></pre>
-            """},
+             """},
             {"Efficient Code", """
-            <pre><code>
-            public void copyArray(int size) {
+                public void copyArray(int size) {
                 int[] source = new int[size];
                 int[] destination = new int[size];
                 // Fill source array with dummy data
@@ -160,7 +157,6 @@ public class ArrayCopyInefficiencyAnalyzer implements Analyzer {
                 // Use System.arraycopy
                 System.arraycopy(source, 0, destination, 0, size);
             }
-            </code></pre>
             """}
         };
     }
