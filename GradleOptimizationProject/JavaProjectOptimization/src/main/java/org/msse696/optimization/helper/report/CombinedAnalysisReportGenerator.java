@@ -1,6 +1,7 @@
 package org.msse696.optimization.helper.report;
 
 import org.msse696.automation.InefficiencyAnalyzerRunner;
+import org.msse696.optimization.helper.JavaFileScanner;
 import org.msse696.optimization.helper.debug.Debug;
 
 import java.util.List;
@@ -50,6 +51,9 @@ public class CombinedAnalysisReportGenerator {
         if (createReport) {
             reportContent.append("</ul>\n");
             reportContent.append("<p><strong>Total Inefficiencies Detected Across All Classes: ").append(totalOverallInefficiencies).append("</strong></p>\n");
+            JavaFileScanner scanner = new JavaFileScanner(reportPath + "/..");
+            int totalLinesOfCode = scanner.getTotalNumberOfLines();
+            reportContent.append("<p><strong>Total # of lines of code Across All Classes: ").append(totalLinesOfCode).append("</strong></p>\n");
             reportContent.append("<p><strong>Total Java Files Analyzed: ").append(totalFilesAnalyzed).append("</strong></p>\n");
             reportContent.append("<hr>\n");
             reportContent.append("<h2>Detailed Reports by Class:</h2>\n");

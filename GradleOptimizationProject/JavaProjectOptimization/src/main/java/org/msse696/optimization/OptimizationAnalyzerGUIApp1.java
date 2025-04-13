@@ -12,15 +12,20 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * GUI application for analyzing Java code for optimization inefficiencies.
  */
-public class OptimizationAnalyzerGUIApp extends JFrame {
+public class OptimizationAnalyzerGUIApp1 extends JFrame {
 
     private JTextField directoryPathField;
     private JCheckBox createReportCheckBox;
@@ -30,11 +35,12 @@ public class OptimizationAnalyzerGUIApp extends JFrame {
     private JFileChooser directoryChooser;
     private final Font biggerFont = new Font("Arial", Font.PLAIN, 14);
     int totalNumberOfLines;
+    private static final String REPORTS_DIRECTORY = "E:\\\\1RegisUniversity\\\\MSSE696_X70_SftwrEngineeringPracticumII\\\\reports";
 
     /**
      * Constructs the main application window.
      */
-    public OptimizationAnalyzerGUIApp() {
+    public OptimizationAnalyzerGUIApp1() {
         setTitle("Optimization Analyzer");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 600);
@@ -144,6 +150,29 @@ public class OptimizationAnalyzerGUIApp extends JFrame {
     }
 
     /**
+     * Generates a unique report file name by appending a number if the file already exists
+     * within the specified reports directory.
+     *
+     * @param baseFileName The base file name (e.g., "analysis_report.html").
+     * @return A unique file name with the full path in the reports directory.
+     */
+    private String generateUniqueReportFileName(String baseFileName) {
+        Path reportsPath = Paths.get(REPORTS_DIRECTORY);
+        String nameWithoutExtension = baseFileName.substring(0, baseFileName.lastIndexOf('.'));
+        String extension = baseFileName.substring(baseFileName.lastIndexOf('.'));
+        int counter = 0;
+        Path filePath;
+
+        do {
+            String currentFileName = counter == 0 ? baseFileName : nameWithoutExtension + counter + extension;
+            filePath = reportsPath.resolve(currentFileName);
+            counter++;
+        } while (Files.exists(filePath));
+
+        return filePath.toString();
+    }
+
+    /**
      * Starts the analysis process.
      *
      * @param e The ActionEvent triggered by the start button.
@@ -192,7 +221,16 @@ public class OptimizationAnalyzerGUIApp extends JFrame {
                     }
 
                     if (createReport) {
-                        outputReportPath = Paths.get(directoryPath, reportFileName).toString();
+                        Path reportsDir = Paths.get(REPORTS_DIRECTORY);
+                        if (!Files.exists(reportsDir)) {
+                            try {
+                                Files.createDirectories(reportsDir);
+                            } catch (IOException ex) {
+                                return new AnalysisResult(javaFiles.size(), grandTotalInefficiencies, null, "Error creating reports directory: " + ex.getMessage());
+                            }
+                        }
+                        String uniqueReportFileName = generateUniqueReportFileName(reportFileName);
+                        outputReportPath = uniqueReportFileName;
                         CombinedAnalysisReportGenerator.generateReport(runners, outputReportPath, true);
                     } else {
                         publish("Analysis complete. Report generation skipped.\n");
@@ -229,7 +267,7 @@ public class OptimizationAnalyzerGUIApp extends JFrame {
                         outputTextArea.append("Report Link: " + result.reportPath + "\n");
                     }
                     if (result.errorMessage != null) {
-                        JOptionPane.showMessageDialog(OptimizationAnalyzerGUIApp.this, result.errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(OptimizationAnalyzerGUIApp1.this, result.errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (InterruptedException | ExecutionException e) {
                     outputTextArea.append("Error during analysis: " + e.getMessage() + "\n");
@@ -272,7 +310,6 @@ public class OptimizationAnalyzerGUIApp extends JFrame {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        preSetup();
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
