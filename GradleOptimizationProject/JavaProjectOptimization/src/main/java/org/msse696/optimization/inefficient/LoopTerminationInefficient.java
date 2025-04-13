@@ -7,7 +7,8 @@ import java.util.Random;
 public class LoopTerminationInefficient {
     public void execute() {
         String size = GenerateRandomObjects.generateRandomString(10000);
-        for (int i = 0; i < size.length(); i++) { // Method called during iteration
+        // Method called during iteration
+        for (int i = 0; i < size.length(); i++) {
             performOperation(size.charAt(i));
         }
     }

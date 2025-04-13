@@ -161,12 +161,14 @@ public class LoopInefficiencyAnalyzer implements Analyzer {
         return new String[][]{
             {"Example", "Code"},
             {"Inefficient Code", """
-            for (int i = 0; i < size.length(); i++) { // Method called during iteration
+            // Method called during iteration
+            for (int i = 0; i < size.length(); i++) { 
                 performOperation(size.charAt(i));
             }
             """},
             {"Efficient Code", """
-            int length = size.length(); // Precompute loop limit
+            // Precompute loop limit
+            int length = size.length(); 
             for (int i = 0; i < length; i++) {
                 performOperation(size.charAt(i));
             }

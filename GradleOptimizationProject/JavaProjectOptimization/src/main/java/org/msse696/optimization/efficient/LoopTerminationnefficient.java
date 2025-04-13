@@ -7,7 +7,8 @@ import java.util.Random;
 public class LoopTerminationnefficient {
     public void execute() {
         String size = GenerateRandomObjects.generateRandomString(10000);
-        int length = size.length(); // Precompute loop limit
+        // Precompute loop limit
+        int length = size.length();
         for (int i = 0; i < length; i++) {
             performOperation(size.charAt(i));
         }
