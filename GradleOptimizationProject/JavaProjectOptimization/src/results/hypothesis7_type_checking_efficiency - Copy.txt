@@ -4,9 +4,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 108247.600  | 677385.800     |
-| Standard Deviation (ns)       | 20704.541   | 163632.987     |
-| Peak Memory (MB)              | 141.587     | 101.716        |
+| Average (nanoseconds)         | 107519.300  | 695963.900     |
+| Standard Deviation (ns)       | 21330.961   | 173618.164     |
+| Peak Memory (MB)              | 141.539     | 90.697         |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -16,9 +16,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 75254.100   | 682260.700     |
-| Standard Deviation (ns)       | 70877.957   | 167512.978     |
-| Peak Memory (MB)              | 101.716     | 129.759        |
+| Average (nanoseconds)         | 70760.000   | 700884.800     |
+| Standard Deviation (ns)       | 55633.264   | 191061.114     |
+| Peak Memory (MB)              | 95.682      | 120.733        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -28,9 +28,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 74891.400   | 668742.300     |
-| Standard Deviation (ns)       | 28579.498   | 142682.631     |
-| Peak Memory (MB)              | 129.759     | 145.742        |
+| Average (nanoseconds)         | 69856.100   | 696895.300     |
+| Standard Deviation (ns)       | 35188.237   | 209686.136     |
+| Peak Memory (MB)              | 138.716     | 130.708        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -40,9 +40,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 71748.400   | 703984.700     |
-| Standard Deviation (ns)       | 13377.900   | 223548.637     |
-| Peak Memory (MB)              | 145.742     | 128.727        |
+| Average (nanoseconds)         | 70738.900   | 673301.500     |
+| Standard Deviation (ns)       | 24279.758   | 175412.224     |
+| Peak Memory (MB)              | 23.742      | 138.716        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -52,9 +52,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 82257.200   | 667344.400     |
-| Standard Deviation (ns)       | 35365.381   | 175122.808     |
-| Peak Memory (MB)              | 128.727     | 142.737        |
+| Average (nanoseconds)         | 113392.600  | 720886.800     |
+| Standard Deviation (ns)       | 45643.232   | 193684.418     |
+| Peak Memory (MB)              | 132.540     | 150.706        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -64,9 +64,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 71852.000   | 655654.300     |
-| Standard Deviation (ns)       | 36191.472   | 138559.264     |
-| Peak Memory (MB)              | 142.737     | 133.737        |
+| Average (nanoseconds)         | 77088.400   | 730427.200     |
+| Standard Deviation (ns)       | 59791.447   | 199290.527     |
+| Peak Memory (MB)              | 150.706     | 108.759        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -76,9 +76,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 71414.900   | 662012.200     |
-| Standard Deviation (ns)       | 28811.926   | 151519.059     |
-| Peak Memory (MB)              | 133.737     | 141.715        |
+| Average (nanoseconds)         | 70563.200   | 699311.700     |
+| Standard Deviation (ns)       | 31029.483   | 181814.154     |
+| Peak Memory (MB)              | 125.751     | 148.733        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -88,9 +88,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 71267.300   | 660208.600     |
-| Standard Deviation (ns)       | 29685.302   | 150284.366     |
-| Peak Memory (MB)              | 145.742     | 113.734        |
+| Average (nanoseconds)         | 71246.700   | 695774.400     |
+| Standard Deviation (ns)       | 15085.883   | 196373.745     |
+| Peak Memory (MB)              | 148.733     | 113.725        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -100,9 +100,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 70311.000   | 752343.300     |
-| Standard Deviation (ns)       | 13309.722   | 262741.029     |
-| Peak Memory (MB)              | 113.734     | 128.722        |
+| Average (nanoseconds)         | 72344.000   | 756026.000     |
+| Standard Deviation (ns)       | 17712.619   | 244285.319     |
+| Peak Memory (MB)              | 113.725     | 138.721        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -112,9 +112,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 70460.100   | 673212.400     |
-| Standard Deviation (ns)       | 13618.525   | 207880.056     |
-| Peak Memory (MB)              | 128.722     | 102.737        |
+| Average (nanoseconds)         | 91988.400   | 709019.600     |
+| Standard Deviation (ns)       | 30751.500   | 232595.002     |
+| Peak Memory (MB)              | 138.721     | 95.735         |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -124,9 +124,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 71777.800   | 644807.700     |
-| Standard Deviation (ns)       | 37315.435   | 145938.699     |
-| Peak Memory (MB)              | 105.718     | 134.708        |
+| Average (nanoseconds)         | 78081.700   | 673101.800     |
+| Standard Deviation (ns)       | 38506.866   | 169978.445     |
+| Peak Memory (MB)              | 112.740     | 149.724        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -136,9 +136,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 71256.200   | 657556.800     |
-| Standard Deviation (ns)       | 30280.410   | 158314.575     |
-| Peak Memory (MB)              | 138.712     | 146.699        |
+| Average (nanoseconds)         | 71047.900   | 681197.900     |
+| Standard Deviation (ns)       | 35487.872   | 167379.409     |
+| Peak Memory (MB)              | 149.724     | 101.730        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -148,9 +148,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 72584.900   | 680857.900     |
-| Standard Deviation (ns)       | 20393.182   | 168047.506     |
-| Peak Memory (MB)              | 22.741      | 138.712        |
+| Average (nanoseconds)         | 70707.600   | 675512.200     |
+| Standard Deviation (ns)       | 17507.231   | 158830.909     |
+| Peak Memory (MB)              | 101.730     | 138.726        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -160,9 +160,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 69036.000   | 675976.600     |
-| Standard Deviation (ns)       | 10263.498   | 167455.957     |
-| Peak Memory (MB)              | 55.734      | 132.708        |
+| Average (nanoseconds)         | 69910.900   | 702570.700     |
+| Standard Deviation (ns)       | 12756.580   | 213668.978     |
+| Peak Memory (MB)              | 138.726     | 89.723         |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -172,9 +172,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 75857.700   | 685715.300     |
-| Standard Deviation (ns)       | 58259.766   | 225328.874     |
-| Peak Memory (MB)              | 90.721      | 87.702         |
+| Average (nanoseconds)         | 77208.300   | 796143.700     |
+| Standard Deviation (ns)       | 36077.359   | 1606139.245    |
+| Peak Memory (MB)              | 95.740      | 130.727        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -184,9 +184,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 71341.200   | 645239.000     |
-| Standard Deviation (ns)       | 34792.191   | 131618.088     |
-| Peak Memory (MB)              | 123.725     | 138.705        |
+| Average (nanoseconds)         | 72275.600   | 682460.500     |
+| Standard Deviation (ns)       | 28243.719   | 174739.216     |
+| Peak Memory (MB)              | 130.727     | 145.733        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -196,9 +196,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 69866.200   | 680007.300     |
-| Standard Deviation (ns)       | 12988.092   | 174677.794     |
-| Peak Memory (MB)              | 6.749       | 148.695        |
+| Average (nanoseconds)         | 72377.400   | 684110.600     |
+| Standard Deviation (ns)       | 18848.365   | 172830.633     |
+| Peak Memory (MB)              | 145.733     | 121.728        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -208,9 +208,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 68624.100   | 674658.600     |
-| Standard Deviation (ns)       | 14437.652   | 179890.886     |
-| Peak Memory (MB)              | 39.744      | 116.709        |
+| Average (nanoseconds)         | 71189.900   | 749023.600     |
+| Standard Deviation (ns)       | 16734.800   | 340672.749     |
+| Peak Memory (MB)              | 121.728     | 135.742        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -220,9 +220,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 69606.400   | 673054.100     |
-| Standard Deviation (ns)       | 23733.335   | 172274.277     |
-| Peak Memory (MB)              | 72.731      | 144.703        |
+| Average (nanoseconds)         | 71330.900   | 682881.300     |
+| Standard Deviation (ns)       | 30924.934   | 189031.378     |
+| Peak Memory (MB)              | 135.742     | 115.733        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -232,9 +232,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 69882.800   | 685773.000     |
-| Standard Deviation (ns)       | 28606.628   | 221060.959     |
-| Peak Memory (MB)              | 105.727     | 102.718        |
+| Average (nanoseconds)         | 72491.800   | 763058.500     |
+| Standard Deviation (ns)       | 33900.446   | 281728.045     |
+| Peak Memory (MB)              | 115.733     | 130.733        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -244,9 +244,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 139570.000  | 829794.300     |
-| Standard Deviation (ns)       | 52929.585   | 248713.744     |
-| Peak Memory (MB)              | 149.650     | 148.679        |
+| Average (nanoseconds)         | 70718.000   | 847205.500     |
+| Standard Deviation (ns)       | 32501.238   | 326503.526     |
+| Peak Memory (MB)              | 147.743     | 141.734        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -256,9 +256,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 105586.600  | 803949.600     |
-| Standard Deviation (ns)       | 50844.739   | 206567.099     |
-| Peak Memory (MB)              | 148.679     | 134.782        |
+| Average (nanoseconds)         | 72222.200   | 688859.200     |
+| Standard Deviation (ns)       | 19700.971   | 161839.416     |
+| Peak Memory (MB)              | 141.734     | 135.728        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -268,9 +268,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 95873.500   | 838648.500     |
-| Standard Deviation (ns)       | 26124.231   | 321859.079     |
-| Peak Memory (MB)              | 134.782     | 117.795        |
+| Average (nanoseconds)         | 72683.300   | 723066.100     |
+| Standard Deviation (ns)       | 33185.256   | 270996.932     |
+| Peak Memory (MB)              | 135.728     | 148.734        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -280,9 +280,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 96445.500   | 777327.700     |
-| Standard Deviation (ns)       | 21583.186   | 187651.351     |
-| Peak Memory (MB)              | 117.795     | 144.790        |
+| Average (nanoseconds)         | 71311.400   | 837457.000     |
+| Standard Deviation (ns)       | 33253.045   | 295956.794     |
+| Peak Memory (MB)              | 148.734     | 141.729        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -292,9 +292,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 96610.100   | 763101.900     |
-| Standard Deviation (ns)       | 18700.584   | 152079.713     |
-| Peak Memory (MB)              | 144.790     | 139.813        |
+| Average (nanoseconds)         | 70792.700   | 706920.400     |
+| Standard Deviation (ns)       | 22785.333   | 187568.642     |
+| Peak Memory (MB)              | 140.713     | 141.729        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -304,9 +304,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 110806.200  | 862658.900     |
-| Standard Deviation (ns)       | 25206.962   | 298902.777     |
-| Peak Memory (MB)              | 139.813     | 144.813        |
+| Average (nanoseconds)         | 70675.000   | 703869.800     |
+| Standard Deviation (ns)       | 13438.442   | 181204.574     |
+| Peak Memory (MB)              | 23.744      | 140.713        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -316,9 +316,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 98152.900   | 806078.900     |
-| Standard Deviation (ns)       | 23796.053   | 329144.169     |
-| Peak Memory (MB)              | 146.824     | 138.799        |
+| Average (nanoseconds)         | 72622.300   | 698643.300     |
+| Standard Deviation (ns)       | 21645.106   | 169697.251     |
+| Peak Memory (MB)              | 56.731      | 124.707        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -328,9 +328,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 96734.700   | 788500.600     |
-| Standard Deviation (ns)       | 27787.101   | 222388.532     |
-| Peak Memory (MB)              | 138.799     | 148.822        |
+| Average (nanoseconds)         | 75568.200   | 834351.900     |
+| Standard Deviation (ns)       | 25743.027   | 296222.598     |
+| Peak Memory (MB)              | 90.722      | 148.720        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -340,9 +340,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 100054.200  | 788576.200     |
-| Standard Deviation (ns)       | 31570.292   | 204526.612     |
-| Peak Memory (MB)              | 148.822     | 150.794        |
+| Average (nanoseconds)         | 71230.200   | 697270.600     |
+| Standard Deviation (ns)       | 33934.518   | 182530.804     |
+| Peak Memory (MB)              | 123.722     | 118.712        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -352,9 +352,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 95547.200   | 771697.300     |
-| Standard Deviation (ns)       | 23433.573   | 182678.378     |
-| Peak Memory (MB)              | 150.794     | 130.809        |
+| Average (nanoseconds)         | 71860.900   | 702046.100     |
+| Standard Deviation (ns)       | 17601.966   | 185655.198     |
+| Peak Memory (MB)              | 5.752       | 144.712        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -364,9 +364,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 97097.100   | 773925.200     |
-| Standard Deviation (ns)       | 26821.631   | 188255.558     |
-| Peak Memory (MB)              | 126.798     | 142.771        |
+| Average (nanoseconds)         | 69910.500   | 699609.400     |
+| Standard Deviation (ns)       | 12336.436   | 182782.244     |
+| Peak Memory (MB)              | 38.738      | 100.707        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -376,9 +376,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 102865.300  | 779341.600     |
-| Standard Deviation (ns)       | 41199.218   | 222081.345     |
-| Peak Memory (MB)              | 128.806     | 126.798        |
+| Average (nanoseconds)         | 76153.800   | 715106.100     |
+| Standard Deviation (ns)       | 37214.976   | 220325.195     |
+| Peak Memory (MB)              | 70.725      | 133.701        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -388,9 +388,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 125588.200  | 783302.500     |
-| Standard Deviation (ns)       | 53498.328   | 189318.333     |
-| Peak Memory (MB)              | 129.810     | 148.770        |
+| Average (nanoseconds)         | 74557.600   | 693474.600     |
+| Standard Deviation (ns)       | 36883.108   | 193317.542     |
+| Peak Memory (MB)              | 104.722     | 105.714        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -400,9 +400,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 92220.800   | 799578.300     |
-| Standard Deviation (ns)       | 26493.414   | 231729.641     |
-| Peak Memory (MB)              | 126.815     | 133.785        |
+| Average (nanoseconds)         | 73457.300   | 680606.300     |
+| Standard Deviation (ns)       | 33336.225   | 168652.968     |
+| Peak Memory (MB)              | 138.722     | 137.714        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -412,9 +412,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 99659.500   | 807678.200     |
-| Standard Deviation (ns)       | 23229.668   | 235329.825     |
-| Peak Memory (MB)              | 110.820     | 147.789        |
+| Average (nanoseconds)         | 72197.400   | 673495.500     |
+| Standard Deviation (ns)       | 14608.365   | 154823.507     |
+| Peak Memory (MB)              | 22.749      | 138.722        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -424,9 +424,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 108359.600  | 887408.900     |
-| Standard Deviation (ns)       | 22369.608   | 399207.372     |
-| Peak Memory (MB)              | 101.829     | 143.786        |
+| Average (nanoseconds)         | 73159.400   | 743654.600     |
+| Standard Deviation (ns)       | 18736.788   | 247575.163     |
+| Peak Memory (MB)              | 56.736      | 107.724        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -436,9 +436,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 104590.100  | 762294.700     |
-| Standard Deviation (ns)       | 32296.707   | 150129.766     |
-| Peak Memory (MB)              | 131.801     | 134.793        |
+| Average (nanoseconds)         | 77491.700   | 686367.700     |
+| Standard Deviation (ns)       | 60823.479   | 191901.331     |
+| Peak Memory (MB)              | 89.728      | 94.719         |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -448,9 +448,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 101382.100  | 787403.200     |
-| Standard Deviation (ns)       | 60798.713   | 203989.986     |
-| Peak Memory (MB)              | 142.803     | 149.784        |
+| Average (nanoseconds)         | 79073.700   | 990950.200     |
+| Standard Deviation (ns)       | 25387.282   | 346919.895     |
+| Peak Memory (MB)              | 122.722     | 150.719        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -460,9 +460,9 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 109945.000  | 1010591.900    |
-| Standard Deviation (ns)       | 27096.788   | 319477.821     |
-| Peak Memory (MB)              | 139.807     | 142.803        |
+| Average (nanoseconds)         | 88521.100   | 809443.500     |
+| Standard Deviation (ns)       | 30475.233   | 503666.071     |
+| Peak Memory (MB)              | 6.756       | 139.722        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 
@@ -472,9 +472,57 @@ Statistical Analysis:
 |                               | (Efficient) | (Inefficient)  |
 ----------------------------------------------------------------
 | Number of Data Points         | 1000        | 1000           |
-| Average (nanoseconds)         | 96875.800   | 984290.600     |
-| Standard Deviation (ns)       | 27093.739   | 335193.509     |
-| Peak Memory (MB)              | 132.811     | 150.797        |
+| Average (nanoseconds)         | 72012.500   | 719704.700     |
+| Standard Deviation (ns)       | 14527.990   | 239638.055     |
+| Peak Memory (MB)              | 39.749      | 99.728         |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 1000        | 1000           |
+| Average (nanoseconds)         | 74256.900   | 700305.100     |
+| Standard Deviation (ns)       | 34217.570   | 187275.354     |
+| Peak Memory (MB)              | 72.738      | 139.718        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 1000        | 1000           |
+| Average (nanoseconds)         | 73666.300   | 699580.700     |
+| Standard Deviation (ns)       | 35407.727   | 205427.197     |
+| Peak Memory (MB)              | 105.734     | 95.723         |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 1000        | 1000           |
+| Average (nanoseconds)         | 72890.900   | 701305.200     |
+| Standard Deviation (ns)       | 28930.779   | 374672.772     |
+| Peak Memory (MB)              | 139.730     | 123.721        |
+----------------------------------------------------------------
+The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
+
+Statistical Analysis:
+----------------------------------------------------------------
+| Metric                        | Dataset 1   | Dataset 2      |
+|                               | (Efficient) | (Inefficient)  |
+----------------------------------------------------------------
+| Number of Data Points         | 1000        | 1000           |
+| Average (nanoseconds)         | 72001.800   | 688190.400     |
+| Standard Deviation (ns)       | 15652.840   | 197346.524     |
+| Peak Memory (MB)              | 22.751      | 139.730        |
 ----------------------------------------------------------------
 The difference between Dataset 1 and Dataset 2 is statistically **significant** at the 1.0% level.
 

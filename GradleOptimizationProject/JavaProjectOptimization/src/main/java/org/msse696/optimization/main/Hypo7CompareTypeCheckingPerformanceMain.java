@@ -9,7 +9,7 @@ import org.msse696.optimization.helper.debug.Debug;
 import java.util.List;
 
 public class Hypo7CompareTypeCheckingPerformanceMain {
-    private static final int NUMBER_OF_ITERATIONS = 10_000;
+    private static final int NUMBER_OF_ITERATIONS = 1000;
     private static final String RESULTS_DIRECTORY = "src/results/";
     private static final String RESULTS_FILENAME = RESULTS_DIRECTORY + "hypothesis7_type_checking_efficiency.txt";
 
@@ -17,11 +17,11 @@ public class Hypo7CompareTypeCheckingPerformanceMain {
         Debug.info("Analyzing type checking performance...");
 
         Debug.info("Running efficient first, then inefficient...");
-        //for (int i = 0; i < 5; i++)
-        //    runEfficientFirstThenInefficient();
+        for (int i = 0; i < 10; i++)
+            runEfficientFirstThenInefficient();
 
         Debug.info("\nRunning inefficient first, then efficient...");
-        //for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10; i++)
             runInefficientFirstThenEfficient();
     }
 
