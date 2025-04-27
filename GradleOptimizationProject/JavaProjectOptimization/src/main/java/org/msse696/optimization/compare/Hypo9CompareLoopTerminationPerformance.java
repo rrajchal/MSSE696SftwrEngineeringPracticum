@@ -26,7 +26,7 @@ public class Hypo9CompareLoopTerminationPerformance {
             }
             long end = System.nanoTime();
             executionTimes.add((double) (end - start)); // Store execution time in nanoseconds
-            //fileDataManager.appendLine(end - start);
+            fileDataManager.appendLine(end - start);
         }
     }
 

@@ -12,4 +12,8 @@ public class User {
     private String address;
     private double salary;
     private String phoneNumber;
+
+    public User() {
+
+    }
 }

@@ -151,7 +151,7 @@ public class InstanceofAnalyzer implements Analyzer {
             public void execute(int iterations) {
                 Object obj = "123"; // Example object as a String representing a number
                 for (int i = 0; i < iterations; i++) {
-                    if (obj instanceof String) {
+                    if (obj instanceof Integer) {
                         performOperation(obj);  // Converts Object to String directly without try-catch
                     }
                 }

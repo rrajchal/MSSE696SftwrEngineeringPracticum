@@ -16,13 +16,15 @@ public class Hypo9CompareLoopTerminationPerformanceMain {
     public static void main(String[] args) {
         Debug.info("Analyzing loop termination performance...");
 
-        Debug.info("Running efficient first, then inefficient...");
-        //for (int i = 0; i < 5; i++)
-        //    runEfficientFirstThenInefficient();
-
         Debug.info("\nRunning inefficient first, then efficient...");
-        //for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 5; i++)
             runInefficientFirstThenEfficient();
+
+        Debug.info("Running efficient first, then inefficient...");
+        for (int i = 0; i < 5; i++)
+            runEfficientFirstThenInefficient();
+
+
     }
 
     private static void runEfficientFirstThenInefficient() {

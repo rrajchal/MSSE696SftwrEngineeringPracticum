@@ -8,16 +8,15 @@ public class TryCatchTypeCheckingInefficient {
         Object obj;
         for (int i = 0; i < iterations; i++) {
             obj = RandomObjectGenerator.generateRandomObject();
-            // Using Try-Catch
             try {
                 performOperation(obj);
             } catch (ClassCastException | NumberFormatException e) {
-                //Debug.error("Invalid cast or format: " + e.getMessage());
+                Debug.error("Invalid cast or format: " + e.getMessage());
             }
         }
     }
 
-    private String performOperation(Object obj) throws NumberFormatException {
+    public String performOperation(Object obj) throws NumberFormatException {
         Integer value = Integer.parseInt(obj.toString());
         return value.toString();
     }

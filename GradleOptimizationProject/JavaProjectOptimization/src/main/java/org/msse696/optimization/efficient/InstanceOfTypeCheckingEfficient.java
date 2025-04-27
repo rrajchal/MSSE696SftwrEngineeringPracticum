@@ -14,7 +14,7 @@ public class InstanceOfTypeCheckingEfficient {
         }
     }
 
-    private void performOperation(Object str) {
+    public void performOperation(Object str) {
         Integer value = Integer.parseInt(str.toString());
         value.toString();
     }

@@ -9,11 +9,11 @@ public class LoopTerminationInefficient {
         String size = GenerateRandomObjects.generateRandomString(10000);
         // Method called during iteration
         for (int i = 0; i < size.length(); i++) {
-            performOperation(size.charAt(i));
+            performOperation(i);
         }
     }
 
-    private void performOperation(char character) {
+    private void performOperation(int character) {
         character = Character.toUpperCase(character);
     }
 }

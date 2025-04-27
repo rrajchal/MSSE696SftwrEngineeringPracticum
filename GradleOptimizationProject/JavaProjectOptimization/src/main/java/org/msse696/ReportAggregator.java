@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ReportAggregator {
-
+    static Map<String, Integer> allAnalyzerFrequency = new HashMap<>();
     /**
      * Main method to search directories, analyze reports, and generate a CSV.
      */
@@ -30,9 +30,13 @@ public class ReportAggregator {
             // Recursively process directories
             processDirectory(rootDirectory, csvWriter);
 
-            System.out.println("Report aggregation completed. Output written to report.csv");
+            System.out.println("Report aggregation completed. Output written to report.csv: " + csvOutputFile.getAbsolutePath());
         } catch (IOException e) {
             System.err.println("Error while writing the CSV file: " + e.getMessage());
+        }
+        // Display Map Content : Aggregate into allAnalyzerFrequency
+        for (Map.Entry<String, Integer> entry : allAnalyzerFrequency.entrySet()) {
+            System.out.println(entry.getKey() + "->" + entry.getValue());
         }
     }
 
@@ -94,6 +98,10 @@ public class ReportAggregator {
                         "TryCatchAnalyzer"}) {
                     if (line.contains(analyzer)) {
                         analyzerFrequency.put(analyzer, analyzerFrequency.getOrDefault(analyzer, 0) + 1);
+                        allAnalyzerFrequency.put(analyzer, analyzerFrequency.getOrDefault(analyzer, 0) + 1);
+                    } else {
+                        analyzerFrequency.put("None", analyzerFrequency.getOrDefault("None", 0) + 1);
+                        allAnalyzerFrequency.put("None", analyzerFrequency.getOrDefault("None", 0) + 1);
                     }
                 }
             }
@@ -109,6 +117,8 @@ public class ReportAggregator {
         String mostFrequentAnalyzer = !topAnalyzers.isEmpty() ? topAnalyzers.get(0) : "None";
         String secondMostFrequentAnalyzer = topAnalyzers.size() > 1 ? topAnalyzers.get(1) : "None";
         String thirdMostFrequentAnalyzer = topAnalyzers.size() > 2 ? topAnalyzers.get(2) : "None";
+
+
 
         // Write the extracted data and analyzers to the CSV
         csvWriter.append(String.valueOf(totalInefficiencies)).append(",").append(String.valueOf(totalLinesOfCode)).append(",").append(String.valueOf(totalJavaFiles)).append(",").append(mostFrequentAnalyzer).append(",").append(secondMostFrequentAnalyzer).append(",").append(thirdMostFrequentAnalyzer).append("\n");
